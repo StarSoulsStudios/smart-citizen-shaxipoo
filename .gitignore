@@ -86,3 +86,6 @@ src/utils/_build_info.py
 *-RELEASE_NOTES.md
 
 /scratch/
+
+# Local dev data (game text, not for commit)
+dev_data/

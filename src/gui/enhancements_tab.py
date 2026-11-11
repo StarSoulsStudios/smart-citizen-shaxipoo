@@ -321,14 +321,14 @@ class EnhancementsTab(QWidget):
         btn_row = QHBoxLayout()
 
         self._apply_categories_btn = QPushButton(tr("enhancements.apply_btn"))
-        self._apply_categories_btn.setMaximumWidth(100)
+        self._apply_categories_btn.setMaximumWidth(130)
         self._apply_categories_btn.setEnabled(False)
         self._apply_categories_btn.setToolTip(tr("enhancements.apply_categories_tooltip"))
         self._apply_categories_btn.clicked.connect(self._apply_category_changes)
         btn_row.addWidget(self._apply_categories_btn)
 
         self._generate_enhancements_btn = QPushButton(tr("enhancements.generate_btn"))
-        self._generate_enhancements_btn.setMaximumWidth(160)
+        self._generate_enhancements_btn.setMaximumWidth(208)
         self._generate_enhancements_btn.clicked.connect(self._on_generate_enhancements_clicked)
         btn_row.addWidget(self._generate_enhancements_btn)
 

@@ -74,6 +74,10 @@
       "ht": "Blueprint Tracker",
       "at": ""
     },
+    "ship_names": {
+      "ht": "Ships",
+      "at": ""
+    },
     "log": {
       "ht": "Log",
       "at": ""
@@ -104,6 +108,10 @@
     },
     "overlay": {
       "ht": "Overlay",
+      "at": ""
+    },
+    "items": {
+      "ht": "Items",
       "at": ""
     }
   },
@@ -1104,6 +1112,10 @@
     },
     "clear_shader_cache_tooltip": {
       "ht": "Clean or remove Star Citizen's shader cache folders in %LOCALAPPDATA%\\Star Citizen.",
+      "at": ""
+    },
+    "theme_hangar": {
+      "ht": "Hangar",
       "at": ""
     }
   },
@@ -3662,6 +3674,280 @@
     },
     "game_running_body": {
       "ht": "Star Citizen is running. Close the game first: it keeps the shader cache open, so deleting now would leave it half removed.",
+      "at": ""
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "My ships",
+      "at": ""
+    },
+    "desc": {
+      "ht": "Ships in this list come first in the ASOP terminal, in this order. Drag to reorder.",
+      "at": ""
+    },
+    "add_group": {
+      "ht": "Rename a ship",
+      "at": ""
+    },
+    "ship_label": {
+      "ht": "Ship:",
+      "at": ""
+    },
+    "ship_placeholder": {
+      "ht": "Type to search ships...",
+      "at": ""
+    },
+    "name_label": {
+      "ht": "Name:",
+      "at": ""
+    },
+    "name_placeholder": {
+      "ht": "Name it should have in game",
+      "at": ""
+    },
+    "add_btn": {
+      "ht": "Add to List",
+      "at": ""
+    },
+    "update_btn": {
+      "ht": "Update Name",
+      "at": ""
+    },
+    "add_hint": {
+      "ht": "Pick a ship, type its new name and press Enter. Pick a ship already in the list to change its name.",
+      "at": ""
+    },
+    "list_group": {
+      "ht": "Your ship list",
+      "at": ""
+    },
+    "numbering": {
+      "ht": "Number ships (01. 02. 03.)",
+      "at": ""
+    },
+    "manufacturer": {
+      "ht": "Add manufacturer before names",
+      "at": ""
+    },
+    "count": {
+      "ht": "{count} ships",
+      "at": ""
+    },
+    "move_up": {
+      "ht": "Move Up",
+      "at": ""
+    },
+    "move_down": {
+      "ht": "Move Down",
+      "at": ""
+    },
+    "remove": {
+      "ht": "Remove",
+      "at": ""
+    },
+    "clear": {
+      "ht": "Clear All",
+      "at": ""
+    },
+    "list_hint": {
+      "ht": "Drag ships to reorder. Changes save as you make them; Apply to Game writes them to Star Citizen. A rename in the String Editor still wins over this list.",
+      "at": ""
+    },
+    "stock_tooltip": {
+      "ht": "Stock name: {name}\nKey: {key}",
+      "at": ""
+    },
+    "missing_suffix": {
+      "ht": "(not in this game build)",
+      "at": ""
+    },
+    "missing_tooltip": {
+      "ht": "{key} is not in the loaded game strings, so this name is not applied. It stays in the list in case the ship returns.",
+      "at": ""
+    },
+    "clear_title": {
+      "ht": "Clear Ship List",
+      "at": ""
+    },
+    "clear_body": {
+      "ht": "Remove all {count} ships from the list?",
+      "at": ""
+    },
+    "preview_title": {
+      "ht": "What it looks like",
+      "at": ""
+    },
+    "preview_desc": {
+      "ht": "Every ship's name, A to Z, the way the ASOP sorts them. White ones are yours.",
+      "at": ""
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "Apply to game",
+      "at": ""
+    },
+    "status_dirty": {
+      "ht": "Changes not in the game yet",
+      "at": ""
+    },
+    "status_clean": {
+      "ht": "Game is up to date",
+      "at": ""
+    },
+    "settings_tooltip": {
+      "ht": "Settings and tools",
+      "at": ""
+    },
+    "from_settings": {
+      "ht": "opened from settings",
+      "at": ""
+    },
+    "nav_ships": {
+      "ht": "Ships",
+      "at": ""
+    },
+    "nav_ships_sub": {
+      "ht": "rename and sort the ASOP list",
+      "at": ""
+    },
+    "nav_items": {
+      "ht": "Items",
+      "at": ""
+    },
+    "nav_items_sub": {
+      "ht": "components, armor, weapons, misc",
+      "at": ""
+    },
+    "nav_missions": {
+      "ht": "Missions",
+      "at": ""
+    },
+    "nav_missions_sub": {
+      "ht": "contract titles and details",
+      "at": ""
+    },
+    "nav_strings": {
+      "ht": "All strings",
+      "at": ""
+    },
+    "nav_strings_sub": {
+      "ht": "search and edit any text",
+      "at": ""
+    },
+    "menu_settings": {
+      "ht": "Settings",
+      "at": ""
+    },
+    "menu_blueprints": {
+      "ht": "Blueprint tracker",
+      "at": ""
+    },
+    "menu_overlay": {
+      "ht": "Overlay",
+      "at": ""
+    },
+    "menu_log": {
+      "ht": "Log",
+      "at": ""
+    },
+    "menu_help": {
+      "ht": "Help",
+      "at": ""
+    },
+    "menu_tutorial": {
+      "ht": "Tutorial",
+      "at": ""
+    },
+    "menu_about": {
+      "ht": "About",
+      "at": ""
+    },
+    "menu_faq": {
+      "ht": "FAQ",
+      "at": ""
+    },
+    "menu_legal": {
+      "ht": "Legal",
+      "at": ""
+    },
+    "menu_tools": {
+      "ht": "Tools and backups",
+      "at": ""
+    },
+    "menu_starstrings": {
+      "ht": "Use StarStrings for missions and items",
+      "at": ""
+    },
+    "starstrings_get": {
+      "ht": "Get MrKraken's StarStrings for mission and item names (build {build}).",
+      "at": ""
+    },
+    "starstrings_update": {
+      "ht": "StarStrings has a newer build: {build}. You have {current}.",
+      "at": ""
+    },
+    "starstrings_download_btn": {
+      "ht": "Download",
+      "at": ""
+    },
+    "starstrings_update_btn": {
+      "ht": "Update",
+      "at": ""
+    },
+    "starstrings_downloading": {
+      "ht": "Downloading StarStrings...",
+      "at": ""
+    },
+    "starstrings_failed": {
+      "ht": "StarStrings download failed: {error}",
+      "at": ""
+    },
+    "starstrings_retry_btn": {
+      "ht": "Try again",
+      "at": ""
+    },
+    "starstrings_installed": {
+      "ht": "StarStrings {build} installed. Apply to game to use it.",
+      "at": ""
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "Components",
+      "at": ""
+    },
+    "components_desc": {
+      "ht": "Coolers, shields, power plants, quantum drives and ship weapons. Pick one, give it a name or apply a preset built from its size, grade and class.",
+      "at": ""
+    },
+    "armor": {
+      "ht": "Armor",
+      "at": ""
+    },
+    "armor_desc": {
+      "ht": "Helmets, cores, arms, legs and undersuits.",
+      "at": ""
+    },
+    "fps": {
+      "ht": "FPS weapons & tools",
+      "at": ""
+    },
+    "fps_desc": {
+      "ht": "Rifles, pistols, multi-tools, medical tools and their attachments.",
+      "at": ""
+    },
+    "misc": {
+      "ht": "Misc",
+      "at": ""
+    },
+    "misc_desc": {
+      "ht": "Everything else you carry: consumables, gadgets and cargo items.",
+      "at": ""
+    },
+    "coming_note": {
+      "ht": "This editor is next on the list. Until then, rename any item from All strings.",
       "at": ""
     }
   }

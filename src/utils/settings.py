@@ -567,6 +567,7 @@ class AppSettings:
     # new steps worth showing again. Empty string means "never shown".
     TUTORIAL_COMPLETED_VERSION = "tutorial_completed_version"
     TUTORIAL_DISABLED = "tutorial_disabled"
+    STARSTRINGS_ENABLED = "starstrings_enabled"
 
     # Settings keys - App self-update check
     # Settings keys - Star Citizen channel selection
@@ -893,6 +894,14 @@ class AppSettings:
     # when any enhancement category is enabled. Never a registry entry, so
     # deliberately not in AVAILABLE_SOURCES.
     SOURCE_ENHANCEMENTS = "enhancements"
+    # Synthetic, runtime-only source for the Ships tab's renamed ships
+    # (src/utils/ship_names.py), injected just below "user". Not a registry
+    # entry either.
+    SOURCE_SHIP_NAMES = "ship_names"
+    # Synthetic, runtime-only source: MrKraken's StarStrings, filtered to
+    # mission text and item names (src/utils/starstrings.py). Sits above
+    # "enhancements". Not a registry entry.
+    SOURCE_STARSTRINGS = "starstrings"
 
     # Backend override hook — kept None by default so production stays on
     # QSettings (registry mode). PR-B in the standalone-build series sets
@@ -1856,6 +1865,25 @@ class AppSettings:
     def get_tutorial_disabled() -> bool:
         """When True, the tutorial never auto-launches (Config tab opt-out)."""
         return AppSettings.settings().value(AppSettings.TUTORIAL_DISABLED, False, type=bool)
+
+    @staticmethod
+    def get_starstrings_enabled() -> bool:
+        """Use StarStrings for mission text and item names (default on)."""
+        return AppSettings.settings().value(AppSettings.STARSTRINGS_ENABLED, True, type=bool)
+
+    @staticmethod
+    def set_starstrings_enabled(enabled: bool) -> None:
+        AppSettings.settings().setValue(AppSettings.STARSTRINGS_ENABLED, bool(enabled))
+        AppSettings.settings().sync()
+
+    @staticmethod
+    def get_starstrings_dir() -> Path:
+        """This channel's StarStrings folder (``…\{channel}\cache\starstrings``).
+
+        Not created here: a status check must not make folders.
+        """
+        from src.utils.starstrings import folder_for
+        return folder_for(AppSettings.get_channel_data_dir() / "cache")
 
     @staticmethod
     def set_tutorial_disabled(disabled: bool) -> None:

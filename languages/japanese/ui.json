@@ -74,6 +74,10 @@
       "ht": "",
       "at": "ブループリントトラッカー"
     },
+    "ship_names": {
+      "ht": "",
+      "at": "艦船"
+    },
     "log": {
       "ht": "",
       "at": "ログ"
@@ -105,6 +109,10 @@
     "overlay": {
       "ht": "",
       "at": "オーバーレイ"
+    },
+    "items": {
+      "ht": "",
+      "at": "アイテム"
     }
   },
   "toolbar": {
@@ -1105,6 +1113,10 @@
     "clear_shader_cache_tooltip": {
       "ht": "",
       "at": "%LOCALAPPDATA%\\Star Citizen にある Star Citizen のシェーダーキャッシュフォルダーをクリーンまたは削除します。"
+    },
+    "theme_hangar": {
+      "ht": "",
+      "at": "ハンガー"
     }
   },
   "enhancements": {
@@ -3865,6 +3877,280 @@
     "game_running_body": {
       "ht": "",
       "at": "Star Citizen が実行中です。先にゲームを終了してください。ゲームがシェーダーキャッシュを開いているため、今削除すると中途半端に残ります。"
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "",
+      "at": "マイ艦船"
+    },
+    "desc": {
+      "ht": "",
+      "at": "このリストの艦船は、この順番で ASOP 端末の先頭に表示されます。ドラッグで並べ替えます。"
+    },
+    "add_group": {
+      "ht": "",
+      "at": "艦船の名前を変更"
+    },
+    "ship_label": {
+      "ht": "",
+      "at": "艦船："
+    },
+    "ship_placeholder": {
+      "ht": "",
+      "at": "入力して艦船を検索..."
+    },
+    "name_label": {
+      "ht": "",
+      "at": "名前："
+    },
+    "name_placeholder": {
+      "ht": "",
+      "at": "ゲーム内で表示する名前"
+    },
+    "add_btn": {
+      "ht": "",
+      "at": "リストに追加"
+    },
+    "update_btn": {
+      "ht": "",
+      "at": "名前を更新"
+    },
+    "add_hint": {
+      "ht": "",
+      "at": "艦船を選び、新しい名前を入力して Enter を押します。リストにある艦船を選ぶと名前を変更できます。"
+    },
+    "list_group": {
+      "ht": "",
+      "at": "艦船リスト"
+    },
+    "numbering": {
+      "ht": "",
+      "at": "艦船に番号を付ける（01. 02. 03.）"
+    },
+    "manufacturer": {
+      "ht": "",
+      "at": "名前の前にメーカー名を付ける"
+    },
+    "count": {
+      "ht": "",
+      "at": "{count} 隻"
+    },
+    "move_up": {
+      "ht": "",
+      "at": "上へ"
+    },
+    "move_down": {
+      "ht": "",
+      "at": "下へ"
+    },
+    "remove": {
+      "ht": "",
+      "at": "削除"
+    },
+    "clear": {
+      "ht": "",
+      "at": "すべてクリア"
+    },
+    "list_hint": {
+      "ht": "",
+      "at": "ドラッグで並べ替えます。変更はすぐに保存され、「ゲームに適用」で Star Citizen に書き込まれます。文字列エディターでの変更は引き続きこのリストより優先されます。"
+    },
+    "stock_tooltip": {
+      "ht": "",
+      "at": "元の名前：{name}\nキー：{key}"
+    },
+    "missing_suffix": {
+      "ht": "",
+      "at": "（このゲームビルドには存在しません）"
+    },
+    "missing_tooltip": {
+      "ht": "",
+      "at": "{key} は読み込んだゲーム文字列にないため、この名前は適用されません。艦船が戻ってきた場合に備えてリストには残ります。"
+    },
+    "clear_title": {
+      "ht": "",
+      "at": "艦船リストをクリア"
+    },
+    "clear_body": {
+      "ht": "",
+      "at": "リストから {count} 隻すべてを削除しますか？"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "表示イメージ"
+    },
+    "preview_desc": {
+      "ht": "",
+      "at": "すべての艦船名を ASOP と同じ A〜Z 順に表示します。白いものがあなたの艦船です。"
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "",
+      "at": "ゲームに適用"
+    },
+    "status_dirty": {
+      "ht": "",
+      "at": "ゲームに未反映の変更があります"
+    },
+    "status_clean": {
+      "ht": "",
+      "at": "ゲームは最新です"
+    },
+    "settings_tooltip": {
+      "ht": "",
+      "at": "設定とツール"
+    },
+    "from_settings": {
+      "ht": "",
+      "at": "設定から開きました"
+    },
+    "nav_ships": {
+      "ht": "",
+      "at": "艦船"
+    },
+    "nav_ships_sub": {
+      "ht": "",
+      "at": "ASOP リストの名前変更と並べ替え"
+    },
+    "nav_items": {
+      "ht": "",
+      "at": "アイテム"
+    },
+    "nav_items_sub": {
+      "ht": "",
+      "at": "コンポーネント、アーマー、武器、その他"
+    },
+    "nav_missions": {
+      "ht": "",
+      "at": "ミッション"
+    },
+    "nav_missions_sub": {
+      "ht": "",
+      "at": "契約のタイトルと詳細"
+    },
+    "nav_strings": {
+      "ht": "",
+      "at": "すべての文字列"
+    },
+    "nav_strings_sub": {
+      "ht": "",
+      "at": "任意のテキストを検索・編集"
+    },
+    "menu_settings": {
+      "ht": "",
+      "at": "設定"
+    },
+    "menu_blueprints": {
+      "ht": "",
+      "at": "ブループリント トラッカー"
+    },
+    "menu_overlay": {
+      "ht": "",
+      "at": "オーバーレイ"
+    },
+    "menu_log": {
+      "ht": "",
+      "at": "ログ"
+    },
+    "menu_help": {
+      "ht": "",
+      "at": "ヘルプ"
+    },
+    "menu_tutorial": {
+      "ht": "",
+      "at": "チュートリアル"
+    },
+    "menu_about": {
+      "ht": "",
+      "at": "このアプリについて"
+    },
+    "menu_faq": {
+      "ht": "",
+      "at": "FAQ"
+    },
+    "menu_legal": {
+      "ht": "",
+      "at": "法的情報"
+    },
+    "menu_tools": {
+      "ht": "",
+      "at": "ツールとバックアップ"
+    },
+    "menu_starstrings": {
+      "ht": "",
+      "at": "ミッションとアイテムに StarStrings を使う"
+    },
+    "starstrings_get": {
+      "ht": "",
+      "at": "ミッション名とアイテム名用に MrKraken の StarStrings を入手（ビルド {build}）。"
+    },
+    "starstrings_update": {
+      "ht": "",
+      "at": "StarStrings に新しいビルドがあります：{build}。現在は {current} です。"
+    },
+    "starstrings_download_btn": {
+      "ht": "",
+      "at": "ダウンロード"
+    },
+    "starstrings_update_btn": {
+      "ht": "",
+      "at": "更新"
+    },
+    "starstrings_downloading": {
+      "ht": "",
+      "at": "StarStrings をダウンロード中..."
+    },
+    "starstrings_failed": {
+      "ht": "",
+      "at": "StarStrings のダウンロードに失敗しました：{error}"
+    },
+    "starstrings_retry_btn": {
+      "ht": "",
+      "at": "再試行"
+    },
+    "starstrings_installed": {
+      "ht": "",
+      "at": "StarStrings {build} をインストールしました。ゲームに適用すると使えます。"
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "",
+      "at": "コンポーネント"
+    },
+    "components_desc": {
+      "ht": "",
+      "at": "クーラー、シールド、パワープラント、クォンタムドライブ、艦載武器。選んで名前を付けるか、サイズ・グレード・クラスに基づくプリセットを適用します。"
+    },
+    "armor": {
+      "ht": "",
+      "at": "アーマー"
+    },
+    "armor_desc": {
+      "ht": "",
+      "at": "ヘルメット、コア、腕、脚、アンダースーツ。"
+    },
+    "fps": {
+      "ht": "",
+      "at": "FPS 武器とツール"
+    },
+    "fps_desc": {
+      "ht": "",
+      "at": "ライフル、ピストル、マルチツール、医療ツールとそのアタッチメント。"
+    },
+    "misc": {
+      "ht": "",
+      "at": "その他"
+    },
+    "misc_desc": {
+      "ht": "",
+      "at": "持ち歩くその他すべて：消耗品、ガジェット、貨物アイテム。"
+    },
+    "coming_note": {
+      "ht": "",
+      "at": "このエディターは次に追加予定です。それまでは「すべての文字列」から任意のアイテム名を変更できます。"
     }
   }
 }

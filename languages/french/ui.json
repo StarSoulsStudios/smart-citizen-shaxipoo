@@ -74,6 +74,10 @@
       "ht": "",
       "at": "Suivi des plans"
     },
+    "ship_names": {
+      "ht": "",
+      "at": "Schiffe"
+    },
     "log": {
       "ht": "Journal",
       "at": "Journal"
@@ -105,6 +109,10 @@
     "overlay": {
       "ht": "",
       "at": "Superposition"
+    },
+    "items": {
+      "ht": "",
+      "at": "Objets"
     }
   },
   "toolbar": {
@@ -1105,6 +1113,10 @@
     "clear_shader_cache_tooltip": {
       "ht": "",
       "at": "Vider ou supprimer les dossiers de cache des shaders de Star Citizen dans %LOCALAPPDATA%\\Star Citizen."
+    },
+    "theme_hangar": {
+      "ht": "",
+      "at": "Hangar"
     }
   },
   "enhancements": {
@@ -3865,6 +3877,280 @@
     "game_running_body": {
       "ht": "",
       "at": "Star Citizen est en cours d'exécution. Fermez d'abord le jeu : il garde le cache des shaders ouvert, une suppression maintenant le laisserait à moitié effacé."
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "",
+      "at": "Mes vaisseaux"
+    },
+    "desc": {
+      "ht": "",
+      "at": "Les vaisseaux de cette liste apparaissent en premier au terminal ASOP, dans cet ordre. Glissez pour réordonner."
+    },
+    "add_group": {
+      "ht": "",
+      "at": "Renommer un vaisseau"
+    },
+    "ship_label": {
+      "ht": "",
+      "at": "Vaisseau :"
+    },
+    "ship_placeholder": {
+      "ht": "",
+      "at": "Tapez pour chercher un vaisseau..."
+    },
+    "name_label": {
+      "ht": "",
+      "at": "Nom :"
+    },
+    "name_placeholder": {
+      "ht": "",
+      "at": "Nom à afficher en jeu"
+    },
+    "add_btn": {
+      "ht": "",
+      "at": "Ajouter à la liste"
+    },
+    "update_btn": {
+      "ht": "",
+      "at": "Modifier le nom"
+    },
+    "add_hint": {
+      "ht": "",
+      "at": "Choisissez un vaisseau, tapez son nouveau nom et appuyez sur Entrée. Choisissez un vaisseau déjà dans la liste pour changer son nom."
+    },
+    "list_group": {
+      "ht": "",
+      "at": "Votre liste de vaisseaux"
+    },
+    "numbering": {
+      "ht": "",
+      "at": "Numéroter les vaisseaux (01. 02. 03.)"
+    },
+    "manufacturer": {
+      "ht": "",
+      "at": "Ajouter le constructeur avant les noms"
+    },
+    "count": {
+      "ht": "",
+      "at": "{count} vaisseaux"
+    },
+    "move_up": {
+      "ht": "",
+      "at": "Monter"
+    },
+    "move_down": {
+      "ht": "",
+      "at": "Descendre"
+    },
+    "remove": {
+      "ht": "",
+      "at": "Retirer"
+    },
+    "clear": {
+      "ht": "",
+      "at": "Tout effacer"
+    },
+    "list_hint": {
+      "ht": "",
+      "at": "Glissez les vaisseaux pour les réordonner. Les changements sont enregistrés au fur et à mesure ; Appliquer au jeu les écrit dans Star Citizen. Une modification dans l'Éditeur de chaînes l'emporte toujours sur cette liste."
+    },
+    "stock_tooltip": {
+      "ht": "",
+      "at": "Nom d'origine : {name}\nClé : {key}"
+    },
+    "missing_suffix": {
+      "ht": "",
+      "at": "(absent de cette version du jeu)"
+    },
+    "missing_tooltip": {
+      "ht": "",
+      "at": "{key} n'est pas dans les chaînes du jeu chargées, ce nom n'est donc pas appliqué. Il reste dans la liste au cas où le vaisseau reviendrait."
+    },
+    "clear_title": {
+      "ht": "",
+      "at": "Effacer la liste des vaisseaux"
+    },
+    "clear_body": {
+      "ht": "",
+      "at": "Retirer les {count} vaisseaux de la liste ?"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "À quoi ça ressemble"
+    },
+    "preview_desc": {
+      "ht": "",
+      "at": "Le nom de chaque vaisseau, de A à Z, comme l'ASOP les trie. Les blancs sont les vôtres."
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "",
+      "at": "Appliquer au jeu"
+    },
+    "status_dirty": {
+      "ht": "",
+      "at": "Modifications pas encore dans le jeu"
+    },
+    "status_clean": {
+      "ht": "",
+      "at": "Le jeu est à jour"
+    },
+    "settings_tooltip": {
+      "ht": "",
+      "at": "Paramètres et outils"
+    },
+    "from_settings": {
+      "ht": "",
+      "at": "ouvert depuis les paramètres"
+    },
+    "nav_ships": {
+      "ht": "",
+      "at": "Vaisseaux"
+    },
+    "nav_ships_sub": {
+      "ht": "",
+      "at": "renommer et trier la liste ASOP"
+    },
+    "nav_items": {
+      "ht": "",
+      "at": "Objets"
+    },
+    "nav_items_sub": {
+      "ht": "",
+      "at": "composants, armures, armes, divers"
+    },
+    "nav_missions": {
+      "ht": "",
+      "at": "Missions"
+    },
+    "nav_missions_sub": {
+      "ht": "",
+      "at": "titres et détails des contrats"
+    },
+    "nav_strings": {
+      "ht": "",
+      "at": "Tous les textes"
+    },
+    "nav_strings_sub": {
+      "ht": "",
+      "at": "chercher et modifier n'importe quel texte"
+    },
+    "menu_settings": {
+      "ht": "",
+      "at": "Paramètres"
+    },
+    "menu_blueprints": {
+      "ht": "",
+      "at": "Suivi des plans"
+    },
+    "menu_overlay": {
+      "ht": "",
+      "at": "Superposition"
+    },
+    "menu_log": {
+      "ht": "",
+      "at": "Journal"
+    },
+    "menu_help": {
+      "ht": "",
+      "at": "Aide"
+    },
+    "menu_tutorial": {
+      "ht": "",
+      "at": "Tutoriel"
+    },
+    "menu_about": {
+      "ht": "",
+      "at": "À propos"
+    },
+    "menu_faq": {
+      "ht": "",
+      "at": "FAQ"
+    },
+    "menu_legal": {
+      "ht": "",
+      "at": "Mentions légales"
+    },
+    "menu_tools": {
+      "ht": "",
+      "at": "Outils et sauvegardes"
+    },
+    "menu_starstrings": {
+      "ht": "",
+      "at": "Utiliser StarStrings pour les missions et les objets"
+    },
+    "starstrings_get": {
+      "ht": "",
+      "at": "Obtenez StarStrings de MrKraken pour les noms de missions et d'objets (version {build})."
+    },
+    "starstrings_update": {
+      "ht": "",
+      "at": "StarStrings a une version plus récente : {build}. Vous avez {current}."
+    },
+    "starstrings_download_btn": {
+      "ht": "",
+      "at": "Télécharger"
+    },
+    "starstrings_update_btn": {
+      "ht": "",
+      "at": "Mettre à jour"
+    },
+    "starstrings_downloading": {
+      "ht": "",
+      "at": "Téléchargement de StarStrings..."
+    },
+    "starstrings_failed": {
+      "ht": "",
+      "at": "Échec du téléchargement de StarStrings : {error}"
+    },
+    "starstrings_retry_btn": {
+      "ht": "",
+      "at": "Réessayer"
+    },
+    "starstrings_installed": {
+      "ht": "",
+      "at": "StarStrings {build} installé. Appliquez au jeu pour l'utiliser."
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "",
+      "at": "Composants"
+    },
+    "components_desc": {
+      "ht": "",
+      "at": "Refroidisseurs, boucliers, générateurs, moteurs quantiques et armes de vaisseau. Choisissez-en un, donnez-lui un nom ou appliquez un modèle basé sur sa taille, sa qualité et sa classe."
+    },
+    "armor": {
+      "ht": "",
+      "at": "Armures"
+    },
+    "armor_desc": {
+      "ht": "",
+      "at": "Casques, torses, bras, jambes et sous-combinaisons."
+    },
+    "fps": {
+      "ht": "",
+      "at": "Armes FPS et outils"
+    },
+    "fps_desc": {
+      "ht": "",
+      "at": "Fusils, pistolets, multi-outils, outils médicaux et leurs accessoires."
+    },
+    "misc": {
+      "ht": "",
+      "at": "Divers"
+    },
+    "misc_desc": {
+      "ht": "",
+      "at": "Tout le reste que vous portez : consommables, gadgets et objets de cargaison."
+    },
+    "coming_note": {
+      "ht": "",
+      "at": "Cet éditeur est le prochain sur la liste. D'ici là, renommez n'importe quel objet depuis Tous les textes."
     }
   }
 }

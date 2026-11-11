@@ -74,6 +74,10 @@
       "ht": "",
       "at": "Rastreador de Blueprints"
     },
+    "ship_names": {
+      "ht": "",
+      "at": "Naves"
+    },
     "log": {
       "ht": "Log",
       "at": "Log"
@@ -105,6 +109,10 @@
     "overlay": {
       "ht": "",
       "at": "Sobreposição"
+    },
+    "items": {
+      "ht": "",
+      "at": "Itens"
     }
   },
   "toolbar": {
@@ -1105,6 +1113,10 @@
     "clear_shader_cache_tooltip": {
       "ht": "",
       "at": "Limpa ou remove as pastas de cache de shaders do Star Citizen em %LOCALAPPDATA%\\Star Citizen."
+    },
+    "theme_hangar": {
+      "ht": "",
+      "at": "Hangar"
     }
   },
   "enhancements": {
@@ -3865,6 +3877,280 @@
     "game_running_body": {
       "ht": "",
       "at": "O Star Citizen está em execução. Feche o jogo primeiro: ele mantém o cache de shaders aberto, então excluir agora o deixaria pela metade."
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "",
+      "at": "Minhas naves"
+    },
+    "desc": {
+      "ht": "",
+      "at": "As naves desta lista aparecem primeiro no terminal ASOP, nesta ordem. Arraste para reordenar."
+    },
+    "add_group": {
+      "ht": "",
+      "at": "Renomear uma nave"
+    },
+    "ship_label": {
+      "ht": "",
+      "at": "Nave:"
+    },
+    "ship_placeholder": {
+      "ht": "",
+      "at": "Digite para buscar naves..."
+    },
+    "name_label": {
+      "ht": "",
+      "at": "Nome:"
+    },
+    "name_placeholder": {
+      "ht": "",
+      "at": "Nome que ela terá no jogo"
+    },
+    "add_btn": {
+      "ht": "",
+      "at": "Adicionar à lista"
+    },
+    "update_btn": {
+      "ht": "",
+      "at": "Atualizar nome"
+    },
+    "add_hint": {
+      "ht": "",
+      "at": "Escolha uma nave, digite o novo nome e pressione Enter. Escolha uma nave que já está na lista para mudar o nome dela."
+    },
+    "list_group": {
+      "ht": "",
+      "at": "Sua lista de naves"
+    },
+    "numbering": {
+      "ht": "",
+      "at": "Numerar naves (01. 02. 03.)"
+    },
+    "manufacturer": {
+      "ht": "",
+      "at": "Adicionar o fabricante antes dos nomes"
+    },
+    "count": {
+      "ht": "",
+      "at": "{count} naves"
+    },
+    "move_up": {
+      "ht": "",
+      "at": "Mover para cima"
+    },
+    "move_down": {
+      "ht": "",
+      "at": "Mover para baixo"
+    },
+    "remove": {
+      "ht": "",
+      "at": "Remover"
+    },
+    "clear": {
+      "ht": "",
+      "at": "Limpar tudo"
+    },
+    "list_hint": {
+      "ht": "",
+      "at": "Arraste as naves para reordenar. As mudanças são salvas na hora; Aplicar ao jogo grava tudo no Star Citizen. Uma alteração no Editor de textos ainda tem prioridade sobre esta lista."
+    },
+    "stock_tooltip": {
+      "ht": "",
+      "at": "Nome original: {name}\nChave: {key}"
+    },
+    "missing_suffix": {
+      "ht": "",
+      "at": "(não está nesta versão do jogo)"
+    },
+    "missing_tooltip": {
+      "ht": "",
+      "at": "{key} não está nos textos do jogo carregados, então este nome não é aplicado. Ele continua na lista caso a nave volte."
+    },
+    "clear_title": {
+      "ht": "",
+      "at": "Limpar lista de naves"
+    },
+    "clear_body": {
+      "ht": "",
+      "at": "Remover todas as {count} naves da lista?"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "Como fica"
+    },
+    "preview_desc": {
+      "ht": "",
+      "at": "O nome de cada nave, de A a Z, como o ASOP ordena. As brancas são suas."
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "",
+      "at": "Aplicar ao jogo"
+    },
+    "status_dirty": {
+      "ht": "",
+      "at": "Mudanças ainda não aplicadas ao jogo"
+    },
+    "status_clean": {
+      "ht": "",
+      "at": "O jogo está atualizado"
+    },
+    "settings_tooltip": {
+      "ht": "",
+      "at": "Configurações e ferramentas"
+    },
+    "from_settings": {
+      "ht": "",
+      "at": "aberto pelas configurações"
+    },
+    "nav_ships": {
+      "ht": "",
+      "at": "Naves"
+    },
+    "nav_ships_sub": {
+      "ht": "",
+      "at": "renomear e ordenar a lista do ASOP"
+    },
+    "nav_items": {
+      "ht": "",
+      "at": "Itens"
+    },
+    "nav_items_sub": {
+      "ht": "",
+      "at": "componentes, armaduras, armas, diversos"
+    },
+    "nav_missions": {
+      "ht": "",
+      "at": "Missões"
+    },
+    "nav_missions_sub": {
+      "ht": "",
+      "at": "títulos e detalhes de contratos"
+    },
+    "nav_strings": {
+      "ht": "",
+      "at": "Todos os textos"
+    },
+    "nav_strings_sub": {
+      "ht": "",
+      "at": "buscar e editar qualquer texto"
+    },
+    "menu_settings": {
+      "ht": "",
+      "at": "Configurações"
+    },
+    "menu_blueprints": {
+      "ht": "",
+      "at": "Rastreador de projetos"
+    },
+    "menu_overlay": {
+      "ht": "",
+      "at": "Sobreposição"
+    },
+    "menu_log": {
+      "ht": "",
+      "at": "Log"
+    },
+    "menu_help": {
+      "ht": "",
+      "at": "Ajuda"
+    },
+    "menu_tutorial": {
+      "ht": "",
+      "at": "Tutorial"
+    },
+    "menu_about": {
+      "ht": "",
+      "at": "Sobre"
+    },
+    "menu_faq": {
+      "ht": "",
+      "at": "Perguntas frequentes"
+    },
+    "menu_legal": {
+      "ht": "",
+      "at": "Informações legais"
+    },
+    "menu_tools": {
+      "ht": "",
+      "at": "Ferramentas e backups"
+    },
+    "menu_starstrings": {
+      "ht": "",
+      "at": "Usar StarStrings para missões e itens"
+    },
+    "starstrings_get": {
+      "ht": "",
+      "at": "Baixe o StarStrings do MrKraken para nomes de missões e itens (versão {build})."
+    },
+    "starstrings_update": {
+      "ht": "",
+      "at": "O StarStrings tem uma versão mais nova: {build}. Você tem {current}."
+    },
+    "starstrings_download_btn": {
+      "ht": "",
+      "at": "Baixar"
+    },
+    "starstrings_update_btn": {
+      "ht": "",
+      "at": "Atualizar"
+    },
+    "starstrings_downloading": {
+      "ht": "",
+      "at": "Baixando StarStrings..."
+    },
+    "starstrings_failed": {
+      "ht": "",
+      "at": "Falha ao baixar o StarStrings: {error}"
+    },
+    "starstrings_retry_btn": {
+      "ht": "",
+      "at": "Tentar de novo"
+    },
+    "starstrings_installed": {
+      "ht": "",
+      "at": "StarStrings {build} instalado. Aplique ao jogo para usar."
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "",
+      "at": "Componentes"
+    },
+    "components_desc": {
+      "ht": "",
+      "at": "Resfriadores, escudos, geradores, motores quânticos e armas de nave. Escolha um, dê um nome ou aplique um modelo baseado em tamanho, grau e classe."
+    },
+    "armor": {
+      "ht": "",
+      "at": "Armaduras"
+    },
+    "armor_desc": {
+      "ht": "",
+      "at": "Capacetes, torsos, braços, pernas e trajes internos."
+    },
+    "fps": {
+      "ht": "",
+      "at": "Armas FPS e ferramentas"
+    },
+    "fps_desc": {
+      "ht": "",
+      "at": "Rifles, pistolas, multiferramentas, ferramentas médicas e seus acessórios."
+    },
+    "misc": {
+      "ht": "",
+      "at": "Diversos"
+    },
+    "misc_desc": {
+      "ht": "",
+      "at": "Todo o resto que você carrega: consumíveis, gadgets e itens de carga."
+    },
+    "coming_note": {
+      "ht": "",
+      "at": "Este editor é o próximo da lista. Até lá, renomeie qualquer item em Todos os textos."
     }
   }
 }

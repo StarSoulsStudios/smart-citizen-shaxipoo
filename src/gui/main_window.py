@@ -29,14 +29,17 @@ from src.gui.enhancements_tab import EnhancementsTab
 from src.gui.filter_header import FilterHeaderView
 from src.gui.log_tab import LogTab
 from src.gui.overlay_tab import OverlayTab, hotkey_problem_text
+from src.gui.ship_names_tab import ShipNamesTab
 from src.gui.simple_mode_widget import SimpleModeWidget
 from src.gui.markdown_renderer import markdown_to_html as _md_to_html
 from src.gui.string_table_model import (
     StringTableModel, COL_CATEGORY, COL_KEY, COL_DEFAULT, COL_CURRENT,
     COL_STAR, COL_ORDER, COL_CUSTOM, COL_STATUS, COL_OWNED,
 )
+from src.gui.app_shell import AppHeader, NavPage, ShellNav, UpdateBanner
+from src.gui.items_tab import ItemsTab
 from src.gui.theme import (
-    BRAND_FONT_FAMILY, get_button_color, get_button_text_color,
+    DISPLAY_FONT_FAMILY, get_button_color, get_button_text_color,
     get_tagline_color, get_title_color,
 )
 from src.gui.workers import (
@@ -86,6 +89,14 @@ from src.utils.version import get_version
 from src.utils.win_paths import win_plain_path
 
 logger = logging.getLogger(__name__)
+
+# The Ships tab saves on every change; reload once the burst settles.
+SHIP_NAMES_RELOAD_DELAY_MS = 600
+
+# The guided tour's steps target the pre-Hangar toolbar. Until they are
+# rewritten for the header + nav, the tour neither starts on first run nor
+# shows in the settings menu.
+TOUR_MATCHES_LAYOUT = False
 
 
 # Preview-pane token translation — turns the raw loc-string format the game
@@ -937,18 +948,18 @@ class MainWindow(QMainWindow):
         # needs a direct reference to the wrapped widget instead.
         self._content_widget = central_widget
         main_layout = QVBoxLayout(central_widget)
-        main_layout.setContentsMargins(8, 8, 8, 8)
-        main_layout.setSpacing(8)
+        # Hangar shell: the header runs edge to edge, each page sets its own margins.
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
-        # Title bar — branded font (Hyperspace Race Expanded Bold)
+        # Wordmark, shown at the left of the header (AppHeader).
         self.title_label = QLabel(tr("branding.title"))
-        title_font = QFont(BRAND_FONT_FAMILY)
-        title_font.setPointSize(22)
+        title_font = QFont(DISPLAY_FONT_FAMILY)
+        title_font.setPointSize(17)
+        title_font.setWeight(QFont.Weight.Bold)
         self.title_label.setFont(title_font)
-        main_layout.addWidget(self.title_label)
 
         self.tagline_label = QLabel(tr("branding.tagline"))
-        main_layout.addWidget(self.tagline_label)
         self._apply_branding_styles()
 
         # Fixed height on both. A QLabel defaults to a Preferred vertical
@@ -963,10 +974,28 @@ class MainWindow(QMainWindow):
 
         toolbar_layout = self.create_toolbar()
 
-        # Wrapped in a container so Simple mode (#180) can hide the whole
-        # advanced toolbar as a unit (a layout can't be hidden).
+        # The original toolbar row still owns the buttons every flow drives
+        # (apply_btn, the More menu's actions), so it is built but never
+        # shown: the header and the settings menu stand in for it.
+        self._legacy_toolbar = QWidget(central_widget)
+        self._legacy_toolbar.setLayout(toolbar_layout)
+        self._legacy_toolbar.hide()
+
+        # Header + nav, wrapped so Simple mode (#180) can hide them as a unit.
         self.toolbar_container = QWidget()
-        self.toolbar_container.setLayout(toolbar_layout)
+        self._shell_layout = QVBoxLayout(self.toolbar_container)
+        self._shell_layout.setContentsMargins(0, 0, 0, 0)
+        self._shell_layout.setSpacing(0)
+        self.app_header = AppHeader(self.title_label, self.tagline_label)
+        self.app_header.apply_clicked.connect(self.apply_btn.click)
+        self.app_header.set_dirty(self._apply_dirty)
+        self._shell_layout.addWidget(self.app_header)
+        # StarStrings update offer (_check_starstrings), between header and nav.
+        self.update_banner = UpdateBanner()
+        self.update_banner.action_clicked.connect(self._on_starstrings_action)
+        self._shell_layout.addWidget(self.update_banner)
+        self._starstrings_offer = None      # the Release the banner offers
+        self._starstrings_worker = None
         main_layout.addWidget(self.toolbar_container)
 
         self.tabs = QTabWidget()
@@ -1010,6 +1039,18 @@ class MainWindow(QMainWindow):
         )
         self._bp_log_scan_worker = None
         self._bp_log_scan_progress = None
+        # Ships tab: renamed + ordered ships for the ASOP. Its list is the
+        # synthetic ship_names source, so a change reloads (debounced, since
+        # drags and toggles come in bursts).
+        self.ship_names_tab = ShipNamesTab()
+        self._ship_names_reload_timer = QTimer(self)
+        self._ship_names_reload_timer.setSingleShot(True)
+        self._ship_names_reload_timer.setInterval(SHIP_NAMES_RELOAD_DELAY_MS)
+        self._ship_names_reload_timer.timeout.connect(self.perform_merge_and_reload)
+        self.ship_names_tab.names_changed.connect(self._ship_names_reload_timer.start)
+        self._ship_names_tab_index = self.tabs.addTab(self.ship_names_tab, tr("tabs.ship_names"))
+        self.items_tab = ItemsTab()
+        self._items_tab_index = self.tabs.addTab(self.items_tab, tr("tabs.items"))
         # Overlay tab (3.0.0): start/stop and options for the Smart Citizen
         # Overlay. Its start button drives the toolbar's Overlay button, so
         # both go through _toggle_sco_overlay.
@@ -1093,6 +1134,18 @@ class MainWindow(QMainWindow):
         # footer. A hidden widget's layout item is empty, so the page that
         # isn't showing costs nothing and the one that is takes the stretch
         # and centres itself.
+        self.tabs.setDocumentMode(True)
+        self.shell_nav = ShellNav(self.tabs, [
+            NavPage(self.ship_names_tab, "shell.nav_ships", "shell.nav_ships_sub"),
+            NavPage(self.items_tab, "shell.nav_items", "shell.nav_items_sub"),
+            NavPage(self.enhancements_tab, "shell.nav_missions", "shell.nav_missions_sub"),
+            NavPage(self.tabs.widget(self._strings_tab_index),
+                    "shell.nav_strings", "shell.nav_strings_sub"),
+        ])
+        self._shell_layout.addWidget(self.shell_nav)
+        self._build_settings_menu()
+        self.app_header.bind_channel_combo(self.config_tab.channel_combo)
+        self.tabs.setCurrentWidget(self.ship_names_tab)
         main_layout.addWidget(self.tabs, 1)          # Advanced
         main_layout.addWidget(self.simple_page, 1)   # Simple
 
@@ -1125,7 +1178,147 @@ class MainWindow(QMainWindow):
 
         # #180: apply the saved Simple/Advanced view last, once every widget
         # the toggle touches exists.
-        self._apply_ui_mode(AppSettings.get_ui_mode())
+        # Hangar: the header's one Apply button does what the Simple page did,
+        # so the window always opens on the tabs.
+        self._apply_ui_mode(AppSettings.UI_MODE_ADVANCED)
+
+    # The header's settings menu: pages that left the tab bar, then the old
+    # toolbar's buttons and its More menu. (tr key, how to open it)
+    def _settings_menu_entries(self):
+        return [
+            ("shell.menu_settings", lambda: self.shell_nav.open_page(self.config_tab)),
+            ("shell.menu_blueprints", lambda: self.shell_nav.open_page(self.blueprint_tracker_tab)),
+            ("shell.menu_overlay", lambda: self.shell_nav.open_page(self.overlay_tab)),
+            ("shell.menu_log", lambda: self.shell_nav.open_page(self.log_tab)),
+            None,
+            ("shell.menu_help", self.help_btn.click),
+            None,
+            ("shell.menu_about", lambda: self.shell_nav.open_page(
+                self.tabs.widget(self._about_tab_index))),
+            ("shell.menu_faq", lambda: self.shell_nav.open_page(
+                self.tabs.widget(self._faq_tab_index))),
+            ("shell.menu_legal", lambda: self.shell_nav.open_page(
+                self.tabs.widget(self._legal_tab_index))),
+        ]
+
+    def _build_settings_menu(self) -> None:
+        menu = self.app_header.settings_menu
+        self._settings_menu_actions = []
+        for entry in self._settings_menu_entries():
+            if entry is None:
+                menu.addSeparator()
+                continue
+            key, callback = entry
+            self._settings_menu_actions.append((key, menu.addAction(tr(key), callback)))
+        menu.addSeparator()
+        self._starstrings_action = menu.addAction(tr("shell.menu_starstrings"))
+        self._starstrings_action.setCheckable(True)
+        self._starstrings_action.setChecked(AppSettings.get_starstrings_enabled())
+        self._starstrings_action.toggled.connect(self._on_starstrings_toggled)
+        menu.addSeparator()
+        # The old More menu, whole: backups, import/export, folders, test plan.
+        self._tools_menu_action = menu.addMenu(self.more_btn.menu())
+        self._tools_menu_action.setText(tr("shell.menu_tools"))
+        if hasattr(self, "_action_switch_to_simple"):
+            self._action_switch_to_simple.setVisible(False)
+
+    def _retranslate_settings_menu(self) -> None:
+        for key, action in getattr(self, "_settings_menu_actions", []):
+            action.setText(tr(key))
+        if hasattr(self, "_tools_menu_action"):
+            self._tools_menu_action.setText(tr("shell.menu_tools"))
+        if hasattr(self, "_starstrings_action"):
+            self._starstrings_action.setText(tr("shell.menu_starstrings"))
+        if getattr(self, "_starstrings_offer", None) is not None and self.update_banner.isVisible():
+            self._show_starstrings_offer()
+
+    # ── StarStrings (mission text and item names from MrKraken) ────────────
+
+    def _starstrings_user_agent(self) -> str:
+        return f"SmartCitizen/{get_version()}"
+
+    def _check_starstrings(self) -> None:
+        """Ask GitHub, in the background, whether this channel's StarStrings is current."""
+        from src.gui.workers import StarStringsCheckWorker
+        from src.utils import starstrings
+        if not AppSettings.get_starstrings_enabled():
+            return
+        if AppSettings.get_selected_language() != starstrings.SUPPORTED_LANGUAGE:
+            return
+        if self._starstrings_worker is not None:
+            return
+        worker = StarStringsCheckWorker(AppSettings.get_active_channel(),
+                                        AppSettings.get_starstrings_dir(),
+                                        self._starstrings_user_agent())
+        worker.checked.connect(self._on_starstrings_checked)
+        worker.check_failed.connect(
+            lambda msg: logger.info(f"StarStrings check skipped: {msg}"))
+        self._run_starstrings_worker(worker)
+
+    def _run_starstrings_worker(self, worker) -> None:
+        self._starstrings_worker = worker
+
+        def _done():
+            worker.deleteLater()
+            if self._starstrings_worker is worker:
+                self._starstrings_worker = None
+        worker.finished.connect(_done)
+        worker.start()
+
+    def _on_starstrings_checked(self, latest, installed) -> None:
+        from src.utils import starstrings
+        if not starstrings.needs_update(installed, latest):
+            logger.info(f"StarStrings is current ({latest.build_label()})")
+            self._starstrings_offer = None
+            self.update_banner.hide()
+            return
+        self._starstrings_offer = latest
+        self._starstrings_installed = installed
+        self._show_starstrings_offer()
+
+    def _show_starstrings_offer(self) -> None:
+        latest = self._starstrings_offer
+        installed = getattr(self, "_starstrings_installed", None)
+        if installed is None:
+            self.update_banner.show_offer(
+                tr("shell.starstrings_get", build=latest.build_label()),
+                tr("shell.starstrings_download_btn"))
+        else:
+            self.update_banner.show_offer(
+                tr("shell.starstrings_update", build=latest.build_label(),
+                   current=installed.build_label()),
+                tr("shell.starstrings_update_btn"))
+
+    def _on_starstrings_action(self) -> None:
+        """The banner's button: download the offered release."""
+        from src.gui.workers import StarStringsDownloadWorker
+        if self._starstrings_offer is None or self._starstrings_worker is not None:
+            return
+        self.update_banner.show_offer(tr("shell.starstrings_downloading"),
+                                      tr("shell.starstrings_download_btn"), busy=True)
+        worker = StarStringsDownloadWorker(self._starstrings_offer,
+                                           AppSettings.get_starstrings_dir(),
+                                           self._starstrings_user_agent())
+        worker.done.connect(self._on_starstrings_downloaded)
+        self._run_starstrings_worker(worker)
+
+    def _on_starstrings_downloaded(self, ok: bool, message: str) -> None:
+        if not ok:
+            self.update_banner.show_offer(tr("shell.starstrings_failed", error=message),
+                                          tr("shell.starstrings_retry_btn"))
+            return
+        self._starstrings_offer = None
+        self.update_banner.hide()
+        self.statusBar().showMessage(tr("shell.starstrings_installed", build=message), 8000)
+        self.perform_merge_and_reload()
+
+    def _on_starstrings_toggled(self, on: bool) -> None:
+        AppSettings.set_starstrings_enabled(on)
+        if on:
+            self._check_starstrings()
+        else:
+            self.update_banner.hide()
+        self.perform_merge_and_reload()
 
     def _apply_ui_mode(self, mode: str) -> None:
         """Switch between the Simple and Advanced views and persist the choice (#180).
@@ -2562,6 +2755,8 @@ class MainWindow(QMainWindow):
             f"font-weight: bold; padding: 6px; }}"
             f"QPushButton:disabled {{ background-color: {color}; color: {text}; }}"
         )
+        if hasattr(self, "app_header"):
+            self.app_header.set_dirty(dirty)
         # simple_page doesn't exist yet when create_toolbar() makes the first
         # call, and it starts dirty too, so skipping that call loses nothing.
         if hasattr(self, "simple_page"):
@@ -3403,6 +3598,7 @@ class MainWindow(QMainWindow):
                 )
                 self.apply_filters()
                 self._rebuild_blueprint_metadata()  # #157 follow-up: filter data
+                self.ship_names_tab.set_stock_names(self.default_values)
                 self._recompute_owned()  # #157
                 # Same as an async reload: _recompute_owned marked it red, and
                 # only the background check can say it's already applied.
@@ -4795,6 +4991,7 @@ class MainWindow(QMainWindow):
         self._maybe_warn_onedrive_data_dir()
         self._maybe_prompt_post_import_apply()
         self._maybe_auto_scan_blueprints()
+        self._check_starstrings()
 
     def _maybe_auto_scan_blueprints(self) -> None:
         """Run "Scan Logs for Owned Blueprints" on startup if opted in (#386).
@@ -4937,7 +5134,10 @@ class MainWindow(QMainWindow):
         # click away from the toolbar once the user switches to Advanced. Still
         # fire the deferred startup tasks so first-run source sync / update /
         # OneDrive checks aren't lost.
-        if AppSettings.get_ui_mode() == AppSettings.UI_MODE_SIMPLE:
+        # Hangar redesign: the tour still spotlights the old toolbar row,
+        # which the header replaced, so it does not start on its own until
+        # its steps are rewritten for the new layout.
+        if not TOUR_MATCHES_LAYOUT or AppSettings.get_ui_mode() == AppSettings.UI_MODE_SIMPLE:
             QTimer.singleShot(0, self._start_post_tutorial_tasks)
             return
         if AppSettings.get_tutorial_disabled():
@@ -5103,6 +5303,8 @@ class MainWindow(QMainWindow):
         if getattr(self, "_channel_indicator", None) is None:
             return
         self._channel_indicator.setText(tr("status_bar.channel_indicator", channel=AppSettings.get_active_channel()))
+        if hasattr(self, "app_header"):
+            self.app_header.refresh_channels()
 
     def _sync_canonical_source_paths(self, context: str) -> None:
         """Mirror canonical file-backed source paths into QSettings.
@@ -5113,6 +5315,10 @@ class MainWindow(QMainWindow):
         data-folder change turned the table, and the next Apply, English
         (#502)."""
         AppSettings.sync_global_source_path(context)
+        self.ship_names_tab.reload_config()  # ship_names.json is per channel
+        if hasattr(self, "update_banner"):
+            self.update_banner.hide()
+            self._check_starstrings()        # StarStrings is per channel too
         stored = AppSettings.get_source_path(AppSettings.SOURCE_USER)
         canonical = str(AppSettings.get_user_ini_path())
         if stored.startswith(("http://", "https://")):
@@ -5244,6 +5450,8 @@ class MainWindow(QMainWindow):
         self.tabs.setTabText(self._config_tab_index, tr("tabs.config"))
         self.tabs.setTabText(self._enhancements_tab_index, tr("tabs.enhancements"))
         self.tabs.setTabText(self._blueprint_tracker_tab_index, tr("tabs.blueprint_tracker"))
+        self.tabs.setTabText(self._ship_names_tab_index, tr("tabs.ship_names"))
+        self.tabs.setTabText(self._items_tab_index, tr("tabs.items"))
         self.tabs.setTabText(self._overlay_tab_index, tr("tabs.overlay"))
         self.tabs.setTabText(self._log_tab_index, tr("tabs.log"))
         self.tabs.setTabText(self._about_tab_index, tr("tabs.about"))
@@ -5380,6 +5588,11 @@ class MainWindow(QMainWindow):
         self.config_tab.retranslate_ui()
         self.enhancements_tab.retranslate_ui()
         self.blueprint_tracker_tab.retranslate_ui()
+        self.ship_names_tab.retranslate_ui()
+        self.items_tab.retranslate_ui()
+        self.app_header.retranslate_ui()
+        self.shell_nav.retranslate_ui()
+        self._retranslate_settings_menu()
         self.overlay_tab.retranslate_ui()
         if self._sco_overlay is not None:
             self._sco_overlay.drawer.retranslate_ui()
@@ -6293,6 +6506,7 @@ class MainWindow(QMainWindow):
         )
         self.apply_filters()
         self._rebuild_blueprint_metadata()  # #157 follow-up: filter data
+        self.ship_names_tab.set_stock_names(self.default_values or {})
         self._recompute_owned()  # #157: weave [Owned] tags + populate Owned stars
         if self._reload_follows_clean_apply:
             # This reload only refreshes state that was just applied cleanly,

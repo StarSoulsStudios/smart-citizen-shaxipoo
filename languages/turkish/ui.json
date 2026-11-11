@@ -74,6 +74,10 @@
       "ht": "",
       "at": "Plan Takipçisi"
     },
+    "ship_names": {
+      "ht": "",
+      "at": "Gemiler"
+    },
     "log": {
       "ht": "",
       "at": "Günlük"
@@ -105,6 +109,10 @@
     "overlay": {
       "ht": "",
       "at": "Katman"
+    },
+    "items": {
+      "ht": "",
+      "at": "Eşyalar"
     }
   },
   "toolbar": {
@@ -1105,6 +1113,10 @@
     "clear_shader_cache_tooltip": {
       "ht": "",
       "at": "%LOCALAPPDATA%\\Star Citizen içindeki Star Citizen gölgelendirici önbellek klasörlerini temizler veya kaldırır."
+    },
+    "theme_hangar": {
+      "ht": "",
+      "at": "Hangar"
     }
   },
   "enhancements": {
@@ -3865,6 +3877,280 @@
     "game_running_body": {
       "ht": "",
       "at": "Star Citizen çalışıyor. Önce oyunu kapatın: oyun gölgelendirici önbelleğini açık tutar, şimdi silmek onu yarım bırakır."
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "",
+      "at": "Gemilerim"
+    },
+    "desc": {
+      "ht": "",
+      "at": "Bu listedeki gemiler ASOP terminalinde en üstte, bu sırayla görünür. Sırayı değiştirmek için sürükle."
+    },
+    "add_group": {
+      "ht": "",
+      "at": "Gemi yeniden adlandır"
+    },
+    "ship_label": {
+      "ht": "",
+      "at": "Gemi:"
+    },
+    "ship_placeholder": {
+      "ht": "",
+      "at": "Gemi aramak için yazın..."
+    },
+    "name_label": {
+      "ht": "",
+      "at": "Ad:"
+    },
+    "name_placeholder": {
+      "ht": "",
+      "at": "Oyunda görünecek ad"
+    },
+    "add_btn": {
+      "ht": "",
+      "at": "Listeye ekle"
+    },
+    "update_btn": {
+      "ht": "",
+      "at": "Adı güncelle"
+    },
+    "add_hint": {
+      "ht": "",
+      "at": "Bir gemi seç, yeni adını yaz ve Enter'a bas. Adını değiştirmek için listedeki bir gemiyi seç."
+    },
+    "list_group": {
+      "ht": "",
+      "at": "Gemi listen"
+    },
+    "numbering": {
+      "ht": "",
+      "at": "Gemileri numaralandır (01. 02. 03.)"
+    },
+    "manufacturer": {
+      "ht": "",
+      "at": "Adların önüne üreticiyi ekle"
+    },
+    "count": {
+      "ht": "",
+      "at": "{count} gemi"
+    },
+    "move_up": {
+      "ht": "",
+      "at": "Yukarı taşı"
+    },
+    "move_down": {
+      "ht": "",
+      "at": "Aşağı taşı"
+    },
+    "remove": {
+      "ht": "",
+      "at": "Kaldır"
+    },
+    "clear": {
+      "ht": "",
+      "at": "Tümünü temizle"
+    },
+    "list_hint": {
+      "ht": "",
+      "at": "Sırayı değiştirmek için gemileri sürükle. Değişiklikler anında kaydedilir; Oyuna Uygula bunları Star Citizen'a yazar. Metin Düzenleyicideki bir değişiklik yine bu listeden önce gelir."
+    },
+    "stock_tooltip": {
+      "ht": "",
+      "at": "Orijinal ad: {name}\nAnahtar: {key}"
+    },
+    "missing_suffix": {
+      "ht": "",
+      "at": "(bu oyun sürümünde yok)"
+    },
+    "missing_tooltip": {
+      "ht": "",
+      "at": "{key} yüklenen oyun metinlerinde yok, bu yüzden bu ad uygulanmıyor. Gemi geri dönerse diye listede kalır."
+    },
+    "clear_title": {
+      "ht": "",
+      "at": "Gemi listesini temizle"
+    },
+    "clear_body": {
+      "ht": "",
+      "at": "{count} geminin tümü listeden kaldırılsın mı?"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "Nasıl görünür"
+    },
+    "preview_desc": {
+      "ht": "",
+      "at": "Her geminin adı, A'dan Z'ye, ASOP'un sıraladığı gibi. Beyaz olanlar senin."
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "",
+      "at": "Oyuna uygula"
+    },
+    "status_dirty": {
+      "ht": "",
+      "at": "Henüz oyunda olmayan değişiklikler"
+    },
+    "status_clean": {
+      "ht": "",
+      "at": "Oyun güncel"
+    },
+    "settings_tooltip": {
+      "ht": "",
+      "at": "Ayarlar ve araçlar"
+    },
+    "from_settings": {
+      "ht": "",
+      "at": "ayarlardan açıldı"
+    },
+    "nav_ships": {
+      "ht": "",
+      "at": "Gemiler"
+    },
+    "nav_ships_sub": {
+      "ht": "",
+      "at": "ASOP listesini adlandır ve sırala"
+    },
+    "nav_items": {
+      "ht": "",
+      "at": "Eşyalar"
+    },
+    "nav_items_sub": {
+      "ht": "",
+      "at": "bileşenler, zırh, silahlar, diğer"
+    },
+    "nav_missions": {
+      "ht": "",
+      "at": "Görevler"
+    },
+    "nav_missions_sub": {
+      "ht": "",
+      "at": "sözleşme başlıkları ve ayrıntıları"
+    },
+    "nav_strings": {
+      "ht": "",
+      "at": "Tüm metinler"
+    },
+    "nav_strings_sub": {
+      "ht": "",
+      "at": "herhangi bir metni ara ve düzenle"
+    },
+    "menu_settings": {
+      "ht": "",
+      "at": "Ayarlar"
+    },
+    "menu_blueprints": {
+      "ht": "",
+      "at": "Plan takipçisi"
+    },
+    "menu_overlay": {
+      "ht": "",
+      "at": "Katman"
+    },
+    "menu_log": {
+      "ht": "",
+      "at": "Günlük"
+    },
+    "menu_help": {
+      "ht": "",
+      "at": "Yardım"
+    },
+    "menu_tutorial": {
+      "ht": "",
+      "at": "Eğitim"
+    },
+    "menu_about": {
+      "ht": "",
+      "at": "Hakkında"
+    },
+    "menu_faq": {
+      "ht": "",
+      "at": "SSS"
+    },
+    "menu_legal": {
+      "ht": "",
+      "at": "Yasal"
+    },
+    "menu_tools": {
+      "ht": "",
+      "at": "Araçlar ve yedekler"
+    },
+    "menu_starstrings": {
+      "ht": "",
+      "at": "Görevler ve eşyalar için StarStrings kullan"
+    },
+    "starstrings_get": {
+      "ht": "",
+      "at": "Görev ve eşya adları için MrKraken'in StarStrings'ini indir (sürüm {build})."
+    },
+    "starstrings_update": {
+      "ht": "",
+      "at": "StarStrings'in daha yeni bir sürümü var: {build}. Sende {current} var."
+    },
+    "starstrings_download_btn": {
+      "ht": "",
+      "at": "İndir"
+    },
+    "starstrings_update_btn": {
+      "ht": "",
+      "at": "Güncelle"
+    },
+    "starstrings_downloading": {
+      "ht": "",
+      "at": "StarStrings indiriliyor..."
+    },
+    "starstrings_failed": {
+      "ht": "",
+      "at": "StarStrings indirilemedi: {error}"
+    },
+    "starstrings_retry_btn": {
+      "ht": "",
+      "at": "Tekrar dene"
+    },
+    "starstrings_installed": {
+      "ht": "",
+      "at": "StarStrings {build} yüklendi. Kullanmak için oyuna uygula."
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "",
+      "at": "Bileşenler"
+    },
+    "components_desc": {
+      "ht": "",
+      "at": "Soğutucular, kalkanlar, güç üniteleri, kuantum motorları ve gemi silahları. Birini seç, ad ver ya da boyut, sınıf ve dereceye göre bir şablon uygula."
+    },
+    "armor": {
+      "ht": "",
+      "at": "Zırh"
+    },
+    "armor_desc": {
+      "ht": "",
+      "at": "Kasklar, gövdeler, kollar, bacaklar ve iç giysiler."
+    },
+    "fps": {
+      "ht": "",
+      "at": "FPS silahları ve aletler"
+    },
+    "fps_desc": {
+      "ht": "",
+      "at": "Tüfekler, tabancalar, çok amaçlı aletler, tıbbi aletler ve ekleri."
+    },
+    "misc": {
+      "ht": "",
+      "at": "Diğer"
+    },
+    "misc_desc": {
+      "ht": "",
+      "at": "Taşıdığın diğer her şey: sarf malzemeleri, aletler ve kargo eşyaları."
+    },
+    "coming_note": {
+      "ht": "",
+      "at": "Bu düzenleyici sıradaki iş. O zamana kadar herhangi bir eşyayı Tüm metinler'den yeniden adlandır."
     }
   }
 }

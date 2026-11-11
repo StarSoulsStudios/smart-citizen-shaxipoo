@@ -74,6 +74,10 @@
       "ht": "",
       "at": "蓝图追踪器"
     },
+    "ship_names": {
+      "ht": "",
+      "at": "舰船"
+    },
     "log": {
       "ht": "",
       "at": "日志"
@@ -105,6 +109,10 @@
     "overlay": {
       "ht": "",
       "at": "叠加层"
+    },
+    "items": {
+      "ht": "",
+      "at": "物品"
     }
   },
   "toolbar": {
@@ -1105,6 +1113,10 @@
     "clear_shader_cache_tooltip": {
       "ht": "",
       "at": "清理或删除 %LOCALAPPDATA%\\Star Citizen 中的 Star Citizen 着色器缓存文件夹。"
+    },
+    "theme_hangar": {
+      "ht": "",
+      "at": "机库"
     }
   },
   "enhancements": {
@@ -3865,6 +3877,280 @@
     "game_running_body": {
       "ht": "",
       "at": "Star Citizen 正在运行。请先关闭游戏：游戏会占用着色器缓存，现在删除只会删掉一部分。"
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "",
+      "at": "我的舰船"
+    },
+    "desc": {
+      "ht": "",
+      "at": "此列表中的舰船会按此顺序排在 ASOP 终端的最前面。拖动以调整顺序。"
+    },
+    "add_group": {
+      "ht": "",
+      "at": "重命名舰船"
+    },
+    "ship_label": {
+      "ht": "",
+      "at": "舰船："
+    },
+    "ship_placeholder": {
+      "ht": "",
+      "at": "输入以搜索舰船……"
+    },
+    "name_label": {
+      "ht": "",
+      "at": "名称："
+    },
+    "name_placeholder": {
+      "ht": "",
+      "at": "游戏中显示的名称"
+    },
+    "add_btn": {
+      "ht": "",
+      "at": "添加到列表"
+    },
+    "update_btn": {
+      "ht": "",
+      "at": "更新名称"
+    },
+    "add_hint": {
+      "ht": "",
+      "at": "选择一艘舰船，输入新名称后按回车。选择列表中已有的舰船可修改其名称。"
+    },
+    "list_group": {
+      "ht": "",
+      "at": "你的舰船列表"
+    },
+    "numbering": {
+      "ht": "",
+      "at": "为舰船编号（01. 02. 03.）"
+    },
+    "manufacturer": {
+      "ht": "",
+      "at": "在名称前添加制造商"
+    },
+    "count": {
+      "ht": "",
+      "at": "{count} 艘舰船"
+    },
+    "move_up": {
+      "ht": "",
+      "at": "上移"
+    },
+    "move_down": {
+      "ht": "",
+      "at": "下移"
+    },
+    "remove": {
+      "ht": "",
+      "at": "移除"
+    },
+    "clear": {
+      "ht": "",
+      "at": "全部清除"
+    },
+    "list_hint": {
+      "ht": "",
+      "at": "拖动舰船以调整顺序。更改会立即保存；“应用到游戏”会将其写入 Star Citizen。在字符串编辑器中的修改仍优先于此列表。"
+    },
+    "stock_tooltip": {
+      "ht": "",
+      "at": "原始名称：{name}\n键：{key}"
+    },
+    "missing_suffix": {
+      "ht": "",
+      "at": "（此游戏版本中不存在）"
+    },
+    "missing_tooltip": {
+      "ht": "",
+      "at": "已加载的游戏字符串中没有 {key}，因此不会应用此名称。它会保留在列表中，以防该舰船回归。"
+    },
+    "clear_title": {
+      "ht": "",
+      "at": "清除舰船列表"
+    },
+    "clear_body": {
+      "ht": "",
+      "at": "要从列表中移除全部 {count} 艘舰船吗？"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "效果预览"
+    },
+    "preview_desc": {
+      "ht": "",
+      "at": "按 ASOP 的排序方式，从 A 到 Z 显示每艘舰船的名称。白色的是你的。"
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "",
+      "at": "应用到游戏"
+    },
+    "status_dirty": {
+      "ht": "",
+      "at": "有尚未应用到游戏的更改"
+    },
+    "status_clean": {
+      "ht": "",
+      "at": "游戏已是最新"
+    },
+    "settings_tooltip": {
+      "ht": "",
+      "at": "设置和工具"
+    },
+    "from_settings": {
+      "ht": "",
+      "at": "从设置中打开"
+    },
+    "nav_ships": {
+      "ht": "",
+      "at": "舰船"
+    },
+    "nav_ships_sub": {
+      "ht": "",
+      "at": "重命名并排序 ASOP 列表"
+    },
+    "nav_items": {
+      "ht": "",
+      "at": "物品"
+    },
+    "nav_items_sub": {
+      "ht": "",
+      "at": "组件、护甲、武器、杂项"
+    },
+    "nav_missions": {
+      "ht": "",
+      "at": "任务"
+    },
+    "nav_missions_sub": {
+      "ht": "",
+      "at": "合同标题和详情"
+    },
+    "nav_strings": {
+      "ht": "",
+      "at": "所有字符串"
+    },
+    "nav_strings_sub": {
+      "ht": "",
+      "at": "搜索并编辑任意文本"
+    },
+    "menu_settings": {
+      "ht": "",
+      "at": "设置"
+    },
+    "menu_blueprints": {
+      "ht": "",
+      "at": "蓝图追踪"
+    },
+    "menu_overlay": {
+      "ht": "",
+      "at": "叠加层"
+    },
+    "menu_log": {
+      "ht": "",
+      "at": "日志"
+    },
+    "menu_help": {
+      "ht": "",
+      "at": "帮助"
+    },
+    "menu_tutorial": {
+      "ht": "",
+      "at": "教程"
+    },
+    "menu_about": {
+      "ht": "",
+      "at": "关于"
+    },
+    "menu_faq": {
+      "ht": "",
+      "at": "常见问题"
+    },
+    "menu_legal": {
+      "ht": "",
+      "at": "法律信息"
+    },
+    "menu_tools": {
+      "ht": "",
+      "at": "工具和备份"
+    },
+    "menu_starstrings": {
+      "ht": "",
+      "at": "对任务和物品使用 StarStrings"
+    },
+    "starstrings_get": {
+      "ht": "",
+      "at": "获取 MrKraken 的 StarStrings，用于任务和物品名称（版本 {build}）。"
+    },
+    "starstrings_update": {
+      "ht": "",
+      "at": "StarStrings 有更新的版本：{build}。你当前是 {current}。"
+    },
+    "starstrings_download_btn": {
+      "ht": "",
+      "at": "下载"
+    },
+    "starstrings_update_btn": {
+      "ht": "",
+      "at": "更新"
+    },
+    "starstrings_downloading": {
+      "ht": "",
+      "at": "正在下载 StarStrings……"
+    },
+    "starstrings_failed": {
+      "ht": "",
+      "at": "StarStrings 下载失败：{error}"
+    },
+    "starstrings_retry_btn": {
+      "ht": "",
+      "at": "重试"
+    },
+    "starstrings_installed": {
+      "ht": "",
+      "at": "已安装 StarStrings {build}。应用到游戏即可使用。"
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "",
+      "at": "组件"
+    },
+    "components_desc": {
+      "ht": "",
+      "at": "冷却器、护盾、电源、量子引擎和舰船武器。选择一个，为其命名，或应用基于尺寸、等级和类别的预设。"
+    },
+    "armor": {
+      "ht": "",
+      "at": "护甲"
+    },
+    "armor_desc": {
+      "ht": "",
+      "at": "头盔、躯干、手臂、腿部和内衬服。"
+    },
+    "fps": {
+      "ht": "",
+      "at": "FPS 武器和工具"
+    },
+    "fps_desc": {
+      "ht": "",
+      "at": "步枪、手枪、多功能工具、医疗工具及其配件。"
+    },
+    "misc": {
+      "ht": "",
+      "at": "杂项"
+    },
+    "misc_desc": {
+      "ht": "",
+      "at": "你携带的其他所有物品：消耗品、小工具和货物。"
+    },
+    "coming_note": {
+      "ht": "",
+      "at": "此编辑器即将推出。在此之前，可在“所有字符串”中重命名任意物品。"
     }
   }
 }

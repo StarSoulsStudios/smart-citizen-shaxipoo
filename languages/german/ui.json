@@ -74,6 +74,10 @@
       "ht": "",
       "at": "Bauplan-Tracker"
     },
+    "ship_names": {
+      "ht": "",
+      "at": "Schiffe"
+    },
     "log": {
       "ht": "",
       "at": "Protokoll"
@@ -105,6 +109,10 @@
     "overlay": {
       "ht": "",
       "at": "Overlay"
+    },
+    "items": {
+      "ht": "",
+      "at": "Gegenstände"
     }
   },
   "toolbar": {
@@ -1105,6 +1113,10 @@
     "clear_shader_cache_tooltip": {
       "ht": "",
       "at": "Shader-Cache-Ordner von Star Citizen in %LOCALAPPDATA%\\Star Citizen leeren oder entfernen."
+    },
+    "theme_hangar": {
+      "ht": "",
+      "at": "Hangar"
     }
   },
   "enhancements": {
@@ -3865,6 +3877,280 @@
     "game_running_body": {
       "ht": "",
       "at": "Star Citizen läuft. Schließe zuerst das Spiel: Es hält den Shader-Cache geöffnet, ein Löschen jetzt würde ihn nur halb entfernen."
+    }
+  },
+  "ship_names": {
+    "title": {
+      "ht": "",
+      "at": "Meine Schiffe"
+    },
+    "desc": {
+      "ht": "",
+      "at": "Schiffe in dieser Liste stehen am ASOP-Terminal ganz oben, in dieser Reihenfolge. Zum Umsortieren ziehen."
+    },
+    "add_group": {
+      "ht": "",
+      "at": "Schiff umbenennen"
+    },
+    "ship_label": {
+      "ht": "",
+      "at": "Schiff:"
+    },
+    "ship_placeholder": {
+      "ht": "",
+      "at": "Tippen, um Schiffe zu suchen..."
+    },
+    "name_label": {
+      "ht": "",
+      "at": "Name:"
+    },
+    "name_placeholder": {
+      "ht": "",
+      "at": "Name, den es im Spiel tragen soll"
+    },
+    "add_btn": {
+      "ht": "",
+      "at": "Zur Liste hinzufügen"
+    },
+    "update_btn": {
+      "ht": "",
+      "at": "Namen ändern"
+    },
+    "add_hint": {
+      "ht": "",
+      "at": "Wähle ein Schiff, gib den neuen Namen ein und drücke Enter. Wähle ein Schiff aus der Liste, um seinen Namen zu ändern."
+    },
+    "list_group": {
+      "ht": "",
+      "at": "Deine Schiffsliste"
+    },
+    "numbering": {
+      "ht": "",
+      "at": "Schiffe nummerieren (01. 02. 03.)"
+    },
+    "manufacturer": {
+      "ht": "",
+      "at": "Hersteller vor die Namen setzen"
+    },
+    "count": {
+      "ht": "",
+      "at": "{count} Schiffe"
+    },
+    "move_up": {
+      "ht": "",
+      "at": "Nach oben"
+    },
+    "move_down": {
+      "ht": "",
+      "at": "Nach unten"
+    },
+    "remove": {
+      "ht": "",
+      "at": "Entfernen"
+    },
+    "clear": {
+      "ht": "",
+      "at": "Alle löschen"
+    },
+    "list_hint": {
+      "ht": "",
+      "at": "Ziehe Schiffe, um sie neu anzuordnen. Änderungen werden sofort gespeichert; Auf Spiel anwenden schreibt sie in Star Citizen. Eine Umbenennung im String-Editor hat weiterhin Vorrang vor dieser Liste."
+    },
+    "stock_tooltip": {
+      "ht": "",
+      "at": "Originalname: {name}\nSchlüssel: {key}"
+    },
+    "missing_suffix": {
+      "ht": "",
+      "at": "(nicht in diesem Spiel-Build)"
+    },
+    "missing_tooltip": {
+      "ht": "",
+      "at": "{key} ist nicht in den geladenen Spieltexten, daher wird dieser Name nicht angewendet. Er bleibt in der Liste, falls das Schiff zurückkehrt."
+    },
+    "clear_title": {
+      "ht": "",
+      "at": "Schiffsliste löschen"
+    },
+    "clear_body": {
+      "ht": "",
+      "at": "Alle {count} Schiffe aus der Liste entfernen?"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "So sieht es aus"
+    },
+    "preview_desc": {
+      "ht": "",
+      "at": "Der Name jedes Schiffs, von A bis Z, so wie das ASOP sie sortiert. Weiße sind deine."
+    }
+  },
+  "shell": {
+    "apply_btn": {
+      "ht": "",
+      "at": "Auf Spiel anwenden"
+    },
+    "status_dirty": {
+      "ht": "",
+      "at": "Änderungen noch nicht im Spiel"
+    },
+    "status_clean": {
+      "ht": "",
+      "at": "Spiel ist aktuell"
+    },
+    "settings_tooltip": {
+      "ht": "",
+      "at": "Einstellungen und Werkzeuge"
+    },
+    "from_settings": {
+      "ht": "",
+      "at": "aus den Einstellungen geöffnet"
+    },
+    "nav_ships": {
+      "ht": "",
+      "at": "Schiffe"
+    },
+    "nav_ships_sub": {
+      "ht": "",
+      "at": "ASOP-Liste umbenennen und sortieren"
+    },
+    "nav_items": {
+      "ht": "",
+      "at": "Gegenstände"
+    },
+    "nav_items_sub": {
+      "ht": "",
+      "at": "Komponenten, Rüstung, Waffen, Sonstiges"
+    },
+    "nav_missions": {
+      "ht": "",
+      "at": "Missionen"
+    },
+    "nav_missions_sub": {
+      "ht": "",
+      "at": "Auftragstitel und Details"
+    },
+    "nav_strings": {
+      "ht": "",
+      "at": "Alle Texte"
+    },
+    "nav_strings_sub": {
+      "ht": "",
+      "at": "jeden Text suchen und bearbeiten"
+    },
+    "menu_settings": {
+      "ht": "",
+      "at": "Einstellungen"
+    },
+    "menu_blueprints": {
+      "ht": "",
+      "at": "Blaupausen-Tracker"
+    },
+    "menu_overlay": {
+      "ht": "",
+      "at": "Overlay"
+    },
+    "menu_log": {
+      "ht": "",
+      "at": "Protokoll"
+    },
+    "menu_help": {
+      "ht": "",
+      "at": "Hilfe"
+    },
+    "menu_tutorial": {
+      "ht": "",
+      "at": "Tutorial"
+    },
+    "menu_about": {
+      "ht": "",
+      "at": "Über"
+    },
+    "menu_faq": {
+      "ht": "",
+      "at": "FAQ"
+    },
+    "menu_legal": {
+      "ht": "",
+      "at": "Rechtliches"
+    },
+    "menu_tools": {
+      "ht": "",
+      "at": "Werkzeuge und Backups"
+    },
+    "menu_starstrings": {
+      "ht": "",
+      "at": "StarStrings für Missionen und Gegenstände verwenden"
+    },
+    "starstrings_get": {
+      "ht": "",
+      "at": "Hol dir MrKrakens StarStrings für Missions- und Gegenstandsnamen (Build {build})."
+    },
+    "starstrings_update": {
+      "ht": "",
+      "at": "StarStrings hat einen neueren Build: {build}. Du hast {current}."
+    },
+    "starstrings_download_btn": {
+      "ht": "",
+      "at": "Herunterladen"
+    },
+    "starstrings_update_btn": {
+      "ht": "",
+      "at": "Aktualisieren"
+    },
+    "starstrings_downloading": {
+      "ht": "",
+      "at": "StarStrings wird heruntergeladen..."
+    },
+    "starstrings_failed": {
+      "ht": "",
+      "at": "StarStrings-Download fehlgeschlagen: {error}"
+    },
+    "starstrings_retry_btn": {
+      "ht": "",
+      "at": "Erneut versuchen"
+    },
+    "starstrings_installed": {
+      "ht": "",
+      "at": "StarStrings {build} installiert. Wende es auf das Spiel an, um es zu nutzen."
+    }
+  },
+  "items": {
+    "components": {
+      "ht": "",
+      "at": "Komponenten"
+    },
+    "components_desc": {
+      "ht": "",
+      "at": "Kühler, Schilde, Kraftwerke, Quantenantriebe und Schiffswaffen. Wähle eine aus, gib ihr einen Namen oder wende eine Vorlage aus Größe, Grad und Klasse an."
+    },
+    "armor": {
+      "ht": "",
+      "at": "Rüstung"
+    },
+    "armor_desc": {
+      "ht": "",
+      "at": "Helme, Torsos, Arme, Beine und Unteranzüge."
+    },
+    "fps": {
+      "ht": "",
+      "at": "FPS-Waffen und Werkzeuge"
+    },
+    "fps_desc": {
+      "ht": "",
+      "at": "Gewehre, Pistolen, Multi-Tools, medizinische Werkzeuge und ihr Zubehör."
+    },
+    "misc": {
+      "ht": "",
+      "at": "Sonstiges"
+    },
+    "misc_desc": {
+      "ht": "",
+      "at": "Alles andere, was du trägst: Verbrauchsgüter, Gadgets und Frachtgegenstände."
+    },
+    "coming_note": {
+      "ht": "",
+      "at": "Dieser Editor ist als Nächstes dran. Bis dahin kannst du jeden Gegenstand unter Alle Texte umbenennen."
     }
   }
 }

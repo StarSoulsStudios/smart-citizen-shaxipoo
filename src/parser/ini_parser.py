@@ -443,8 +443,78 @@ def load_sources_from_settings() -> tuple[Dict[str, Dict[str, str]], List[str], 
             else:
                 hierarchy = hierarchy + [AppSettings.SOURCE_ENHANCEMENTS]
 
+    hierarchy = _inject_starstrings(sources_dict, hierarchy)
+    hierarchy = _inject_ship_names(sources_dict, hierarchy)
+
     logger.info(f"load_sources_from_settings complete. Loaded sources: {list(sources_dict.keys())}")
     return sources_dict, hierarchy, enhancements_key_categories
+
+
+_starstrings_cache: Dict[str, object] = {}
+
+
+def _inject_starstrings(sources_dict: Dict[str, Dict[str, str]], hierarchy: List[str]) -> List[str]:
+    """Add MrKraken's StarStrings, filtered to mission text and item names.
+
+    Goes just above ``enhancements`` (or above ``global`` when there is no
+    enhancements source), so for those strings StarStrings wins over the
+    generated tags and every other string stays Smart Citizen's. Only when it
+    is switched on, the language is English and a downloaded copy exists. The
+    parsed file is cached by path and modification time.
+    """
+    from src.utils.settings import AppSettings
+    from src.utils import starstrings
+
+    if not AppSettings.get_starstrings_enabled():
+        return hierarchy
+    if AppSettings.get_selected_language() != starstrings.SUPPORTED_LANGUAGE:
+        return hierarchy
+    try:
+        path = AppSettings.get_starstrings_dir() / starstrings.GLOBAL_INI_NAME
+        stamp = (str(path), path.stat().st_mtime_ns)
+    except OSError:
+        return hierarchy
+    if _starstrings_cache.get("stamp") != stamp:
+        _starstrings_cache["stamp"] = stamp
+        _starstrings_cache["data"] = parse_ini_file(path)
+    overrides = starstrings.overlay(
+        sources_dict.get(AppSettings.SOURCE_GLOBAL, {}), _starstrings_cache["data"]
+    )
+    if not overrides:
+        return hierarchy
+    sources_dict[AppSettings.SOURCE_STARSTRINGS] = overrides
+    logger.info(f"StarStrings: {len(overrides)} mission and item strings loaded")
+    anchor = (AppSettings.SOURCE_ENHANCEMENTS if AppSettings.SOURCE_ENHANCEMENTS in hierarchy
+              else AppSettings.SOURCE_GLOBAL)
+    if anchor in hierarchy:
+        idx = hierarchy.index(anchor) + 1
+        return hierarchy[:idx] + [AppSettings.SOURCE_STARSTRINGS] + hierarchy[idx:]
+    return [AppSettings.SOURCE_STARSTRINGS] + hierarchy
+
+
+def _inject_ship_names(sources_dict: Dict[str, Dict[str, str]], hierarchy: List[str]) -> List[str]:
+    """Add the Ships tab's renames as the ``ship_names`` source, just below ``user``.
+
+    Rendered against the stock ``global`` source each load, so numbering and
+    the manufacturer switch always match the saved list. Returns the hierarchy.
+    """
+    from src.utils.settings import AppSettings
+    from src.utils import ship_names
+
+    try:
+        config = ship_names.load_config(ship_names.config_path())
+    except OSError as exc:
+        logger.warning(f"Ship names not loaded: {exc}")
+        return hierarchy
+    overrides = ship_names.render_overrides(config, sources_dict.get(AppSettings.SOURCE_GLOBAL, {}))
+    if not overrides:
+        return hierarchy
+    sources_dict[AppSettings.SOURCE_SHIP_NAMES] = overrides
+    logger.info(f"Ship names: {len(overrides)} renamed ships loaded")
+    if AppSettings.SOURCE_USER in hierarchy:
+        idx = hierarchy.index(AppSettings.SOURCE_USER)
+        return hierarchy[:idx] + [AppSettings.SOURCE_SHIP_NAMES] + hierarchy[idx:]
+    return hierarchy + [AppSettings.SOURCE_SHIP_NAMES]
 
 
 @timed

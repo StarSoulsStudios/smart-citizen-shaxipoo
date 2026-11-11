@@ -1304,3 +1304,53 @@ class TestPlanSubmitWorker(QThread):
             # a urllib exception's text, so scrub it before it reaches the log.
             logger.error("Test plan report submission failed: %s", self._redact(str(e)))
             self.finished.emit(False, f"Could not send report: {self._redact(str(e))}")
+
+
+class StarStringsCheckWorker(QThread):
+    """Ask GitHub for the current StarStrings release of one channel.
+
+    Emits ``checked(release, installed)`` -- the latest ``Release`` and the one
+    on disk (or None) -- or ``check_failed(message)``; never both. Offline or
+    rate-limited is not an error worth a dialog, so the owner just logs it.
+    """
+
+    checked = pyqtSignal(object, object)
+    check_failed = pyqtSignal(str)
+
+    def __init__(self, channel: str, folder: Path, user_agent: str) -> None:
+        super().__init__()
+        self._channel, self._folder, self._user_agent = channel, Path(folder), user_agent
+
+    def run(self) -> None:
+        from src.utils import starstrings
+        try:
+            latest = starstrings.fetch_release(
+                starstrings.tag_for_channel(self._channel), self._user_agent)
+        except Exception as e:  # network, HTTP, JSON: all just "couldn't check"
+            self.check_failed.emit(f"{type(e).__name__}: {e}")
+            return
+        self.checked.emit(latest, starstrings.read_installed(self._folder))
+
+
+class StarStringsDownloadWorker(QThread):
+    """Download a StarStrings release into the channel's folder.
+
+    Emits ``done(ok, message)``: the build label on success, the error text
+    on failure.
+    """
+
+    done = pyqtSignal(bool, str)
+
+    def __init__(self, release, folder: Path, user_agent: str) -> None:
+        super().__init__()
+        self._release, self._folder, self._user_agent = release, Path(folder), user_agent
+
+    def run(self) -> None:
+        from src.utils import starstrings
+        try:
+            starstrings.install(self._release, self._user_agent, self._folder)
+        except Exception as e:
+            logger.warning(f"StarStrings download failed: {type(e).__name__}: {e}")
+            self.done.emit(False, f"{type(e).__name__}: {e}")
+            return
+        self.done.emit(True, self._release.build_label())

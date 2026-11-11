@@ -10,7 +10,7 @@ import logging
 import sys
 from pathlib import Path
 
-from PyQt6.QtGui import QColor, QFontDatabase, QPalette
+from PyQt6.QtGui import QColor, QFont, QFontDatabase, QPalette
 from PyQt6.QtWidgets import (
     QApplication, QFrame, QProxyStyle, QScrollArea, QStyle, QVBoxLayout, QWidget,
 )
@@ -35,9 +35,26 @@ def _assets_fonts_dir() -> Path:
     return base / "assets" / "fonts"
 
 
+# Hangar theme typefaces (SIL OFL, licences beside them in assets/fonts):
+# Goldman for headings, tab names and buttons, Poppins for body text,
+# JetBrains Mono for text shown the way the game shows it (previews).
+DISPLAY_FONT_FAMILY = "Goldman"
+BODY_FONT_FAMILY = "Poppins"
+GAME_TEXT_FONT_FAMILY = "JetBrains Mono"
+_OFL_FONT_FILES = (
+    "Goldman-Regular.ttf", "Goldman-Bold.ttf",
+    "Poppins-Light.ttf", "Poppins-Regular.ttf", "Poppins-Medium.ttf", "Poppins-SemiBold.ttf",
+    "JetBrainsMono-Variable.ttf",
+)
+
+
 def load_application_fonts() -> None:
     """Register bundled display fonts with Qt. Call once at startup after
     QApplication is constructed and before any widgets use the font."""
+    for name in _OFL_FONT_FILES:
+        path = _assets_fonts_dir() / name
+        if not path.exists() or QFontDatabase.addApplicationFont(str(path)) < 0:
+            logger.warning(f"Font {name} not registered; using system fallback")
     font_path = _assets_fonts_dir() / _BRAND_FONT_FILE
     if not font_path.exists():
         logger.warning(f"Brand font not found at {font_path}; using system fallback")
@@ -53,13 +70,28 @@ THEME_LIGHT = "light"
 THEME_DARK = "dark"
 THEME_SCLE = "scle"
 THEME_ODW = "odw"
-AVAILABLE_THEMES = (THEME_LIGHT, THEME_DARK, THEME_SCLE, THEME_ODW)
-DEFAULT_THEME = THEME_SCLE
+THEME_HANGAR = "hangar"
+AVAILABLE_THEMES = (THEME_HANGAR, THEME_LIGHT, THEME_DARK, THEME_SCLE, THEME_ODW)
+DEFAULT_THEME = THEME_HANGAR
+
+# Hangar theme tokens (styled after the StarLabels tool): charcoal-navy
+# surfaces, one signal red for the actions that change the game.
+HANGAR_VOID = "#14151C"      # window
+HANGAR_HULL = "#1C1D28"      # panels, inputs' wells
+HANGAR_PLATE = "#2A2C3D"     # raised blocks, selected rows
+HANGAR_PLATE_HI = "#353850"  # hover, checked segments
+HANGAR_LINE = "#2F3144"      # borders, dividers
+HANGAR_TEXT = "#ECEDF3"
+HANGAR_MUTED = "#9A9CB0"
+HANGAR_FAINT = "#5E6075"
+HANGAR_SIGNAL = "#E3161C"
+HANGAR_TERMINAL = "#0D0E13"  # in-game preview panels
 
 # Secondary/dim text color per theme. A single shade can't stay readable on
 # both #C8C8C8 (light window) and #0D1826 (scle navy) — so we resolve it
 # per-theme and surface it via the app-level QSS rule in `_app_stylesheet_for`.
 _SECONDARY_TEXT_COLORS = {
+    THEME_HANGAR: HANGAR_MUTED,
     THEME_LIGHT: "#2A2A2A",
     THEME_DARK:  "#D5D5D5",
     THEME_SCLE:  "#D5D5D5",
@@ -75,6 +107,14 @@ _SECONDARY_TEXT_COLORS = {
 # light up) — kept in this per-theme palette rather than a hardcoded hex so
 # it stays visually consistent with each theme's own saturation/warmth.
 _BUTTON_COLORS = {
+    THEME_HANGAR: {
+        "load":        "#C4C6D4",
+        "restore":     "#F08A4B",
+        "apply":       "#3C9A6A",   # quiet green: the game already matches
+        "clear":       HANGAR_MUTED,
+        "open":        "#C4C6D4",
+        "needs_apply": "#FF4045",   # signal red, lifted so it reads as text on dark
+    },
     THEME_LIGHT: {
         "load":        "#2196F3",
         "restore":     "#FF5722",
@@ -184,6 +224,7 @@ def get_button_text_color() -> str:
 # main window. Each pair ties to the theme's signature accent so the header
 # reads as "of" that theme.
 _TITLE_COLORS = {
+    THEME_HANGAR: "#FFFFFF",
     THEME_LIGHT: "#1565C0",   # rich blue
     THEME_DARK:  "#64B5F6",   # soft sky blue
     THEME_SCLE:  "#4FD7E8",   # cube-glow cyan
@@ -191,6 +232,7 @@ _TITLE_COLORS = {
 }
 
 _TAGLINE_COLORS = {
+    THEME_HANGAR: HANGAR_MUTED,
     THEME_LIGHT: "#555555",
     THEME_DARK:  "#A0A0A0",
     THEME_SCLE:  "#6FB5D0",   # muted cyan
@@ -213,6 +255,7 @@ def get_tagline_color() -> str:
 # the bar is in determinate mode. In indeterminate mode the QSS is cleared
 # so Fusion's animated busy indicator keeps working.
 _PROGRESS_GROOVE_COLORS = {
+    THEME_HANGAR: HANGAR_PLATE,
     THEME_LIGHT: "#8A8A8A",
     THEME_DARK:  "#3C3C3F",
     THEME_SCLE:  "#152538",
@@ -220,6 +263,7 @@ _PROGRESS_GROOVE_COLORS = {
 }
 
 _PROGRESS_CHUNK_COLORS = {
+    THEME_HANGAR: HANGAR_SIGNAL,
     THEME_LIGHT: "#1565C0",
     THEME_DARK:  "#3B82F6",
     THEME_SCLE:  "#4FD7E8",
@@ -350,7 +394,84 @@ def _odw_palette() -> QPalette:
     return p
 
 
+def _hangar_palette() -> QPalette:
+    """Hangar: charcoal-navy and signal red, after the StarLabels tool."""
+    p = QPalette()
+    c = QColor
+    p.setColor(QPalette.ColorRole.Window,          c(HANGAR_VOID))
+    p.setColor(QPalette.ColorRole.WindowText,      c(HANGAR_TEXT))
+    p.setColor(QPalette.ColorRole.Base,            c(HANGAR_HULL))
+    p.setColor(QPalette.ColorRole.AlternateBase,   c("#202131"))
+    p.setColor(QPalette.ColorRole.ToolTipBase,     c(HANGAR_PLATE))
+    p.setColor(QPalette.ColorRole.ToolTipText,     c(HANGAR_TEXT))
+    p.setColor(QPalette.ColorRole.Text,            c(HANGAR_TEXT))
+    p.setColor(QPalette.ColorRole.Button,          c(HANGAR_PLATE))
+    p.setColor(QPalette.ColorRole.ButtonText,      c(HANGAR_TEXT))
+    p.setColor(QPalette.ColorRole.BrightText,      c(HANGAR_SIGNAL))
+    p.setColor(QPalette.ColorRole.Highlight,       c("#B8141A"))
+    p.setColor(QPalette.ColorRole.HighlightedText, c("#FFFFFF"))
+    p.setColor(QPalette.ColorRole.Link,            c("#FF5A5F"))
+    p.setColor(QPalette.ColorRole.PlaceholderText, c(HANGAR_FAINT))
+    for role in (QPalette.ColorRole.WindowText, QPalette.ColorRole.Text,
+                 QPalette.ColorRole.ButtonText):
+        p.setColor(QPalette.ColorGroup.Disabled, role, c(HANGAR_FAINT))
+    return p
+
+
+def _hangar_stylesheet() -> str:
+    """App-wide QSS for Hangar. Leaves QProgressBar alone (see below)."""
+    v, h, pl, phi, ln = HANGAR_VOID, HANGAR_HULL, HANGAR_PLATE, HANGAR_PLATE_HI, HANGAR_LINE
+    t, m, f, red = HANGAR_TEXT, HANGAR_MUTED, HANGAR_FAINT, HANGAR_SIGNAL
+    return f"""
+QMainWindow, QDialog {{ background: {v}; }}
+QToolTip {{ background: {pl}; color: {t}; border: 1px solid {ln}; padding: 6px; }}
+QPushButton {{ background: {pl}; color: {t}; border: 1px solid {ln}; padding: 4px 10px;
+    font-weight: 500; }}
+QPushButton:hover {{ background: {phi}; }}
+QPushButton:pressed {{ background: {h}; }}
+QPushButton:disabled {{ color: {f}; background: {h}; }}
+QPushButton:default {{ border: 1px solid {red}; }}
+QLineEdit, QComboBox, QSpinBox, QPlainTextEdit, QTextEdit {{ background: {v}; color: {t};
+    border: none; border-bottom: 2px solid {f}; padding: 6px 8px;
+    selection-background-color: #B8141A; }}
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus, QPlainTextEdit:focus {{ border-bottom-color: {red}; }}
+QComboBox QAbstractItemView {{ background: {h}; border: 1px solid {ln}; selection-background-color: {pl}; }}
+QGroupBox {{ border: 1px solid {ln}; margin-top: 22px; padding: 14px 12px 10px 12px; }}
+QGroupBox::title {{ subcontrol-origin: margin; left: 0px; top: 0px; padding: 0 2px;
+    color: {t}; font-family: "{DISPLAY_FONT_FAMILY}"; font-weight: 700; font-size: 14px; }}
+QTabWidget::pane {{ border: 1px solid {ln}; top: -1px; }}
+QTabBar::tab {{ background: transparent; color: {m}; padding: 8px 16px; border: none;
+    border-bottom: 2px solid {ln}; font-weight: 500; }}
+QTabBar::tab:selected {{ color: {t}; background: {h}; border-bottom: 3px solid {red}; }}
+QTabBar::tab:hover:!selected {{ color: {t}; }}
+QTableView, QTreeView, QListView, QListWidget {{ background: {h}; alternate-background-color: #202131;
+    border: 1px solid {ln}; gridline-color: {ln}; selection-background-color: {pl}; selection-color: {t}; }}
+QHeaderView::section {{ background: {v}; color: {m}; border: none; border-bottom: 1px solid {ln};
+    padding: 6px 8px; font-weight: 500; }}
+QCheckBox, QRadioButton {{ spacing: 8px; }}
+QCheckBox::indicator, QRadioButton::indicator {{ width: 14px; height: 14px; border: 1.5px solid {m}; background: {v}; }}
+QRadioButton::indicator {{ border-radius: 8px; }}
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {{ background: {red}; border-color: {red}; }}
+QScrollBar:vertical {{ background: {v}; width: 10px; margin: 0; }}
+QScrollBar:horizontal {{ background: {v}; height: 10px; margin: 0; }}
+QScrollBar::handle {{ background: {pl}; min-height: 24px; min-width: 24px; }}
+QScrollBar::handle:hover {{ background: {phi}; }}
+QScrollBar::add-line, QScrollBar::sub-line {{ width: 0; height: 0; }}
+QScrollBar::add-page, QScrollBar::sub-page {{ background: none; }}
+QMenu {{ background: {h}; border: 1px solid {ln}; padding: 4px; }}
+QMenu::item {{ padding: 7px 22px 7px 14px; }}
+QMenu::item:selected {{ background: {pl}; }}
+QMenu::separator {{ height: 1px; background: {ln}; margin: 4px 8px; }}
+QStatusBar {{ background: #101117; color: {f}; border-top: 1px solid {ln}; }}
+QDockWidget::title {{ background: {h}; padding: 6px; }}
+QSplitter::handle {{ background: {ln}; }}
+QLabel[role="secondary"] {{ color: {m}; }}
+"""
+
+
 def _palette_for(theme: str) -> QPalette:
+    if theme == THEME_HANGAR:
+        return _hangar_palette()
     if theme == THEME_DARK:
         return _dark_palette()
     if theme == THEME_SCLE:
@@ -369,6 +490,8 @@ def _app_stylesheet_for(theme: str) -> str:
     busy indicator. Per-theme progress-bar contrast is handled via the
     palette's Highlight role in the theme palettes below.
     """
+    if theme == THEME_HANGAR:
+        return _hangar_stylesheet()
     secondary = _SECONDARY_TEXT_COLORS.get(theme, _SECONDARY_TEXT_COLORS[DEFAULT_THEME])
     return f'QLabel[role="secondary"] {{ color: {secondary}; }}'
 
@@ -428,5 +551,11 @@ def apply_theme(app: QApplication, theme: str) -> None:
         # gives us the Fusion look — just with our tooltip-delay override.
         app.setStyle(_SmartCitizenProxyStyle("Fusion"))
     app.setPalette(_palette_for(theme))
+    # Body text font. Set on the app rather than in QSS: a QSS font-family
+    # rule would override every widget's own setFont (headings, previews).
+    if theme == THEME_HANGAR:
+        body = QFont(BODY_FONT_FAMILY)
+        body.setPointSizeF(9)
+        app.setFont(body)
     app.setStyleSheet(_app_stylesheet_for(theme))
     logger.info(f"Applied theme: {theme}")

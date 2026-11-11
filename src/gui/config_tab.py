@@ -12,7 +12,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import pyqtSignal, QTimer
 
 from src.gui.theme import (
-    AVAILABLE_THEMES, THEME_LIGHT, THEME_DARK, THEME_SCLE, THEME_ODW, host_in_scroll_area,
+    AVAILABLE_THEMES, THEME_HANGAR, THEME_LIGHT, THEME_DARK, THEME_SCLE, THEME_ODW, host_in_scroll_area,
     needs_apply_style,
 )
 from src.utils.i18n import tr
@@ -143,31 +143,31 @@ class ConfigTab(QWidget):
         button_layout = QHBoxLayout()
 
         self._import_btn = QPushButton(tr("config.import_ini_btn"))
-        self._import_btn.setMaximumWidth(150)
+        self._import_btn.setMaximumWidth(195)
         self._import_btn.setToolTip(tr("config.import_ini_tooltip"))
         self._import_btn.clicked.connect(self.import_ini_requested.emit)
         button_layout.addWidget(self._import_btn)
 
         self._reset_user_ini_btn = QPushButton(tr("config.reset_user_ini_btn"))
-        self._reset_user_ini_btn.setMaximumWidth(150)
+        self._reset_user_ini_btn.setMaximumWidth(195)
         self._reset_user_ini_btn.setToolTip(tr("config.reset_user_ini_tooltip"))
         self._reset_user_ini_btn.clicked.connect(self.reset_user_ini_requested.emit)
         button_layout.addWidget(self._reset_user_ini_btn)
 
         self._restore_user_ini_btn = QPushButton(tr("config.restore_user_ini_btn"))
-        self._restore_user_ini_btn.setMaximumWidth(150)
+        self._restore_user_ini_btn.setMaximumWidth(195)
         self._restore_user_ini_btn.setToolTip(tr("config.restore_user_ini_tooltip"))
         self._restore_user_ini_btn.clicked.connect(self.restore_user_ini_requested.emit)
         button_layout.addWidget(self._restore_user_ini_btn)
 
         self._preview_btn = QPushButton(tr("config.preview_apply_btn"))
-        self._preview_btn.setMaximumWidth(150)
+        self._preview_btn.setMaximumWidth(195)
         self._preview_btn.setToolTip(tr("config.preview_apply_tooltip"))
         self._preview_btn.clicked.connect(self._on_preview_clicked)
         button_layout.addWidget(self._preview_btn)
 
         self._check_updates_btn = QPushButton(tr("config.check_updates_btn"))
-        self._check_updates_btn.setMaximumWidth(170)
+        self._check_updates_btn.setMaximumWidth(221)
         self._check_updates_btn.setToolTip(tr("config.check_updates_tooltip"))
         self._check_updates_btn.clicked.connect(self.check_updates_requested.emit)
         button_layout.addWidget(self._check_updates_btn)
@@ -193,6 +193,7 @@ class ConfigTab(QWidget):
 
         self.theme_combo = QComboBox()
         self.theme_combo.setToolTip(tr("config.theme_tooltip"))
+        self.theme_combo.addItem(tr("config.theme_hangar"), THEME_HANGAR)
         self.theme_combo.addItem(tr("config.theme_default"), THEME_SCLE)
         self.theme_combo.addItem(tr("config.theme_light"), THEME_LIGHT)
         self.theme_combo.addItem(tr("config.theme_dark"), THEME_DARK)
@@ -258,7 +259,7 @@ class ConfigTab(QWidget):
         game_input_layout.addWidget(self.game_path_input)
 
         self._game_browse_btn = QPushButton(tr("config.browse_btn"))
-        self._game_browse_btn.setMaximumWidth(100)
+        self._game_browse_btn.setMaximumWidth(130)
         self._game_browse_btn.setToolTip(tr("config.browse_game_tooltip"))
         self._game_browse_btn.clicked.connect(self._browse_game_path)
         game_input_layout.addWidget(self._game_browse_btn)
@@ -293,7 +294,7 @@ class ConfigTab(QWidget):
         # Launcher drives instead makes every apply a silent no-op, and
         # nothing else in the app can surface that.
         self._dupe_check_btn = QPushButton(tr("config.dupe_check_btn"))
-        self._dupe_check_btn.setMaximumWidth(220)
+        self._dupe_check_btn.setMaximumWidth(286)
         self._dupe_check_btn.setToolTip(tr("config.dupe_check_tooltip"))
         # Lambda, not a bare connect: clicked(bool) would land its `checked`
         # argument in the `deep` parameter.
@@ -318,7 +319,7 @@ class ConfigTab(QWidget):
         language_row.addWidget(self.language_combo)
 
         self._map_lang_btn = QPushButton(tr("config.map_language_btn"))
-        self._map_lang_btn.setMaximumWidth(160)
+        self._map_lang_btn.setMaximumWidth(208)
         self._map_lang_btn.setToolTip(tr("config.map_language_tooltip"))
         self._map_lang_btn.clicked.connect(self._open_language_source_dialog)
         language_row.addWidget(self._map_lang_btn)
@@ -360,13 +361,13 @@ class ConfigTab(QWidget):
         data_input_layout.addWidget(self.data_dir_input)
 
         self._data_browse_btn = QPushButton(tr("config.browse_btn"))
-        self._data_browse_btn.setMaximumWidth(100)
+        self._data_browse_btn.setMaximumWidth(130)
         self._data_browse_btn.setToolTip(tr("config.browse_data_tooltip"))
         self._data_browse_btn.clicked.connect(self._browse_data_dir)
         data_input_layout.addWidget(self._data_browse_btn)
 
         self._data_reset_btn = QPushButton(tr("config.reset_btn"))
-        self._data_reset_btn.setMaximumWidth(80)
+        self._data_reset_btn.setMaximumWidth(104)
         self._data_reset_btn.setToolTip(tr("config.reset_data_tooltip"))
         self._data_reset_btn.clicked.connect(self._reset_data_dir)
         data_input_layout.addWidget(self._data_reset_btn)
@@ -391,13 +392,13 @@ class ConfigTab(QWidget):
         cache_input_layout.addWidget(self.cache_dir_input)
 
         self._cache_browse_btn = QPushButton(tr("config.browse_btn"))
-        self._cache_browse_btn.setMaximumWidth(100)
+        self._cache_browse_btn.setMaximumWidth(130)
         self._cache_browse_btn.setToolTip(tr("config.browse_cache_tooltip"))
         self._cache_browse_btn.clicked.connect(self._browse_cache_dir)
         cache_input_layout.addWidget(self._cache_browse_btn)
 
         self._cache_reset_btn = QPushButton(tr("config.reset_btn"))
-        self._cache_reset_btn.setMaximumWidth(80)
+        self._cache_reset_btn.setMaximumWidth(104)
         self._cache_reset_btn.setToolTip(tr("config.reset_cache_tooltip"))
         self._cache_reset_btn.clicked.connect(self._reset_cache_dir)
         cache_input_layout.addWidget(self._cache_reset_btn)
@@ -427,7 +428,7 @@ class ConfigTab(QWidget):
         p4k_status_row.addStretch()
 
         self._extract_btn = QPushButton(tr("config.extract_btn"))
-        self._extract_btn.setMaximumWidth(180)
+        self._extract_btn.setMaximumWidth(234)
         self._extract_btn.setToolTip(tr("config.extract_tooltip"))
         self._extract_btn.clicked.connect(self.p4k_extract_requested.emit)
         p4k_status_row.addWidget(self._extract_btn)
@@ -453,7 +454,7 @@ class ConfigTab(QWidget):
 
         sc_tools_btn_layout = QHBoxLayout()
         self._clear_shader_cache_btn = QPushButton(tr("config.clear_shader_cache_btn"))
-        self._clear_shader_cache_btn.setMaximumWidth(170)
+        self._clear_shader_cache_btn.setMaximumWidth(221)
         self._clear_shader_cache_btn.setToolTip(tr("config.clear_shader_cache_tooltip"))
         self._clear_shader_cache_btn.clicked.connect(self._clear_shader_cache)
         sc_tools_btn_layout.addWidget(self._clear_shader_cache_btn)
@@ -474,13 +475,13 @@ class ConfigTab(QWidget):
         backup_btn_layout = QHBoxLayout()
 
         self._export_settings_btn = QPushButton(tr("config.export_settings_btn"))
-        self._export_settings_btn.setMaximumWidth(150)
+        self._export_settings_btn.setMaximumWidth(195)
         self._export_settings_btn.setToolTip(tr("config.export_settings_tooltip"))
         self._export_settings_btn.clicked.connect(self.export_settings_requested.emit)
         backup_btn_layout.addWidget(self._export_settings_btn)
 
         self._import_settings_btn = QPushButton(tr("config.import_settings_btn"))
-        self._import_settings_btn.setMaximumWidth(150)
+        self._import_settings_btn.setMaximumWidth(195)
         self._import_settings_btn.setToolTip(tr("config.import_settings_tooltip"))
         self._import_settings_btn.clicked.connect(self.import_settings_requested.emit)
         backup_btn_layout.addWidget(self._import_settings_btn)
@@ -528,10 +529,11 @@ class ConfigTab(QWidget):
         self.theme_combo.setToolTip(tr("config.theme_tooltip"))
         self.theme_combo.blockSignals(True)
         try:
-            self.theme_combo.setItemText(0, tr("config.theme_default"))
-            self.theme_combo.setItemText(1, tr("config.theme_light"))
-            self.theme_combo.setItemText(2, tr("config.theme_dark"))
-            self.theme_combo.setItemText(3, tr("config.theme_odw"))
+            self.theme_combo.setItemText(0, tr("config.theme_hangar"))
+            self.theme_combo.setItemText(1, tr("config.theme_default"))
+            self.theme_combo.setItemText(2, tr("config.theme_light"))
+            self.theme_combo.setItemText(3, tr("config.theme_dark"))
+            self.theme_combo.setItemText(4, tr("config.theme_odw"))
         finally:
             self.theme_combo.blockSignals(False)
         self._font_size_label.setText(tr("config.font_size_label"))
