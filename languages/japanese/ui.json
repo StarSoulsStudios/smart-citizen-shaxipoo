@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "アイテム"
+    },
+    "missions": {
+      "ht": "",
+      "at": "ミッション"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "StarStrings {build} をインストールしました。ゲームに適用すると使えます。"
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "拡張"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "このエディターは次に追加予定です。それまでは「すべての文字列」から任意のアイテム名を変更できます。"
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "コンポーネント、艦載武器、ミサイルの名前にクラス・サイズ・グレードを付ける方法。保存すると再構築されます。"
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "アーマー名に重量を付ける方法。保存すると再構築されます。"
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "保存して再構築"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "ミッション"
+    },
+    "lede": {
+      "ht": "",
+      "at": "契約のタイトルと説明に何を表示するか選びます。プレビューは読み込んだ文字列から作られます。"
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "ミッション文を書くのは"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "MrKraken のタイトル、評判・ブループリントタグ"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "ゲームファイルから作るタグ"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "タイトル"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "StarStrings は対応するタイトルを書き換えます。これらの設定はそれ以外の契約に適用されます。"
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "Smart Citizen がゲームファイルからこれらのタグを作ります。"
+    },
+    "route": {
+      "ht": "",
+      "at": "運送契約のルート"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "評判タグ"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "ブループリント確率タグ"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "短いタイトル"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "説明"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "獲得評判"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "入手可能なブループリント"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "敵と難易度"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "ミッション文を再構築"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "タイトルと説明の設定はミッション文の再構築後に反映されます。"
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "ミッション設定を変更しました。再構築すると反映されます。"
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "商品、ジャーナル、お気に入りは 設定 > 拡張 にあります。コンポーネントとアーマーのタグはアイテムにあります。"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "表示イメージ"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "契約マネージャー、プレビュー"
+    },
+    "caption": {
+      "ht": "",
+      "at": "赤い破線は最後の変更で変わった部分です。依頼主、報酬、場所はサンプルで、タイトルと本文はあなたの文字列です。"
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "読み込んだ文字列にサンプル契約がまだありません。先にゲームの文字列を読み込むか抽出してください。"
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "契約"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "オファー"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "受諾済み"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "履歴"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "依頼主"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "報酬"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "種類"
     }
   }
 }

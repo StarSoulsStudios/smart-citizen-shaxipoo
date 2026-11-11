@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "Itens"
+    },
+    "missions": {
+      "ht": "",
+      "at": "Missões"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "StarStrings {build} instalado. Aplique ao jogo para usar."
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "Melhorias"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "Este editor é o próximo da lista. Até lá, renomeie qualquer item em Todos os textos."
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "Como os nomes de componentes, armas de nave e mísseis recebem tags de classe, tamanho e grau. Salve para reconstruí-los."
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "Como os nomes de armaduras recebem tags de peso. Salve para reconstruí-los."
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "Salvar e reconstruir"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "Missões"
+    },
+    "lede": {
+      "ht": "",
+      "at": "Escolha o que os títulos e descrições dos contratos mostram. A prévia usa seus textos carregados."
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "Quem escreve os textos de missão"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "Títulos e tags de reputação e projetos do MrKraken"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "Tags criadas a partir dos arquivos do jogo"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "Títulos"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "O StarStrings escreve os títulos que cobre. Estes ajustes valem para os demais contratos."
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "O Smart Citizen cria essas tags a partir dos arquivos do jogo."
+    },
+    "route": {
+      "ht": "",
+      "at": "Rota em contratos de transporte"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "Tag de reputação"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "Tag de chance de projeto"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "Títulos mais curtos"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "Descrição"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "Reputação concedida"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "Projetos possíveis"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "Hostis e dificuldade"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "Reconstruir textos de missão"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "Os ajustes de títulos e descrições valem quando os textos de missão são reconstruídos."
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "Você mudou ajustes de missão. Reconstrua para vê-los."
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "Mercadorias, diário e favoritos estão em Configurações > Melhorias. As tags de componentes e armaduras estão em Itens."
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "Como fica"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "Gerenciador de contratos, prévia"
+    },
+    "caption": {
+      "ht": "",
+      "at": "O vermelho tracejado marca o que sua última mudança alterou. Contratantes, recompensas e locais são exemplos; títulos e textos são os seus."
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "Ainda não há contratos de exemplo nos textos carregados. Carregue ou extraia os textos do jogo primeiro."
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "CONTRATOS"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "OFERTAS"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "ACEITOS"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "HISTÓRICO"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "CONTRATANTE"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "RECOMPENSA"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "TIPO"
     }
   }
 }

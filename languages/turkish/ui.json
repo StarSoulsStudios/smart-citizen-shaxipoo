@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "Eşyalar"
+    },
+    "missions": {
+      "ht": "",
+      "at": "Görevler"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "StarStrings {build} yüklendi. Kullanmak için oyuna uygula."
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "Geliştirmeler"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "Bu düzenleyici sıradaki iş. O zamana kadar herhangi bir eşyayı Tüm metinler'den yeniden adlandır."
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "Bileşen, gemi silahı ve füze adlarının sınıf, boyut ve dereceyle nasıl etiketlendiği. Yeniden oluşturmak için kaydet."
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "Zırh adlarının ağırlıkla nasıl etiketlendiği. Yeniden oluşturmak için kaydet."
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "Kaydet ve yeniden oluştur"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "Görevler"
+    },
+    "lede": {
+      "ht": "",
+      "at": "Sözleşme başlıklarının ve açıklamalarının ne göstereceğini seç. Önizleme yüklü metinlerinden oluşturulur."
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "Görev metinlerini kim yazar"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "MrKraken'in başlıkları, itibar ve plan etiketleri"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "Oyun dosyalarından üretilen etiketler"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "Başlıklar"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "StarStrings kapsadığı başlıkları yazar. Bu ayarlar diğer tüm sözleşmelere uygulanır."
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "Smart Citizen bu etiketleri oyun dosyalarından üretir."
+    },
+    "route": {
+      "ht": "",
+      "at": "Taşıma sözleşmelerinde rota"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "İtibar etiketi"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "Plan şansı etiketi"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "Daha kısa başlıklar"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "Açıklama"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "Verilen itibar"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "Olası planlar"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "Düşmanlar ve zorluk"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "Görev metinlerini yeniden oluştur"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "Başlık ve açıklama ayarları görev metinleri yeniden oluşturulunca geçerli olur."
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "Görev ayarlarını değiştirdin. Görmek için yeniden oluştur."
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "Emtialar, günlük ve favoriler Ayarlar > Geliştirmeler altında. Bileşen ve zırh etiketleri Eşyalar'da."
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "Nasıl görünür"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "Sözleşme yöneticisi, önizleme"
+    },
+    "caption": {
+      "ht": "",
+      "at": "Kesikli kırmızı, son değişikliğinin neyi değiştirdiğini gösterir. İşverenler, ödüller ve konumlar örnektir; başlıklar ve metinler senin."
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "Yüklü metinlerde henüz örnek sözleşme yok. Önce oyun metinlerini yükle ya da çıkar."
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "SÖZLEŞMELER"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "TEKLİFLER"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "KABUL EDİLEN"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "GEÇMİŞ"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "İŞVEREN"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "ÖDÜL"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "TÜR"
     }
   }
 }

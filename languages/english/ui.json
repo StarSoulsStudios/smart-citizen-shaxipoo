@@ -113,6 +113,10 @@
     "items": {
       "ht": "Items",
       "at": ""
+    },
+    "missions": {
+      "ht": "Missions",
+      "at": ""
     }
   },
   "toolbar": {
@@ -3911,6 +3915,10 @@
     "starstrings_installed": {
       "ht": "StarStrings {build} installed. Apply to game to use it.",
       "at": ""
+    },
+    "menu_enhancements": {
+      "ht": "Enhancements",
+      "at": ""
     }
   },
   "items": {
@@ -3948,6 +3956,152 @@
     },
     "coming_note": {
       "ht": "This editor is next on the list. Until then, rename any item from All strings.",
+      "at": ""
+    },
+    "components_tags_desc": {
+      "ht": "How component, ship weapon and missile names are tagged with class, size and grade. Save to rebuild them.",
+      "at": ""
+    },
+    "armor_tags_desc": {
+      "ht": "How armor names are tagged with weight. Save to rebuild them.",
+      "at": ""
+    },
+    "save_tags_btn": {
+      "ht": "Save and rebuild tags",
+      "at": ""
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "Missions",
+      "at": ""
+    },
+    "lede": {
+      "ht": "Choose what contract titles and descriptions show. The preview is built from your loaded strings.",
+      "at": ""
+    },
+    "source_heading": {
+      "ht": "Who writes mission text",
+      "at": ""
+    },
+    "source_starstrings": {
+      "ht": "StarStrings",
+      "at": ""
+    },
+    "source_starstrings_desc": {
+      "ht": "MrKraken's titles, rep and blueprint tags",
+      "at": ""
+    },
+    "source_smart": {
+      "ht": "Smart Citizen",
+      "at": ""
+    },
+    "source_smart_desc": {
+      "ht": "Tags built from your game files",
+      "at": ""
+    },
+    "titles_heading": {
+      "ht": "Titles",
+      "at": ""
+    },
+    "titles_note_starstrings": {
+      "ht": "StarStrings writes the titles it covers. These apply to every other contract.",
+      "at": ""
+    },
+    "titles_note_smart": {
+      "ht": "Smart Citizen builds these tags from your game files.",
+      "at": ""
+    },
+    "route": {
+      "ht": "Route on hauling contracts",
+      "at": ""
+    },
+    "rep_tag": {
+      "ht": "Reputation tag",
+      "at": ""
+    },
+    "bp_tag": {
+      "ht": "Blueprint chance tag",
+      "at": ""
+    },
+    "shorten": {
+      "ht": "Shorter titles",
+      "at": ""
+    },
+    "desc_heading": {
+      "ht": "Description",
+      "at": ""
+    },
+    "field_rep": {
+      "ht": "Reputation awarded",
+      "at": ""
+    },
+    "field_bp": {
+      "ht": "Potential blueprints",
+      "at": ""
+    },
+    "field_hostiles": {
+      "ht": "Hostiles and difficulty",
+      "at": ""
+    },
+    "rebuild_btn": {
+      "ht": "Rebuild mission text",
+      "at": ""
+    },
+    "rebuild_note": {
+      "ht": "Title and description settings take effect when mission text is rebuilt.",
+      "at": ""
+    },
+    "rebuild_pending": {
+      "ht": "You changed mission settings. Rebuild to see them.",
+      "at": ""
+    },
+    "moved_note": {
+      "ht": "Commodities, journal and favorites are under Settings > Enhancements. Component and armor tags are in Items.",
+      "at": ""
+    },
+    "preview_title": {
+      "ht": "What it looks like",
+      "at": ""
+    },
+    "preview_where": {
+      "ht": "Contracts Manager, preview",
+      "at": ""
+    },
+    "caption": {
+      "ht": "Dashed red marks what your last change altered. Contractors, rewards and locations are samples; titles and text are your strings.",
+      "at": ""
+    },
+    "preview_empty": {
+      "ht": "No sample contracts are in the loaded strings yet. Load or extract your game strings first.",
+      "at": ""
+    },
+    "app_contracts": {
+      "ht": "CONTRACTS",
+      "at": ""
+    },
+    "app_offers": {
+      "ht": "OFFERS",
+      "at": ""
+    },
+    "app_accepted": {
+      "ht": "ACCEPTED",
+      "at": ""
+    },
+    "app_history": {
+      "ht": "HISTORY",
+      "at": ""
+    },
+    "card_contractor": {
+      "ht": "CONTRACTOR",
+      "at": ""
+    },
+    "card_reward": {
+      "ht": "REWARD",
+      "at": ""
+    },
+    "card_type": {
+      "ht": "TYPE",
       "at": ""
     }
   }

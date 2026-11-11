@@ -10,7 +10,9 @@ from typing import List, Optional, Tuple
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QFrame, QLabel, QTabWidget, QVBoxLayout, QWidget
+from PyQt6.QtWidgets import (
+    QFrame, QHBoxLayout, QLabel, QPushButton, QTabWidget, QVBoxLayout, QWidget,
+)
 
 from src.gui.theme import DISPLAY_FONT_FAMILY, HANGAR_LINE
 from src.utils.i18n import tr
@@ -59,6 +61,40 @@ class _ComingPage(QWidget):
         self.note.setText(tr("items.coming_note"))
 
 
+class _HostedPage(QWidget):
+    """A sub-tab holding editors moved here from the Enhancements page."""
+
+    def __init__(self, title_key: str, desc_key: str, pages, save_key: str, on_save) -> None:
+        super().__init__()
+        self._title_key, self._desc_key, self._save_key = title_key, desc_key, save_key
+        col = QVBoxLayout(self)
+        col.setContentsMargins(0, 14, 0, 0)
+        col.setSpacing(8)
+        self.desc = QLabel()
+        self.desc.setProperty("role", "secondary")
+        self.desc.setWordWrap(True)
+        col.addWidget(self.desc)
+        if len(pages) == 1:
+            col.addWidget(pages[0][1], 1)
+        else:
+            inner = QTabWidget()
+            inner.setDocumentMode(True)
+            for label, widget in pages:
+                inner.addTab(widget, label)
+            col.addWidget(inner, 1)
+        row = QHBoxLayout()
+        row.addStretch(1)
+        self.save_btn = QPushButton()
+        self.save_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.save_btn.clicked.connect(on_save)
+        row.addWidget(self.save_btn)
+        col.addLayout(row)
+
+    def retranslate_ui(self) -> None:
+        self.desc.setText(tr(self._desc_key))
+        self.save_btn.setText(tr(self._save_key))
+
+
 class ItemsTab(QWidget):
     """The Items tab and its four sub-tabs."""
 
@@ -76,6 +112,20 @@ class ItemsTab(QWidget):
         layout.addWidget(self.sub_tabs, 1)
         self.sub_tabs.tabBar().setCursor(Qt.CursorShape.PointingHandCursor)
         self.retranslate_ui()
+
+    def host(self, key: str, pages, desc_key: str, save_key: str, on_save) -> None:
+        """Replace sub-tab *key*'s placeholder with editors (label, widget)."""
+        index = next(i for i, (k, *_r) in enumerate(SUB_TABS) if k == key)
+        title_key = self._pages[index][0]
+        page = _HostedPage(title_key, desc_key, pages, save_key, on_save)
+        old = self.sub_tabs.widget(index)
+        self.sub_tabs.removeTab(index)
+        old.setParent(None)   # out of the widget tree now, not at the next event loop
+        old.deleteLater()
+        self.sub_tabs.insertTab(index, page, tr(title_key).replace("&", "&&"))
+        self._pages[index] = (title_key, page)
+        page.retranslate_ui()
+        self.sub_tabs.setCurrentIndex(0)
 
     def retranslate_ui(self) -> None:
         for i, (title_key, page) in enumerate(self._pages):

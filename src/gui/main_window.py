@@ -38,6 +38,7 @@ from src.gui.string_table_model import (
 )
 from src.gui.app_shell import AppHeader, NavPage, ShellNav, UpdateBanner
 from src.gui.items_tab import ItemsTab
+from src.gui.missions_tab import MissionsTab
 from src.gui.theme import (
     DISPLAY_FONT_FAMILY, get_button_color, get_button_text_color,
     get_tagline_color, get_title_color,
@@ -1051,6 +1052,12 @@ class MainWindow(QMainWindow):
         self._ship_names_tab_index = self.tabs.addTab(self.ship_names_tab, tr("tabs.ship_names"))
         self.items_tab = ItemsTab()
         self._items_tab_index = self.tabs.addTab(self.items_tab, tr("tabs.items"))
+        self._host_item_tag_builders()
+        # Missions: a front for the Enhancements page's mission settings plus
+        # a Contracts Manager preview. Enhancements itself moves to settings.
+        self.missions_tab = MissionsTab(self.enhancements_tab)
+        self.missions_tab.set_source(AppSettings.get_starstrings_enabled())
+        self._missions_tab_index = self.tabs.addTab(self.missions_tab, tr("tabs.missions"))
         # Overlay tab (3.0.0): start/stop and options for the Smart Citizen
         # Overlay. Its start button drives the toolbar's Overlay button, so
         # both go through _toggle_sco_overlay.
@@ -1138,7 +1145,7 @@ class MainWindow(QMainWindow):
         self.shell_nav = ShellNav(self.tabs, [
             NavPage(self.ship_names_tab, "shell.nav_ships", "shell.nav_ships_sub"),
             NavPage(self.items_tab, "shell.nav_items", "shell.nav_items_sub"),
-            NavPage(self.enhancements_tab, "shell.nav_missions", "shell.nav_missions_sub"),
+            NavPage(self.missions_tab, "shell.nav_missions", "shell.nav_missions_sub"),
             NavPage(self.tabs.widget(self._strings_tab_index),
                     "shell.nav_strings", "shell.nav_strings_sub"),
         ])
@@ -1182,11 +1189,42 @@ class MainWindow(QMainWindow):
         # so the window always opens on the tabs.
         self._apply_ui_mode(AppSettings.UI_MODE_ADVANCED)
 
+    def _refresh_missions_preview(self) -> None:
+        """Feed the Missions preview the strings as they will be applied."""
+        if not hasattr(self, "missions_tab"):
+            return
+        wanted = self.missions_tab.preview_keys()
+        values = {e.key: (e.custom_value or e.original_value)
+                  for e in self.entries if e.key in wanted}
+        self.missions_tab.set_strings(values.get)
+
+    def _host_item_tag_builders(self) -> None:
+        """Move the component and armor tag builders into Items' sub-tabs.
+
+        The pages keep their owner (EnhancementsTab), so saving, dirty
+        tracking and generation run as before; only where they show changes.
+        """
+        from src.gui.enhancements_tab import _CATEGORY_LABELS
+        enh = self.enhancements_tab
+        pages, tabs = enh._tag_builder_pages, enh._tag_builder_tabs
+
+        def take(category):
+            tabs.removeTab(tabs.indexOf(pages[category]))
+            return (_CATEGORY_LABELS[category], pages[category])
+
+        self.items_tab.host(
+            "components", [take("components"), take("ship_weapons"), take("missiles")],
+            "items.components_tags_desc", "items.save_tags_btn", enh._apply_tag_builder)
+        self.items_tab.host(
+            "armor", [take("armor")],
+            "items.armor_tags_desc", "items.save_tags_btn", enh._apply_tag_builder)
+
     # The header's settings menu: pages that left the tab bar, then the old
     # toolbar's buttons and its More menu. (tr key, how to open it)
     def _settings_menu_entries(self):
         return [
             ("shell.menu_settings", lambda: self.shell_nav.open_page(self.config_tab)),
+            ("shell.menu_enhancements", lambda: self.shell_nav.open_page(self.enhancements_tab)),
             ("shell.menu_blueprints", lambda: self.shell_nav.open_page(self.blueprint_tracker_tab)),
             ("shell.menu_overlay", lambda: self.shell_nav.open_page(self.overlay_tab)),
             ("shell.menu_log", lambda: self.shell_nav.open_page(self.log_tab)),
@@ -1215,6 +1253,7 @@ class MainWindow(QMainWindow):
         self._starstrings_action.setCheckable(True)
         self._starstrings_action.setChecked(AppSettings.get_starstrings_enabled())
         self._starstrings_action.toggled.connect(self._on_starstrings_toggled)
+        self.missions_tab.source_changed.connect(self._starstrings_action.setChecked)
         menu.addSeparator()
         # The old More menu, whole: backups, import/export, folders, test plan.
         self._tools_menu_action = menu.addMenu(self.more_btn.menu())
@@ -1314,6 +1353,7 @@ class MainWindow(QMainWindow):
 
     def _on_starstrings_toggled(self, on: bool) -> None:
         AppSettings.set_starstrings_enabled(on)
+        self.missions_tab.set_source(on)
         if on:
             self._check_starstrings()
         else:
@@ -3599,6 +3639,7 @@ class MainWindow(QMainWindow):
                 self.apply_filters()
                 self._rebuild_blueprint_metadata()  # #157 follow-up: filter data
                 self.ship_names_tab.set_stock_names(self.default_values)
+                self._refresh_missions_preview()
                 self._recompute_owned()  # #157
                 # Same as an async reload: _recompute_owned marked it red, and
                 # only the background check can say it's already applied.
@@ -5452,6 +5493,7 @@ class MainWindow(QMainWindow):
         self.tabs.setTabText(self._blueprint_tracker_tab_index, tr("tabs.blueprint_tracker"))
         self.tabs.setTabText(self._ship_names_tab_index, tr("tabs.ship_names"))
         self.tabs.setTabText(self._items_tab_index, tr("tabs.items"))
+        self.tabs.setTabText(self._missions_tab_index, tr("tabs.missions"))
         self.tabs.setTabText(self._overlay_tab_index, tr("tabs.overlay"))
         self.tabs.setTabText(self._log_tab_index, tr("tabs.log"))
         self.tabs.setTabText(self._about_tab_index, tr("tabs.about"))
@@ -5590,6 +5632,7 @@ class MainWindow(QMainWindow):
         self.blueprint_tracker_tab.retranslate_ui()
         self.ship_names_tab.retranslate_ui()
         self.items_tab.retranslate_ui()
+        self.missions_tab.retranslate_ui()
         self.app_header.retranslate_ui()
         self.shell_nav.retranslate_ui()
         self._retranslate_settings_menu()
@@ -6507,6 +6550,7 @@ class MainWindow(QMainWindow):
         self.apply_filters()
         self._rebuild_blueprint_metadata()  # #157 follow-up: filter data
         self.ship_names_tab.set_stock_names(self.default_values or {})
+        self._refresh_missions_preview()
         self._recompute_owned()  # #157: weave [Owned] tags + populate Owned stars
         if self._reload_follows_clean_apply:
             # This reload only refreshes state that was just applied cleanly,

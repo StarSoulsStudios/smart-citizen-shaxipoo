@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "物品"
+    },
+    "missions": {
+      "ht": "",
+      "at": "任务"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "已安装 StarStrings {build}。应用到游戏即可使用。"
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "增强"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "此编辑器即将推出。在此之前，可在“所有字符串”中重命名任意物品。"
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "组件、舰船武器和导弹名称如何标注等级、尺寸和类别。保存以重建。"
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "护甲名称如何标注重量。保存以重建。"
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "保存并重建"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "任务"
+    },
+    "lede": {
+      "ht": "",
+      "at": "选择合同标题和描述显示的内容。预览基于你已加载的字符串。"
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "由谁编写任务文本"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "MrKraken 的标题、声望和蓝图标签"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "根据你的游戏文件生成的标签"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "标题"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "StarStrings 编写它覆盖的标题。这些设置适用于其他所有合同。"
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "Smart Citizen 根据你的游戏文件生成这些标签。"
+    },
+    "route": {
+      "ht": "",
+      "at": "运输合同中的路线"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "声望标签"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "蓝图概率标签"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "更短的标题"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "描述"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "获得的声望"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "可能的蓝图"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "敌人和难度"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "重建任务文本"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "重建任务文本后，标题和描述设置才会生效。"
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "你更改了任务设置。重建后即可看到。"
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "商品、日志和收藏在 设置 > 增强 中。组件和护甲标签在 物品 中。"
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "效果预览"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "合同管理器，预览"
+    },
+    "caption": {
+      "ht": "",
+      "at": "红色虚线标出你上次更改所影响的内容。委托方、奖励和地点为示例；标题和文本来自你的字符串。"
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "已加载的字符串中还没有示例合同。请先加载或提取游戏字符串。"
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "合同"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "邀约"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "已接受"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "历史"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "委托方"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "奖励"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "类型"
     }
   }
 }

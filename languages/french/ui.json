@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "Objets"
+    },
+    "missions": {
+      "ht": "",
+      "at": "Missions"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "StarStrings {build} installé. Appliquez au jeu pour l'utiliser."
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "Améliorations"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "Cet éditeur est le prochain sur la liste. D'ici là, renommez n'importe quel objet depuis Tous les textes."
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "Comment les noms des composants, armes de vaisseau et missiles sont étiquetés par classe, taille et qualité. Enregistrez pour les reconstruire."
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "Comment les noms d'armures sont étiquetés par poids. Enregistrez pour les reconstruire."
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "Enregistrer et reconstruire"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "Missions"
+    },
+    "lede": {
+      "ht": "",
+      "at": "Choisissez ce qu'affichent les titres et descriptions des contrats. L'aperçu utilise vos textes chargés."
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "Qui écrit les textes de mission"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "Titres, tags de réputation et de plans de MrKraken"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "Tags tirés de vos fichiers de jeu"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "Titres"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "StarStrings écrit les titres qu'il couvre. Ces réglages s'appliquent à tous les autres contrats."
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "Smart Citizen crée ces tags à partir de vos fichiers de jeu."
+    },
+    "route": {
+      "ht": "",
+      "at": "Itinéraire sur les contrats de transport"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "Tag de réputation"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "Tag de chance de plan"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "Titres plus courts"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "Description"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "Réputation accordée"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "Plans possibles"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "Hostiles et difficulté"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "Reconstruire les textes de mission"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "Les réglages de titres et de descriptions s'appliquent quand les textes de mission sont reconstruits."
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "Vous avez modifié les réglages de mission. Reconstruisez pour les voir."
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "Marchandises, journal et favoris sont dans Paramètres > Améliorations. Les tags de composants et d'armures sont dans Objets."
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "À quoi ça ressemble"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "Gestionnaire de contrats, aperçu"
+    },
+    "caption": {
+      "ht": "",
+      "at": "Le rouge en pointillés marque ce que votre dernier changement a modifié. Commanditaires, récompenses et lieux sont des exemples ; titres et textes sont les vôtres."
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "Aucun contrat d'exemple dans les textes chargés. Chargez ou extrayez d'abord les textes du jeu."
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "CONTRATS"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "OFFRES"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "ACCEPTÉS"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "HISTORIQUE"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "COMMANDITAIRE"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "RÉCOMPENSE"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "TYPE"
     }
   }
 }

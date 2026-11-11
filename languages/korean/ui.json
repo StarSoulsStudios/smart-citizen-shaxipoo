@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "아이템"
+    },
+    "missions": {
+      "ht": "",
+      "at": "미션"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "StarStrings {build} 설치 완료. 게임에 적용하면 사용됩니다."
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "향상"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "이 편집기는 다음 순서로 추가됩니다. 그때까지는 모든 문자열에서 아이템 이름을 바꾸세요."
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "부품, 함선 무기, 미사일 이름에 등급·크기·클래스를 붙이는 방식입니다. 저장하면 다시 만듭니다."
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "갑옷 이름에 무게를 붙이는 방식입니다. 저장하면 다시 만듭니다."
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "저장하고 다시 만들기"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "미션"
+    },
+    "lede": {
+      "ht": "",
+      "at": "계약 제목과 설명에 무엇을 표시할지 고르세요. 미리보기는 불러온 문자열로 만들어집니다."
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "미션 텍스트 작성 주체"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "MrKraken의 제목, 평판·청사진 태그"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "게임 파일로 만든 태그"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "제목"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "StarStrings는 담당하는 제목을 씁니다. 이 설정은 나머지 계약에 적용됩니다."
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "Smart Citizen이 게임 파일로 이 태그를 만듭니다."
+    },
+    "route": {
+      "ht": "",
+      "at": "운송 계약의 경로"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "평판 태그"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "청사진 확률 태그"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "짧은 제목"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "설명"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "획득 평판"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "가능한 청사진"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "적과 난이도"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "미션 텍스트 다시 만들기"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "제목과 설명 설정은 미션 텍스트를 다시 만들 때 적용됩니다."
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "미션 설정을 바꿨습니다. 다시 만들면 반영됩니다."
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "상품, 저널, 즐겨찾기는 설정 > 향상에 있습니다. 부품과 갑옷 태그는 아이템에 있습니다."
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "미리보기"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "계약 관리자, 미리보기"
+    },
+    "caption": {
+      "ht": "",
+      "at": "빨간 점선은 마지막 변경으로 바뀐 부분입니다. 의뢰인, 보상, 장소는 예시이고 제목과 본문은 내 문자열입니다."
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "불러온 문자열에 예시 계약이 아직 없습니다. 먼저 게임 문자열을 불러오거나 추출하세요."
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "계약"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "제안"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "수락됨"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "기록"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "의뢰인"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "보상"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "유형"
     }
   }
 }

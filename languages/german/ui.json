@@ -113,6 +113,10 @@
     "items": {
       "ht": "",
       "at": "Gegenstände"
+    },
+    "missions": {
+      "ht": "",
+      "at": "Missionen"
     }
   },
   "toolbar": {
@@ -4113,6 +4117,10 @@
     "starstrings_installed": {
       "ht": "",
       "at": "StarStrings {build} installiert. Wende es auf das Spiel an, um es zu nutzen."
+    },
+    "menu_enhancements": {
+      "ht": "",
+      "at": "Erweiterungen"
     }
   },
   "items": {
@@ -4151,6 +4159,152 @@
     "coming_note": {
       "ht": "",
       "at": "Dieser Editor ist als Nächstes dran. Bis dahin kannst du jeden Gegenstand unter Alle Texte umbenennen."
+    },
+    "components_tags_desc": {
+      "ht": "",
+      "at": "Wie Namen von Komponenten, Schiffswaffen und Raketen mit Klasse, Größe und Grad markiert werden. Speichern, um sie neu zu erstellen."
+    },
+    "armor_tags_desc": {
+      "ht": "",
+      "at": "Wie Rüstungsnamen mit dem Gewicht markiert werden. Speichern, um sie neu zu erstellen."
+    },
+    "save_tags_btn": {
+      "ht": "",
+      "at": "Speichern und neu erstellen"
+    }
+  },
+  "missions": {
+    "title": {
+      "ht": "",
+      "at": "Missionen"
+    },
+    "lede": {
+      "ht": "",
+      "at": "Wähle, was Auftragstitel und -beschreibungen zeigen. Die Vorschau nutzt deine geladenen Texte."
+    },
+    "source_heading": {
+      "ht": "",
+      "at": "Wer schreibt Missionstexte"
+    },
+    "source_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "source_starstrings_desc": {
+      "ht": "",
+      "at": "MrKrakens Titel, Ruf- und Blaupausen-Tags"
+    },
+    "source_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "source_smart_desc": {
+      "ht": "",
+      "at": "Tags aus deinen Spieldateien"
+    },
+    "titles_heading": {
+      "ht": "",
+      "at": "Titel"
+    },
+    "titles_note_starstrings": {
+      "ht": "",
+      "at": "StarStrings schreibt die Titel, die es abdeckt. Diese Einstellungen gelten für alle anderen Aufträge."
+    },
+    "titles_note_smart": {
+      "ht": "",
+      "at": "Smart Citizen erstellt diese Tags aus deinen Spieldateien."
+    },
+    "route": {
+      "ht": "",
+      "at": "Route bei Frachtaufträgen"
+    },
+    "rep_tag": {
+      "ht": "",
+      "at": "Ruf-Tag"
+    },
+    "bp_tag": {
+      "ht": "",
+      "at": "Blaupausen-Tag"
+    },
+    "shorten": {
+      "ht": "",
+      "at": "Kürzere Titel"
+    },
+    "desc_heading": {
+      "ht": "",
+      "at": "Beschreibung"
+    },
+    "field_rep": {
+      "ht": "",
+      "at": "Erhaltener Ruf"
+    },
+    "field_bp": {
+      "ht": "",
+      "at": "Mögliche Blaupausen"
+    },
+    "field_hostiles": {
+      "ht": "",
+      "at": "Gegner und Schwierigkeit"
+    },
+    "rebuild_btn": {
+      "ht": "",
+      "at": "Missionstexte neu erstellen"
+    },
+    "rebuild_note": {
+      "ht": "",
+      "at": "Titel- und Beschreibungseinstellungen greifen, wenn die Missionstexte neu erstellt werden."
+    },
+    "rebuild_pending": {
+      "ht": "",
+      "at": "Du hast Missionseinstellungen geändert. Neu erstellen, um sie zu sehen."
+    },
+    "moved_note": {
+      "ht": "",
+      "at": "Waren, Journal und Favoriten findest du unter Einstellungen > Erweiterungen. Komponenten- und Rüstungs-Tags sind unter Gegenstände."
+    },
+    "preview_title": {
+      "ht": "",
+      "at": "So sieht es aus"
+    },
+    "preview_where": {
+      "ht": "",
+      "at": "Auftragsverwaltung, Vorschau"
+    },
+    "caption": {
+      "ht": "",
+      "at": "Rot gestrichelt markiert, was deine letzte Änderung verändert hat. Auftraggeber, Belohnungen und Orte sind Beispiele; Titel und Texte sind deine."
+    },
+    "preview_empty": {
+      "ht": "",
+      "at": "Noch keine Beispielaufträge in den geladenen Texten. Lade oder extrahiere zuerst die Spieltexte."
+    },
+    "app_contracts": {
+      "ht": "",
+      "at": "AUFTRÄGE"
+    },
+    "app_offers": {
+      "ht": "",
+      "at": "ANGEBOTE"
+    },
+    "app_accepted": {
+      "ht": "",
+      "at": "ANGENOMMEN"
+    },
+    "app_history": {
+      "ht": "",
+      "at": "VERLAUF"
+    },
+    "card_contractor": {
+      "ht": "",
+      "at": "AUFTRAGGEBER"
+    },
+    "card_reward": {
+      "ht": "",
+      "at": "BELOHNUNG"
+    },
+    "card_type": {
+      "ht": "",
+      "at": "TYP"
     }
   }
 }
