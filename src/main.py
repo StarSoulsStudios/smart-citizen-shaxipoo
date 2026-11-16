@@ -169,8 +169,10 @@ def main():
     # Required on Windows so the taskbar groups the app under its own icon
     # instead of the Python interpreter icon.
     if sys.platform == 'win32':
+        # Our own ID: sharing the official app's would make Windows show that
+        # app's (cached) taskbar icon for this build.
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
-            'OsirisDevWorks.SmartCitizen'
+            'StarSoulStudios.SmartCitizen'
         )
 
     # Load UI strings for the selected language before any window is built.
