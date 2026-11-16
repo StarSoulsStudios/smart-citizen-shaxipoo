@@ -4208,7 +4208,7 @@
     },
     "titles_note_starstrings": {
       "ht": "",
-      "at": "StarStrings 撰寫它涵蓋的標題。這些設定適用於其他所有合約。"
+      "at": "這些標題和詳情由 StarStrings 撰寫。選擇 Smart Citizen 即可在此自訂。"
     },
     "titles_note_smart": {
       "ht": "",
@@ -4252,11 +4252,11 @@
     },
     "rebuild_note": {
       "ht": "",
-      "at": "重建任務文字後，標題和描述設定才會生效。"
+      "at": "預覽已顯示你的設定。重建後即可套用到遊戲。"
     },
     "rebuild_pending": {
       "ht": "",
-      "at": "你變更了任務設定。重建後即可看到。"
+      "at": "設定已變更。重建任務文字即可套用到遊戲。"
     },
     "moved_note": {
       "ht": "",
@@ -4272,7 +4272,7 @@
     },
     "caption": {
       "ht": "",
-      "at": "紅色虛線標出你上次變更所影響的內容。委託方、獎勵和地點為範例；標題和文字來自你的字串。"
+      "at": "變更會立即顯示在這裡並以紅色閃爍。委託方、獎勵、路線和地點為範例。"
     },
     "preview_empty": {
       "ht": "",
@@ -4305,6 +4305,26 @@
     "card_type": {
       "ht": "",
       "at": "類型"
+    },
+    "route_hint": {
+      "ht": "",
+      "at": "加上取貨和送達地點，例如 Area18 > Lorville"
+    },
+    "route_position": {
+      "ht": "",
+      "at": "位置"
+    },
+    "rep_hint": {
+      "ht": "",
+      "at": "加上聲望獎勵，例如 [150 Rep]"
+    },
+    "bp_hint": {
+      "ht": "",
+      "at": "合約可能獎勵藍圖時加上 [BP]"
+    },
+    "shorten_hint": {
+      "ht": "",
+      "at": "Medium Distance 變為 Med. 等"
     }
   }
 }

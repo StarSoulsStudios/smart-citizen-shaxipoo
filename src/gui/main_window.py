@@ -1196,7 +1196,8 @@ class MainWindow(QMainWindow):
         wanted = self.missions_tab.preview_keys()
         values = {e.key: (e.custom_value or e.original_value)
                   for e in self.entries if e.key in wanted}
-        self.missions_tab.set_strings(values.get)
+        stock = self.default_values or {}
+        self.missions_tab.set_strings(values.get, stock.get)
 
     def _host_item_tag_builders(self) -> None:
         """Move the component and armor tag builders into Items' sub-tabs.

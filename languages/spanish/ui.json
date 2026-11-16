@@ -4208,7 +4208,7 @@
     },
     "titles_note_starstrings": {
       "ht": "",
-      "at": "StarStrings escribe los títulos que cubre. Estos ajustes se aplican al resto de contratos."
+      "at": "StarStrings escribe estos títulos y detalles. Elige Smart Citizen para personalizarlos aquí."
     },
     "titles_note_smart": {
       "ht": "",
@@ -4252,11 +4252,11 @@
     },
     "rebuild_note": {
       "ht": "",
-      "at": "Los ajustes de títulos y descripciones se aplican al reconstruir los textos de misión."
+      "at": "La vista previa ya muestra tus ajustes. Reconstruye para llevarlos al juego."
     },
     "rebuild_pending": {
       "ht": "",
-      "at": "Cambiaste ajustes de misiones. Reconstruye para verlos."
+      "at": "Ajustes cambiados. Reconstruye los textos de misión para llevarlos al juego."
     },
     "moved_note": {
       "ht": "",
@@ -4272,7 +4272,7 @@
     },
     "caption": {
       "ht": "",
-      "at": "El rojo discontinuo marca lo que cambió tu último ajuste. Contratistas, recompensas y lugares son ejemplos; títulos y textos son tuyos."
+      "at": "Los cambios aparecen aquí al instante y parpadean en rojo. Contratistas, recompensas, rutas y lugares son ejemplos."
     },
     "preview_empty": {
       "ht": "",
@@ -4305,6 +4305,26 @@
     "card_type": {
       "ht": "",
       "at": "TIPO"
+    },
+    "route_hint": {
+      "ht": "",
+      "at": "Añade recogida y entrega, como Area18 > Lorville"
+    },
+    "route_position": {
+      "ht": "",
+      "at": "Posición"
+    },
+    "rep_hint": {
+      "ht": "",
+      "at": "Añade la reputación, como [150 Rep]"
+    },
+    "bp_hint": {
+      "ht": "",
+      "at": "Añade [BP] cuando un contrato puede dar un plano"
+    },
+    "shorten_hint": {
+      "ht": "",
+      "at": "Medium Distance pasa a Med., etc."
     }
   }
 }

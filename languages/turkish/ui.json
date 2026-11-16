@@ -4208,7 +4208,7 @@
     },
     "titles_note_starstrings": {
       "ht": "",
-      "at": "StarStrings kapsadığı başlıkları yazar. Bu ayarlar diğer tüm sözleşmelere uygulanır."
+      "at": "Bu başlıkları ve ayrıntıları StarStrings yazar. Burada özelleştirmek için Smart Citizen'ı seç."
     },
     "titles_note_smart": {
       "ht": "",
@@ -4252,11 +4252,11 @@
     },
     "rebuild_note": {
       "ht": "",
-      "at": "Başlık ve açıklama ayarları görev metinleri yeniden oluşturulunca geçerli olur."
+      "at": "Önizleme ayarlarını zaten gösteriyor. Oyuna aktarmak için yeniden oluştur."
     },
     "rebuild_pending": {
       "ht": "",
-      "at": "Görev ayarlarını değiştirdin. Görmek için yeniden oluştur."
+      "at": "Ayarlar değişti. Oyuna aktarmak için görev metinlerini yeniden oluştur."
     },
     "moved_note": {
       "ht": "",
@@ -4272,7 +4272,7 @@
     },
     "caption": {
       "ht": "",
-      "at": "Kesikli kırmızı, son değişikliğinin neyi değiştirdiğini gösterir. İşverenler, ödüller ve konumlar örnektir; başlıklar ve metinler senin."
+      "at": "Değişiklikler burada anında görünür ve kırmızı yanıp söner. İşverenler, ödüller, rotalar ve konumlar örnektir."
     },
     "preview_empty": {
       "ht": "",
@@ -4305,6 +4305,26 @@
     "card_type": {
       "ht": "",
       "at": "TÜR"
+    },
+    "route_hint": {
+      "ht": "",
+      "at": "Alış ve teslim noktasını ekler, örn. Area18 > Lorville"
+    },
+    "route_position": {
+      "ht": "",
+      "at": "Konum"
+    },
+    "rep_hint": {
+      "ht": "",
+      "at": "İtibar ödülünü ekler, örn. [150 Rep]"
+    },
+    "bp_hint": {
+      "ht": "",
+      "at": "Sözleşme plan verebiliyorsa [BP] ekler"
+    },
+    "shorten_hint": {
+      "ht": "",
+      "at": "Medium Distance, Med. olur, vb."
     }
   }
 }

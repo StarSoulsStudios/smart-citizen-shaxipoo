@@ -4005,7 +4005,7 @@
       "at": ""
     },
     "titles_note_starstrings": {
-      "ht": "StarStrings writes the titles it covers. These apply to every other contract.",
+      "ht": "StarStrings writes these titles and details. Choose Smart Citizen to customize them here.",
       "at": ""
     },
     "titles_note_smart": {
@@ -4049,11 +4049,11 @@
       "at": ""
     },
     "rebuild_note": {
-      "ht": "Title and description settings take effect when mission text is rebuilt.",
+      "ht": "The preview already shows your settings. Rebuild to put them in the game.",
       "at": ""
     },
     "rebuild_pending": {
-      "ht": "You changed mission settings. Rebuild to see them.",
+      "ht": "Settings changed. Rebuild mission text to put them in the game.",
       "at": ""
     },
     "moved_note": {
@@ -4069,7 +4069,7 @@
       "at": ""
     },
     "caption": {
-      "ht": "Dashed red marks what your last change altered. Contractors, rewards and locations are samples; titles and text are your strings.",
+      "ht": "Changes show here instantly and flash red. Contractors, rewards, routes and locations are samples.",
       "at": ""
     },
     "preview_empty": {
@@ -4102,6 +4102,26 @@
     },
     "card_type": {
       "ht": "TYPE",
+      "at": ""
+    },
+    "route_hint": {
+      "ht": "Adds pickup and drop-off, like Area18 > Lorville",
+      "at": ""
+    },
+    "route_position": {
+      "ht": "Position",
+      "at": ""
+    },
+    "rep_hint": {
+      "ht": "Adds the rep reward, like [150 Rep]",
+      "at": ""
+    },
+    "bp_hint": {
+      "ht": "Adds [BP] when a contract can award a blueprint",
+      "at": ""
+    },
+    "shorten_hint": {
+      "ht": "Medium Distance becomes Med., and similar",
       "at": ""
     }
   }

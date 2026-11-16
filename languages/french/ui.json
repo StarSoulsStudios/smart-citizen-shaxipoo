@@ -4208,7 +4208,7 @@
     },
     "titles_note_starstrings": {
       "ht": "",
-      "at": "StarStrings écrit les titres qu'il couvre. Ces réglages s'appliquent à tous les autres contrats."
+      "at": "StarStrings écrit ces titres et détails. Choisissez Smart Citizen pour les personnaliser ici."
     },
     "titles_note_smart": {
       "ht": "",
@@ -4252,11 +4252,11 @@
     },
     "rebuild_note": {
       "ht": "",
-      "at": "Les réglages de titres et de descriptions s'appliquent quand les textes de mission sont reconstruits."
+      "at": "L'aperçu montre déjà vos réglages. Reconstruisez pour les mettre dans le jeu."
     },
     "rebuild_pending": {
       "ht": "",
-      "at": "Vous avez modifié les réglages de mission. Reconstruisez pour les voir."
+      "at": "Réglages modifiés. Reconstruisez les textes de mission pour les mettre dans le jeu."
     },
     "moved_note": {
       "ht": "",
@@ -4272,7 +4272,7 @@
     },
     "caption": {
       "ht": "",
-      "at": "Le rouge en pointillés marque ce que votre dernier changement a modifié. Commanditaires, récompenses et lieux sont des exemples ; titres et textes sont les vôtres."
+      "at": "Les changements s'affichent ici aussitôt et clignotent en rouge. Commanditaires, récompenses, itinéraires et lieux sont des exemples."
     },
     "preview_empty": {
       "ht": "",
@@ -4305,6 +4305,26 @@
     "card_type": {
       "ht": "",
       "at": "TYPE"
+    },
+    "route_hint": {
+      "ht": "",
+      "at": "Ajoute le départ et l'arrivée, comme Area18 > Lorville"
+    },
+    "route_position": {
+      "ht": "",
+      "at": "Position"
+    },
+    "rep_hint": {
+      "ht": "",
+      "at": "Ajoute la réputation, comme [150 Rep]"
+    },
+    "bp_hint": {
+      "ht": "",
+      "at": "Ajoute [BP] quand un contrat peut donner un plan"
+    },
+    "shorten_hint": {
+      "ht": "",
+      "at": "Medium Distance devient Med., etc."
     }
   }
 }

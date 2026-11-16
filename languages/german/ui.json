@@ -4208,7 +4208,7 @@
     },
     "titles_note_starstrings": {
       "ht": "",
-      "at": "StarStrings schreibt die Titel, die es abdeckt. Diese Einstellungen gelten für alle anderen Aufträge."
+      "at": "StarStrings schreibt diese Titel und Details. Wähle Smart Citizen, um sie hier anzupassen."
     },
     "titles_note_smart": {
       "ht": "",
@@ -4252,11 +4252,11 @@
     },
     "rebuild_note": {
       "ht": "",
-      "at": "Titel- und Beschreibungseinstellungen greifen, wenn die Missionstexte neu erstellt werden."
+      "at": "Die Vorschau zeigt deine Einstellungen schon. Neu erstellen, um sie ins Spiel zu bringen."
     },
     "rebuild_pending": {
       "ht": "",
-      "at": "Du hast Missionseinstellungen geändert. Neu erstellen, um sie zu sehen."
+      "at": "Einstellungen geändert. Missionstexte neu erstellen, um sie ins Spiel zu bringen."
     },
     "moved_note": {
       "ht": "",
@@ -4272,7 +4272,7 @@
     },
     "caption": {
       "ht": "",
-      "at": "Rot gestrichelt markiert, was deine letzte Änderung verändert hat. Auftraggeber, Belohnungen und Orte sind Beispiele; Titel und Texte sind deine."
+      "at": "Änderungen erscheinen hier sofort und blinken rot. Auftraggeber, Belohnungen, Routen und Orte sind Beispiele."
     },
     "preview_empty": {
       "ht": "",
@@ -4305,6 +4305,26 @@
     "card_type": {
       "ht": "",
       "at": "TYP"
+    },
+    "route_hint": {
+      "ht": "",
+      "at": "Fügt Abholung und Ziel hinzu, z. B. Area18 > Lorville"
+    },
+    "route_position": {
+      "ht": "",
+      "at": "Position"
+    },
+    "rep_hint": {
+      "ht": "",
+      "at": "Fügt den Ruf hinzu, z. B. [150 Rep]"
+    },
+    "bp_hint": {
+      "ht": "",
+      "at": "Fügt [BP] hinzu, wenn ein Auftrag eine Blaupause geben kann"
+    },
+    "shorten_hint": {
+      "ht": "",
+      "at": "Aus Medium Distance wird Med. usw."
     }
   }
 }
