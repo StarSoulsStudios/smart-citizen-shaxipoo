@@ -1643,6 +1643,18 @@
     "tag_preview_no_tag": {
       "ht": "Preview:  {name}   (no tag — every element is empty or disabled)",
       "at": ""
+    },
+    "mt_tag_ground_cb": {
+      "ht": "FPS Tag (adds \"[FPS]\" / \"[FPS?]\" when a contract needs FPS gear)",
+      "at": ""
+    },
+    "mt_tag_space_cb": {
+      "ht": "Ship Tag (adds \"[SHIP]\" to ship-combat-only contracts)",
+      "at": ""
+    },
+    "mt_ground_label": {
+      "ht": "Tag word",
+      "at": ""
     }
   },
   "blueprint_tracker": {
@@ -3980,36 +3992,8 @@
       "ht": "Choose what contract titles and descriptions show. The preview is built from your loaded strings.",
       "at": ""
     },
-    "source_heading": {
-      "ht": "Who writes mission text",
-      "at": ""
-    },
-    "source_starstrings": {
-      "ht": "StarStrings",
-      "at": ""
-    },
-    "source_starstrings_desc": {
-      "ht": "MrKraken's titles, rep and blueprint tags",
-      "at": ""
-    },
-    "source_smart": {
-      "ht": "Smart Citizen",
-      "at": ""
-    },
-    "source_smart_desc": {
-      "ht": "Tags built from your game files",
-      "at": ""
-    },
     "titles_heading": {
       "ht": "Titles",
-      "at": ""
-    },
-    "titles_note_starstrings": {
-      "ht": "StarStrings writes these titles and details. Choose Smart Citizen to customize them here.",
-      "at": ""
-    },
-    "titles_note_smart": {
-      "ht": "Smart Citizen builds these tags from your game files.",
       "at": ""
     },
     "route": {
@@ -4121,7 +4105,159 @@
       "at": ""
     },
     "shorten_hint": {
-      "ht": "Medium Distance becomes Med., and similar",
+      "ht": "Red Level Contract: becomes Red Lvl:, and similar",
+      "at": ""
+    },
+    "layers_heading": {
+      "ht": "Who writes mission text",
+      "at": ""
+    },
+    "layers_lede": {
+      "ht": "Each mission type has two layers. The one in front wins where both have text. Click the one behind to bring it forward, or a dot to switch that layer off.",
+      "at": ""
+    },
+    "use_starstrings": {
+      "ht": "Use StarStrings",
+      "at": ""
+    },
+    "layers_legend": {
+      "ht": "FRONT LAYER WINS",
+      "at": ""
+    },
+    "layer_starstrings": {
+      "ht": "StarStrings",
+      "at": ""
+    },
+    "layer_smart": {
+      "ht": "Smart Citizen",
+      "at": ""
+    },
+    "layer_stock": {
+      "ht": "Game text",
+      "at": ""
+    },
+    "stack_tip": {
+      "ht": "{top} is in front of {back}. Click the one behind to swap, a dot to switch it off.",
+      "at": ""
+    },
+    "type_all": {
+      "ht": "All mission types",
+      "at": ""
+    },
+    "type_mixed": {
+      "ht": "mixed",
+      "at": ""
+    },
+    "type_hauling": {
+      "ht": "Hauling",
+      "at": ""
+    },
+    "type_delivery": {
+      "ht": "Delivery & Courier",
+      "at": ""
+    },
+    "type_mercenary": {
+      "ht": "Mercenary",
+      "at": ""
+    },
+    "type_bounty": {
+      "ht": "Bounty Hunting",
+      "at": ""
+    },
+    "type_investigation": {
+      "ht": "Investigation & Recovery",
+      "at": ""
+    },
+    "type_salvage": {
+      "ht": "Salvage",
+      "at": ""
+    },
+    "type_mining": {
+      "ht": "Mining",
+      "at": ""
+    },
+    "type_repair": {
+      "ht": "Repair & Refuel",
+      "at": ""
+    },
+    "type_collection": {
+      "ht": "Collection & Supply",
+      "at": ""
+    },
+    "type_wikelo": {
+      "ht": "Wikelo",
+      "at": ""
+    },
+    "type_other": {
+      "ht": "Other contracts",
+      "at": ""
+    },
+    "type_items": {
+      "ht": "Item names",
+      "at": ""
+    },
+    "ss_extras": {
+      "ht": "My title settings on StarStrings titles",
+      "at": ""
+    },
+    "ss_extras_hint": {
+      "ht": "Shorter titles, route and FPS tag apply where StarStrings is in front",
+      "at": ""
+    },
+    "ss_status_off": {
+      "ht": "Off. Switch it on to choose it per mission type.",
+      "at": ""
+    },
+    "ss_status_language": {
+      "ht": "English only. Your language keeps its own text.",
+      "at": ""
+    },
+    "ss_status_missing": {
+      "ht": "Not downloaded yet. The banner at the top offers it.",
+      "at": ""
+    },
+    "ss_status_build": {
+      "ht": "Build {build}",
+      "at": ""
+    },
+    "ground_tag": {
+      "ht": "FPS tag",
+      "at": ""
+    },
+    "ground_hint": {
+      "ht": "Adds [FPS] when a contract needs FPS gear, [FPS?] when only some do",
+      "at": ""
+    },
+    "ground_word": {
+      "ht": "Tag word",
+      "at": ""
+    },
+    "space_tag": {
+      "ht": "Ship combat tag",
+      "at": ""
+    },
+    "space_hint": {
+      "ht": "Adds [SHIP] to contracts that are ship combat only",
+      "at": ""
+    },
+    "card_source": {
+      "ht": "TEXT FROM",
+      "at": ""
+    },
+    "cat_heading": {
+      "ht": "Category names",
+      "at": ""
+    },
+    "cat_hint": {
+      "ht": "Rename the Contracts Manager's categories and tabs. Leave a name blank to keep the game's own.",
+      "at": ""
+    },
+    "cat_show": {
+      "ht": "Rename",
+      "at": ""
+    },
+    "cat_renamed": {
+      "ht": "{count} renamed",
       "at": ""
     }
   }

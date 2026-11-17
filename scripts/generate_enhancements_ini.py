@@ -56,7 +56,7 @@ try:
         DEFAULT_COMMODITY_USAGE_MAPPING, DEFAULT_COMPONENT_CLASS_MAPPING,
         DEFAULT_COMPONENT_TYPE_MAPPING, DEFAULT_TAG_CONFIGS, ElementSpec,
         SIZE_ABBREV_BY_WORD, TagConfig, USAGE_INPUT_SEP,
-        abbreviate_title, apply_mission_title, join_tag, render_route,
+        abbreviate_title, apply_mission_title, engagement_tag, join_tag, render_route,
         render_tag, route_enabled, tag_enabled,
     )
 except ImportError:  # pragma: no cover — only triggers if src/ is removed
@@ -73,6 +73,7 @@ except ImportError:  # pragma: no cover — only triggers if src/ is removed
     render_route = None  # type: ignore[assignment]
     apply_mission_title = None  # type: ignore[assignment]
     abbreviate_title = None  # type: ignore[assignment]
+    engagement_tag = None  # type: ignore[assignment]
     SIZE_ABBREV_BY_WORD = {}  # type: ignore[assignment]
     def join_tag(name, tag, placement):  # type: ignore[misc]
         if not tag:
@@ -144,7 +145,14 @@ try:
         COMPENDIUM_ORE_ALIASES as _MINING_COMPENDIUM_ORE_ALIASES,
         CRAFTING_INDEX_FILE, write_crafting_index,
     )
+    # What StarStrings titles need from a generation (route, FPS / SHIP),
+    # read back by the merge's layer orderer.
+    from src.utils.mission_layers import (
+        MISSION_INDEX_FILE, IndexEntry as _MissionIndexEntry, write_mission_index,
+    )
 except ImportError:  # pragma: no cover — only triggers if src/ is removed
+    MISSION_INDEX_FILE = None  # type: ignore[assignment]
+    _MissionIndexEntry = None  # type: ignore[assignment]
     MINEABLE_RS_VALUES = {}  # type: ignore[assignment]
     ORE_SIGNATURES = {}  # type: ignore[assignment]
     _MINING_COMPENDIUM_ORE_ALIASES = {"savrilium": "savrillium"}
@@ -1350,7 +1358,7 @@ def _mission_loc_key(root: ET.Element) -> str | None:
 # always FPS. ``ugf`` is matched as a standalone token via word-boundary check
 # below to avoid false-positives on substrings like ``frugfrog``.
 _FPS_TOKENS = (
-    "_fps_", "fps_", "_fps", "fpsmine",
+    "_fps_", "fps_", "_fps", "fpsmine", "handmining",
     "_ugf_", "ugf_", "_ugf",
     "_onfoot_", "onfoot_", "_onfoot",
     "_foot_",
@@ -1369,8 +1377,14 @@ _FPS_PLUS_SHIP_TOKENS = (
 )
 
 
-def _classify_mission_engagement(loc_key: str | None) -> str:
+def _classify_mission_engagement(loc_key: str | None,
+                                 hostile_kinds: "set[str] | None" = None) -> str:
     """Classify a mission as FPS / Ship / FPS & Ship from its loc_key.
+
+    *hostile_kinds* (``_hostile_kinds(root)``), when given, adds what the
+    mission actually spawns: hostile people on foot make it FPS whatever the
+    key says, and hostile ships next to them make it FPS & Ship. Without it
+    only the key decides, as before.
 
     Conservative defaults — when in doubt, classify as ``Ship`` (the most
     common SC mission category and the safer mis-classification: a player
@@ -1384,20 +1398,76 @@ def _classify_mission_engagement(loc_key: str | None) -> str:
        → ``FPS & Ship`` (mission needs FPS gear AND a ship for transport)
     3. FPS marker present, no transport token → ``FPS``
     """
-    if not loc_key:
-        return "Ship"
+    kinds = hostile_kinds or set()
+    key_lower = (loc_key or "").lower()
 
-    key_lower = loc_key.lower()
-
-    has_fps = any(tok in key_lower for tok in _FPS_TOKENS)
+    has_fps = "npc" in kinds or any(tok in key_lower for tok in _FPS_TOKENS)
     if not has_fps:
         return "Ship"
 
-    has_transport = any(tok in key_lower for tok in _FPS_PLUS_SHIP_TOKENS)
+    has_transport = "ship" in kinds or any(tok in key_lower for tok in _FPS_PLUS_SHIP_TOKENS)
     if has_transport:
         return "FPS & Ship"
 
     return "FPS"
+
+
+def _hostile_kinds(element: ET.Element,
+                   exclude_within: str | tuple[str, ...] | None = None) -> set[str]:
+    """Which kinds of hostile group *element* spawns: ``{"ship", "npc"}`` or less."""
+    kinds: set[str] = set()
+    try:
+        _extract_spawn_counts(element, exclude_within=exclude_within, kinds_out=kinds)
+    except Exception:
+        return set()
+    return kinds
+
+
+def _key_says_fps(*keys: "str | None") -> bool:
+    """True when any of *keys* carries CIG's FPS / UGF / OnFoot naming."""
+    return any(
+        k and any(tok in k.lower() for tok in _FPS_TOKENS) for k in keys
+    )
+
+
+# One contract variant's engagement, for the title tags.
+ENGAGE_FPS = "fps"       # needs FPS gear (on-foot hostiles or FPS naming)
+ENGAGE_SHIP = "ship"     # ship combat only
+ENGAGE_NONE = ""         # no combat (hauling, delivery, mining...)
+
+
+def _variant_engagement(hostile_kinds: "set[str] | frozenset[str]", *keys: "str | None") -> str:
+    """ENGAGE_FPS / ENGAGE_SHIP / ENGAGE_NONE for one contract variant.
+
+    Hostile people on foot (a ``SpawnDescription_NPC_Group`` the spawn
+    classifier calls hostile) mean FPS gear whatever the contract is called;
+    CIG's own FPS / UGF / OnFoot key naming (``_FPS_TOKENS``) catches the
+    on-foot work that spawns its hostiles some other way. A ship-and-foot
+    contract counts as FPS: the point of the tag is "bring your armor".
+    """
+    if "npc" in hostile_kinds or _key_says_fps(*keys):
+        return ENGAGE_FPS
+    if "ship" in hostile_kinds:
+        return ENGAGE_SHIP
+    return ENGAGE_NONE
+
+
+def _title_engagement(engagements: "list[str]") -> tuple[str, bool]:
+    """(ground, space) for a title from its variants' engagements.
+
+    ground is ``"all"`` when every variant needs FPS gear, ``"some"`` when
+    only some do (CIG reuses one title for on-foot and ship-only variants,
+    so the tag says [FPS?], as [BP?] does), ``""`` when none do. space is
+    True when every variant is ship combat.
+    """
+    if not engagements:
+        return "", False
+    fps = sum(1 for e in engagements if e == ENGAGE_FPS)
+    if fps == len(engagements):
+        return "all", False
+    if fps:
+        return "some", False
+    return "", all(e == ENGAGE_SHIP for e in engagements)
 
 
 # #166: pickup→dropoff route appended to haul/delivery mission TITLES.
@@ -2882,7 +2952,8 @@ def _within_excluded_subtree(node: ET.Element, scope: ET.Element,
 
 
 def _extract_spawn_counts(element: ET.Element,
-                          exclude_within: str | tuple[str, ...] | None = None) -> SpawnBreakdown:
+                          exclude_within: str | tuple[str, ...] | None = None,
+                          kinds_out: "set[str] | None" = None) -> SpawnBreakdown:
     """Extract a per-bucket per-label breakdown of spawn descriptions.
 
     Parses ``SpawnDescription_ShipGroup`` and ``SpawnDescription_NPC_Group``
@@ -2908,6 +2979,12 @@ def _extract_spawn_counts(element: ET.Element,
     Pre-1.4.1 this returned ``(num_waves, num_enemies, num_not_enemies)`` and
     bucketed everything unrecognized as hostile — see the keyword-table
     docstring for the misclassifications that surfaced.
+
+    *kinds_out*, when given, collects which kinds of hostile group the scope
+    spawns: ``"ship"`` for a hostile ship group, ``"npc"`` for hostile people
+    on foot. That is the FPS title tag's main signal (see
+    :func:`_variant_engagement`): a contract that spawns hostile NPCs needs
+    FPS gear whatever its key is called.
     """
     breakdown = _empty_spawn_breakdown()
 
@@ -2931,6 +3008,8 @@ def _extract_spawn_counts(element: ET.Element,
             if fallback is not None:
                 bucket, label = fallback
         _add_spawn(breakdown, bucket, label, total)
+        if kinds_out is not None and bucket == SPAWN_HOSTILE:
+            kinds_out.add("ship")
 
     for ng in element.findall(".//SpawnDescription_NPC_Group"):
         if _within_excluded_subtree(ng, element, exclude_within):
@@ -2961,6 +3040,8 @@ def _extract_spawn_counts(element: ET.Element,
             if fallback is not None:
                 bucket, label = fallback
         _add_spawn(breakdown, bucket, label, total_npcs)
+        if kinds_out is not None and bucket == SPAWN_HOSTILE:
+            kinds_out.add("npc")
 
     return breakdown
 
@@ -3183,7 +3264,8 @@ def enhancements_mission(root: ET.Element, reputation_lookup: dict[str, int] | N
 
     try:
         loc_key = _mission_loc_key(root) or _loc_key(root)
-        lines.append(f"<EM4>Engagement Type:</EM4> {_classify_mission_engagement(loc_key)}")
+        lines.append(f"<EM4>Engagement Type:</EM4> "
+                     f"{_classify_mission_engagement(loc_key, _hostile_kinds(root))}")
 
         flags = _extract_mission_flags(root)
         if _show("mission_type"):
@@ -4136,8 +4218,15 @@ def scan_contract_generators(
     standing_track_lookup: dict[str, str] | None = None,
     template_lookup: dict[str, tuple[str, str]] | None = None,
     roots=None,
+    engagement_out: "dict[str, list[str]] | None" = None,
 ):
     """Scan contract generator XMLs for mission variants with different systems.
+
+    *engagement_out*, when given, is filled with each title's per-variant
+    engagement (:func:`_variant_engagement`, in variant order), for the
+    FPS / SHIP title tags. A separate out-parameter rather than a 13th
+    ContractVariant field, whose width tests/test_mission_variant_tuple.py
+    locks.
 
     *template_lookup* (:func:`_build_template_lookup` of the sibling
     contracttemplates folder) and *roots* (the parsed contractgen XML roots,
@@ -4275,8 +4364,10 @@ def scan_contract_generators(
                     # not a union of every sibling contract's roster (#186) —
                     # including the one-time intro mission's own roster, which
                     # uses the plain <Contract> tag, not <CareerContract>.
+                    handler_kinds: set[str] = set()
                     handler_spawns = _extract_spawn_counts(
-                        handler, exclude_within=("CareerContract", "Contract")
+                        handler, exclude_within=("CareerContract", "Contract"),
+                        kinds_out=handler_kinds,
                     )
 
                     contracts = handler.findall(contract_xpath)
@@ -4497,11 +4588,18 @@ def scan_contract_generators(
                             # to the handler-level breakdown when the contract
                             # node itself has no spawn descriptions of its own
                             # (a contract is empty when every bucket is empty).
-                            contract_spawns = _extract_spawn_counts(contract)
+                            contract_kinds: set[str] = set()
+                            contract_spawns = _extract_spawn_counts(
+                                contract, kinds_out=contract_kinds)
                             spawns = (
                                 contract_spawns
                                 if any(contract_spawns.values())
                                 else handler_spawns
+                            )
+                            spawn_kinds = (
+                                contract_kinds
+                                if any(contract_spawns.values())
+                                else handler_kinds
                             )
 
                             # Extract per-contract difficulty
@@ -4518,6 +4616,10 @@ def scan_contract_generators(
                             if title_key not in missions:
                                 missions[title_key] = []
                             missions[title_key].append(ContractVariant(system_name, success_xp, failure_xp, desc_key, contract_flags, spawns, contract_difficulty, contract_has_bp, contract_bp_chance, contract_bp_variant, rank_name, rep_track))
+                            if engagement_out is not None:
+                                engagement_out.setdefault(title_key, []).append(
+                                    _variant_engagement(spawn_kinds, title_key, desc_key,
+                                                        contract_name))
 
                             # Sub-contracts override title/desc but inherit
                             # everything else from the parent contract.
@@ -4533,6 +4635,10 @@ def scan_contract_generators(
                                 if sub_title not in missions:
                                     missions[sub_title] = []
                                 missions[sub_title].append(ContractVariant(system_name, success_xp, failure_xp, sub_desc or desc_key, contract_flags, spawns, contract_difficulty, contract_has_bp, contract_bp_chance, contract_bp_variant, rank_name, rep_track))
+                                if engagement_out is not None:
+                                    engagement_out.setdefault(sub_title, []).append(
+                                        _variant_engagement(spawn_kinds, sub_title,
+                                                            sub_desc or desc_key, contract_name))
                                 if contract_has_bp and sub_title != title_key:
                                     # Reuse contract_pools_by_label (already
                                     # scanned above) instead of re-iterating
@@ -7228,6 +7334,8 @@ class _PuMissionScan(NamedTuple):
     * xp_records: ``(title key, XP or None when reading it failed)`` for each
       XML whose title and description are both ``@`` references, for the
       end-of-run "titles skipped" diagnostic.
+    * title_engagement: each title's per-file engagement
+      (:func:`_variant_engagement`), for the FPS / SHIP title tags.
     """
     descs: dict[str, str]
     spawn_ambiguous_descs: set[str]
@@ -7235,6 +7343,7 @@ class _PuMissionScan(NamedTuple):
     cargo_delivery_descs: set[str]
     title_xps: dict[str, list[int]]
     xp_records: list[tuple[str, "int | None"]]
+    title_engagement: "dict[str, list[str]]" = {}
 
 
 def _scan_pu_missions(
@@ -7263,6 +7372,7 @@ def _scan_pu_missions(
     cargo_delivery_descs: set[str] = set()
     title_xps: dict[str, list[int]] = {}
     xp_records: list[tuple[str, "int | None"]] = []
+    title_engagement: dict[str, list[str]] = {}
     skipped = discovered = 0
     for xml_file in pu_files:
         try:
@@ -7314,6 +7424,8 @@ def _scan_pu_missions(
             continue
         desc_key = desc_attr.lstrip("@")
         title_to_descs.setdefault(title_key, set()).add(desc_key)
+        title_engagement.setdefault(title_key, []).append(
+            _variant_engagement(_hostile_kinds(root), title_key, desc_key, xml_file.stem))
         _parts = xml_file.parts
         _i = _parts.index("pu_missions") if "pu_missions" in _parts else -1
         if _i >= 0 and _i + 1 < len(_parts) and _parts[_i + 1] in ("cargo", "delivery"):
@@ -7344,7 +7456,7 @@ def _scan_pu_missions(
         f"0 no enhancements, {skipped} no loc key"
     )
     return _PuMissionScan(descs, spawn_ambiguous_descs, title_to_descs,
-                          cargo_delivery_descs, title_xps, xp_records)
+                          cargo_delivery_descs, title_xps, xp_records, title_engagement)
 
 
 def _run_gen_missions(ctx: dict) -> dict[str, str]:
@@ -7398,6 +7510,27 @@ def _run_gen_missions(ctx: dict) -> dict[str, str]:
 
     def _show_title_tag(_field: str) -> bool:
         return bool(_mtt.get(_field, True))
+    # The FPS tag defaults on and the SHIP tag off (AppSettings'
+    # _MISSION_TITLE_TAG_DEFAULTS); a run handed no settings (the CLI) gets
+    # the same. The tag word rides in the same dict (main_window adds it).
+    _show_ground_tag = bool(_mtt.get("ground", True))
+    _show_space_tag = bool(_mtt.get("space", False))
+    _ground_label = str(_mtt.get("ground_label") or "fps")
+    # What StarStrings titles need from this run (route, FPS / SHIP): left in
+    # mission_index.json for the merge, which lays them over StarStrings'
+    # titles (src/utils/mission_layers.py).
+    mission_index: dict = ctx.setdefault("mission_index", {})
+
+    def _engagement_suffix(title_key: str, engagements: "list[str]", route: str) -> str:
+        ground, space = _title_engagement(engagements)
+        if _MissionIndexEntry is not None and (ground or space or route):
+            mission_index[title_key] = _MissionIndexEntry(ground=ground, space=space,
+                                                          route=route)
+        if engagement_tag is None:
+            return ""
+        tag = engagement_tag(ground, space, show_ground=_show_ground_tag,
+                             show_space=_show_space_tag, label_key=_ground_label)
+        return f" <EM4>{tag}</EM4>" if tag else ""
     tag_configs       = ctx.get("tag_configs") or {}
     # User toggle (Enhancements tab) for the inline component and armor
     # (#492) annotation in mission descriptions. Default True preserves
@@ -7526,6 +7659,9 @@ def _run_gen_missions(ctx: dict) -> dict[str, str]:
     # used to raise it, and the walk is finished for them if
     # scan_contract_generators stops early on an error of its own.
     contractgen_dir = records / "contracts" / "contractgenerator"
+    # Per title, each contractgen variant's engagement (FPS / ship / none),
+    # for the FPS and SHIP title tags.
+    contractgen_engagement: dict[str, list[str]] = {}
     battaglia_mineable_rs: dict[str, str] = {}
     battaglia_mineable_rs_desc_ores: dict[str, list[str]] = {}
     _calc_reward_titles: set[str] = set()
@@ -7583,6 +7719,7 @@ def _run_gen_missions(ctx: dict) -> dict[str, str]:
         standing_track_lookup=standing_track_lookup,
         template_lookup=_template_lookup,
         roots=_roots,
+        engagement_out=contractgen_engagement,
     )
     for _root in _roots:
         pass
@@ -7700,14 +7837,19 @@ def _run_gen_missions(ctx: dict) -> dict[str, str]:
         # separator-after-Rank normalization is itself an independent,
         # always-on feature — the word/phrase toggles inside abbreviate_title
         # are what stay individually gated on `abbreviated_phrases`.
+        # Shortening covers every mission type since the Missions tab's
+        # layer orderer (long Mercenary / Salvage / Alliance Aid titles are
+        # cut off in the Contracts Manager as much as hauls are); the route
+        # below stays haul / delivery / courier only.
         _mt_phrases = getattr(_mt_cfg, "abbreviated_phrases", frozenset())
-        if abbreviate_title and _is_route_title(title_key):
+        if abbreviate_title:
             base_title = abbreviate_title(
                 base_title, _mt_phrases, getattr(_mt_cfg, "rank_separator", "dash"),
                 getattr(_mt_cfg, "standardize_hauling_names", False),
-            )
+            ) or base_title
         augmented_title = base_title
-        if (route_enabled(_mt_cfg) and _is_route_title(title_key)
+        _title_route = ""
+        if (_is_route_title(title_key)
                 and not _title_has_route_token(base_title)):
             _route_descs = pu_title_to_descs.get(title_key, set()) | {
                 v.desc_key for v in variants if v.desc_key
@@ -7715,8 +7857,18 @@ def _run_gen_missions(ctx: dict) -> dict[str, str]:
             _route = _derive_route_fragment(
                 [loc.get(dk) for dk in _route_descs], _mt_cfg, loc, _route_expand_cache
             )
-            if _route and apply_mission_title:
+            _title_route = _route or ""
+            if route_enabled(_mt_cfg) and _route and apply_mission_title:
                 augmented_title = apply_mission_title(base_title, _route, _mt_cfg)
+        # FPS / SHIP first among the tags: it is the one that changes what
+        # the player brings. Every spawn path the title fronts counts, the
+        # pu_missions ones included, as for the [BP?] demotion below.
+        augmented_title += _engagement_suffix(
+            title_key,
+            contractgen_engagement.get(title_key, [])
+            + pu_scan.title_engagement.get(title_key, []),
+            _title_route,
+        )
         if _show_title_tag("blueprint"):
             if _all_have_bp and _all_bp_guaranteed and not _surviving_no_bp_cargo:
                 augmented_title += " <EM4>[BP]</EM4>"
@@ -8003,20 +8155,25 @@ def _run_gen_missions(ctx: dict) -> dict[str, str]:
         # Rank separator is an independent always-on feature, not gated on
         # any checkbox.
         _mt2_phrases = getattr(_mt_cfg2, "abbreviated_phrases", frozenset())
-        if title_key not in out and abbreviate_title and _is_route_title(title_key):
+        pu_only = title_key not in out
+        if pu_only and abbreviate_title:
             current = abbreviate_title(
                 current, _mt2_phrases, getattr(_mt_cfg2, "rank_separator", "dash"),
                 getattr(_mt_cfg2, "standardize_hauling_names", False),
-            )
-        if (title_key not in out and route_enabled(_mt_cfg2)
-                and _is_route_title(title_key)
+            ) or current
+        _title_route = ""
+        if (pu_only and _is_route_title(title_key)
                 and not _title_has_route_token(base_title)):
             _route = _derive_route_fragment(
                 [loc.get(dk) for dk in pu_title_to_descs.get(title_key, set())],
                 _mt_cfg2, loc, _route_expand_cache
             )
-            if _route and apply_mission_title:
+            _title_route = _route or ""
+            if route_enabled(_mt_cfg2) and _route and apply_mission_title:
                 current = apply_mission_title(current, _route, _mt_cfg2)
+        if pu_only:
+            current += _engagement_suffix(
+                title_key, pu_scan.title_engagement.get(title_key, []), _title_route)
         unique_xp = sorted(set(xps)) if _show_title_tag("rep") else []
         if len(unique_xp) == 1:
             current += f" <EM4>[{unique_xp[0]:,} {rep_xp_label}]</EM4>"
@@ -8542,6 +8699,8 @@ def main(base_ini_path: Path, forge_dir: Path | None = None,
         "rs_ore_name_annotations": bool(rs_ore_name_annotations),
         # Filled by the commodity/journal generator for the SCO drawer.
         "crafting_index":    {},
+        # Filled by the missions generator for the StarStrings title extras.
+        "mission_index":     {},
     }
 
     gen_jobs: dict[str, Callable] = {}
@@ -8665,6 +8824,9 @@ def main(base_ini_path: Path, forge_dir: Path | None = None,
     # outlives the INIs it was built with.
     if "commodity_journal" in gen_jobs and CRAFTING_INDEX_FILE:
         write_crafting_index(output_dir / CRAFTING_INDEX_FILE, ctx["crafting_index"])
+    # The same rule for the missions' index: written whenever they ran.
+    if "missions" in gen_jobs and MISSION_INDEX_FILE:
+        write_mission_index(output_dir / MISSION_INDEX_FILE, ctx["mission_index"])
 
     total = (len(out_ships) + len(out_components) + len(out_ship_weapons) +
              len(out_fps_weapons) + len(out_armor) + len(out_missions) + len(out_commodities) +

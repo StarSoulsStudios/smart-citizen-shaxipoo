@@ -1643,6 +1643,18 @@
     "tag_preview_no_tag": {
       "ht": "",
       "at": "Prévia:  {name}   (sem tag — todos os elementos estão vazios ou desativados)"
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "Tag FPS (adiciona \"[FPS]\" / \"[FPS?]\" quando um contrato precisa de equipamento FPS)"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "Tag de nave (adiciona \"[SHIP]\" a contratos só de combate de naves)"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "Palavra da tag"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "Escolha o que os títulos e descrições dos contratos mostram. A prévia usa seus textos carregados."
     },
-    "source_heading": {
-      "ht": "",
-      "at": "Quem escreve os textos de missão"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "Títulos e tags de reputação e projetos do MrKraken"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "Tags criadas a partir dos arquivos do jogo"
-    },
     "titles_heading": {
       "ht": "",
       "at": "Títulos"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "O StarStrings escreve estes títulos e detalhes. Escolha Smart Citizen para personalizá-los aqui."
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "O Smart Citizen cria essas tags a partir dos arquivos do jogo."
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Medium Distance vira Med., etc."
+      "at": "Red Level Contract: vira Red Lvl:, e similares"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "Quem escreve o texto das missões"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "Cada tipo de missão tem duas camadas. A da frente vence onde as duas têm texto. Clique na de trás para trazê-la à frente, ou num ponto para desligar essa camada."
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "Usar StarStrings"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "A CAMADA DA FRENTE VENCE"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "Texto do jogo"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top} está na frente de {back}. Clique na de trás para trocar, num ponto para desligá-la."
+    },
+    "type_all": {
+      "ht": "",
+      "at": "Todos os tipos de missão"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "misto"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "Transporte de carga"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "Entrega e courier"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "Mercenário"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "Caça a recompensas"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "Investigação e recuperação"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "Salvamento"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "Mineração"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "Reparo e reabastecimento"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "Coleta e suprimentos"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "Outros contratos"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "Nomes de itens"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "Minhas opções de título nos títulos do StarStrings"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "Títulos mais curtos, rota e tag FPS valem onde o StarStrings está na frente"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "Desligado. Ligue para escolhê-lo por tipo de missão."
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "Só inglês. Seu idioma mantém os próprios textos."
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "Ainda não baixado. O aviso no topo oferece o download."
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "Build {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "Tag FPS"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "Adiciona [FPS] quando um contrato precisa de equipamento FPS, [FPS?] quando só alguns"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "Palavra da tag"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "Tag de combate de naves"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "Adiciona [SHIP] a contratos só de combate de naves"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "TEXTO DE"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "Nomes das categorias"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "Renomeie as categorias e abas do gerenciador de contratos. Deixe um nome em branco para manter o do jogo."
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "Renomear"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "{count} renomeadas"
     }
   }
 }

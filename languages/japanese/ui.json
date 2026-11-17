@@ -1643,6 +1643,18 @@
     "rs_ore_name_annotations_tooltip": {
       "ht": "",
       "at": "採掘可能な各鉱石の基本リソースシグネチャをその表示名に付加します（例：「Aluminium (RS 4285)」）。これにより、ミッショントラッカーを含め、ゲームがその名前を表示するすべての場所に表示されます。ミッション詳細フィールドのリソースシグネチャとは独立しています。次回の「拡張機能を生成」時に反映されます。"
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "FPS タグ（契約に FPS 装備が必要なとき \"[FPS]\" / \"[FPS?]\" を追加）"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "艦船タグ（艦船戦闘のみの契約に \"[SHIP]\" を追加）"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "タグの語"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "契約のタイトルと説明に何を表示するか選びます。プレビューは読み込んだ文字列から作られます。"
     },
-    "source_heading": {
-      "ht": "",
-      "at": "ミッション文を書くのは"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "MrKraken のタイトル、評判・ブループリントタグ"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "ゲームファイルから作るタグ"
-    },
     "titles_heading": {
       "ht": "",
       "at": "タイトル"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "これらのタイトルと詳細は StarStrings が書いています。ここでカスタマイズするには Smart Citizen を選んでください。"
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "Smart Citizen がゲームファイルからこれらのタグを作ります。"
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Medium Distance を Med. にするなど"
+      "at": "Red Level Contract: が Red Lvl: になるなど"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "ミッション文を書くのは誰か"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "各ミッションタイプには2つのレイヤーがあります。両方に文がある場合は前のレイヤーが優先されます。後ろのレイヤーをクリックすると前に出し、ドットをクリックするとそのレイヤーをオフにします。"
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "StarStrings を使う"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "前のレイヤーが優先"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "ゲームの文"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top} が {back} の前にあります。後ろをクリックで入れ替え、ドットでオフ。"
+    },
+    "type_all": {
+      "ht": "",
+      "at": "すべてのミッションタイプ"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "混在"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "貨物輸送"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "配達とクーリエ"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "傭兵"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "賞金稼ぎ"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "調査と回収"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "サルベージ"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "採掘"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "修理と給油"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "収集と補給"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "その他の契約"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "アイテム名"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "StarStrings のタイトルにも自分のタイトル設定を使う"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "StarStrings が前のときも、短縮タイトル・ルート・FPS タグが適用されます"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "オフです。オンにするとミッションタイプごとに選べます。"
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "英語のみ。あなたの言語は独自の文を保ちます。"
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "まだダウンロードされていません。上部のバナーから入手できます。"
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "ビルド {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "FPS タグ"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "契約に FPS 装備が必要なら [FPS]、一部だけなら [FPS?] を追加"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "タグの語"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "艦船戦闘タグ"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "艦船戦闘のみの契約に [SHIP] を追加"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "文の出所"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "カテゴリ名"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "契約マネージャーのカテゴリとタブの名前を変更します。空欄ならゲームの名前のままです。"
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "名前を変更"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "{count} 件変更済み"
     }
   }
 }

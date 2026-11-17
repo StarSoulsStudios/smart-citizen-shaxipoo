@@ -1643,6 +1643,18 @@
     "tag_preview_no_tag": {
       "ht": "",
       "at": "미리보기:  {name}   (태그 없음. 모든 요소가 비어 있거나 비활성화됨)"
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "FPS 태그 (계약에 FPS 장비가 필요하면 \"[FPS]\" / \"[FPS?]\" 추가)"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "함선 태그 (함선 전투만 있는 계약에 \"[SHIP]\" 추가)"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "태그 단어"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "계약 제목과 설명에 무엇을 표시할지 고르세요. 미리보기는 불러온 문자열로 만들어집니다."
     },
-    "source_heading": {
-      "ht": "",
-      "at": "미션 텍스트 작성 주체"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "MrKraken의 제목, 평판·청사진 태그"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "게임 파일로 만든 태그"
-    },
     "titles_heading": {
       "ht": "",
       "at": "제목"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "이 제목과 세부 정보는 StarStrings가 씁니다. 여기서 바꾸려면 Smart Citizen을 선택하세요."
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "Smart Citizen이 게임 파일로 이 태그를 만듭니다."
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Medium Distance를 Med. 형태로 줄이는 등"
+      "at": "Red Level Contract: 가 Red Lvl: 가 되는 식"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "임무 텍스트를 누가 쓰는가"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "각 임무 유형에는 두 개의 레이어가 있습니다. 둘 다 텍스트가 있으면 앞쪽 레이어가 우선합니다. 뒤쪽 레이어를 클릭하면 앞으로 가져오고, 점을 클릭하면 그 레이어를 끕니다."
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "StarStrings 사용"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "앞쪽 레이어 우선"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "게임 텍스트"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top}이(가) {back} 앞에 있습니다. 뒤쪽을 클릭해 바꾸고, 점을 클릭해 끕니다."
+    },
+    "type_all": {
+      "ht": "",
+      "at": "모든 임무 유형"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "혼합"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "화물 운송"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "배달 및 택배"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "용병"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "현상금 사냥"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "조사 및 회수"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "샐비지"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "채굴"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "수리 및 급유"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "수집 및 보급"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "기타 계약"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "아이템 이름"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "StarStrings 제목에도 내 제목 설정 적용"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "StarStrings가 앞에 있어도 짧은 제목, 경로, FPS 태그가 적용됩니다"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "꺼짐. 켜면 임무 유형별로 선택할 수 있습니다."
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "영어 전용. 사용 중인 언어는 자체 텍스트를 유지합니다."
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "아직 다운로드되지 않았습니다. 상단 배너에서 받을 수 있습니다."
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "빌드 {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "FPS 태그"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "계약에 FPS 장비가 필요하면 [FPS], 일부만 필요하면 [FPS?]를 추가"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "태그 단어"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "함선 전투 태그"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "함선 전투만 있는 계약에 [SHIP]을 추가"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "텍스트 출처"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "카테고리 이름"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "계약 관리자의 카테고리와 탭 이름을 바꿉니다. 비워 두면 게임의 이름을 유지합니다."
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "이름 바꾸기"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "{count}개 변경됨"
     }
   }
 }

@@ -1643,6 +1643,18 @@
     "tag_preview_no_tag": {
       "ht": "",
       "at": "Önizleme:  {name}   (etiket yok — her öğe boş veya devre dışı)"
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "FPS Etiketi (sözleşme FPS ekipmanı gerektirdiğinde \"[FPS]\" / \"[FPS?]\" ekler)"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "Gemi Etiketi (yalnızca gemi savaşı olan sözleşmelere \"[SHIP]\" ekler)"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "Etiket sözcüğü"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "Sözleşme başlıklarının ve açıklamalarının ne göstereceğini seç. Önizleme yüklü metinlerinden oluşturulur."
     },
-    "source_heading": {
-      "ht": "",
-      "at": "Görev metinlerini kim yazar"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "MrKraken'in başlıkları, itibar ve plan etiketleri"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "Oyun dosyalarından üretilen etiketler"
-    },
     "titles_heading": {
       "ht": "",
       "at": "Başlıklar"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "Bu başlıkları ve ayrıntıları StarStrings yazar. Burada özelleştirmek için Smart Citizen'ı seç."
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "Smart Citizen bu etiketleri oyun dosyalarından üretir."
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Medium Distance, Med. olur, vb."
+      "at": "Red Level Contract: ifadesi Red Lvl: olur, benzerleri de"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "Görev metnini kim yazar"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "Her görev türünün iki katmanı vardır. İkisinde de metin varsa öndeki kazanır. Arkadakini öne almak için ona, katmanı kapatmak için bir noktaya tıkla."
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "StarStrings kullan"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "ÖNDEKİ KATMAN KAZANIR"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "Oyun metni"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top}, {back} önünde. Yer değiştirmek için arkadakine, kapatmak için bir noktaya tıkla."
+    },
+    "type_all": {
+      "ht": "",
+      "at": "Tüm görev türleri"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "karışık"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "Kargo taşıma"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "Teslimat ve kurye"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "Paralı asker"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "Ödül avcılığı"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "Soruşturma ve kurtarma"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "Hurda toplama"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "Madencilik"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "Onarım ve yakıt"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "Toplama ve tedarik"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "Diğer sözleşmeler"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "Eşya adları"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "Başlık ayarlarım StarStrings başlıklarında"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "Kısa başlıklar, rota ve FPS etiketi StarStrings öndeyken de uygulanır"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "Kapalı. Görev türüne göre seçmek için aç."
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "Yalnızca İngilizce. Dilin kendi metinlerini korur."
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "Henüz indirilmedi. Üstteki şerit indirmeyi sunar."
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "Sürüm {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "FPS etiketi"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "Sözleşme FPS ekipmanı gerektirdiğinde [FPS], yalnızca bazıları gerektirdiğinde [FPS?] ekler"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "Etiket sözcüğü"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "Gemi savaşı etiketi"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "Yalnızca gemi savaşı olan sözleşmelere [SHIP] ekler"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "METİN KAYNAĞI"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "Kategori adları"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "Sözleşme yöneticisinin kategori ve sekmelerini yeniden adlandır. Oyunun kendi adını korumak için boş bırak."
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "Yeniden adlandır"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "{count} yeniden adlandırıldı"
     }
   }
 }

@@ -1643,6 +1643,18 @@
     "rs_ore_name_annotations_tooltip": {
       "ht": "",
       "at": "將每種可開採礦石的基礎資源訊號附加到其顯示名稱後（例如“Aluminium (RS 4285)”），使其在遊戲渲染該名稱的所有位置都會顯示——包括任務追蹤器。與“任務詳情欄位”下的“資源訊號”相互獨立。將在下次生成增強內容時生效。"
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "FPS 標籤（合約需要 FPS 裝備時加上 \"[FPS]\" / \"[FPS?]\"）"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "艦船標籤（為純艦船戰鬥的合約加上 \"[SHIP]\"）"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "標籤文字"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "選擇合約標題和描述顯示的內容。預覽依據你已載入的字串。"
     },
-    "source_heading": {
-      "ht": "",
-      "at": "由誰撰寫任務文字"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "MrKraken 的標題、聲望和藍圖標籤"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "依你的遊戲檔案產生的標籤"
-    },
     "titles_heading": {
       "ht": "",
       "at": "標題"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "這些標題和詳情由 StarStrings 撰寫。選擇 Smart Citizen 即可在此自訂。"
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "Smart Citizen 依你的遊戲檔案產生這些標籤。"
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Medium Distance 變為 Med. 等"
+      "at": "Red Level Contract: 變為 Red Lvl: 等"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "由誰撰寫任務文字"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "每種任務類型有兩層。兩層都有文字時，前面的一層生效。點擊後面的一層把它移到前面，或點擊圓點關閉該層。"
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "使用 StarStrings"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "前層優先"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "遊戲原文"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top} 在 {back} 前面。點擊後面的一層以交換，點擊圓點以關閉。"
+    },
+    "type_all": {
+      "ht": "",
+      "at": "所有任務類型"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "混合"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "貨運"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "遞送與快遞"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "傭兵"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "賞金狩獵"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "調查與回收"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "打撈"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "採礦"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "維修與加油"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "收集與補給"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "其他合約"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "物品名稱"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "在 StarStrings 標題上使用我的標題設定"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "StarStrings 在前時，縮短標題、路線和 FPS 標籤仍然生效"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "已關閉。開啟後可依任務類型選擇。"
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "僅限英文。你的語言保留自己的文字。"
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "尚未下載。頂部橫幅提供下載。"
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "版本 {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "FPS 標籤"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "合約需要 FPS 裝備時加上 [FPS]，只有部分需要時加上 [FPS?]"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "標籤文字"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "艦船戰鬥標籤"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "為純艦船戰鬥的合約加上 [SHIP]"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "文字來源"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "類別名稱"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "重新命名合約管理器的類別和分頁。留空則保留遊戲原名。"
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "重新命名"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "已重新命名 {count} 個"
     }
   }
 }

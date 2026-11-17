@@ -15,7 +15,7 @@ from src.gui.theme import host_in_scroll_area, needs_apply_style
 from src.utils.i18n import tr
 from src.utils.settings import AppSettings
 from src.utils.tag_builder import (
-    CATEGORIES, ELEMENT_LABELS, LOCATION_DETAILS,
+    CATEGORIES, DEFAULT_GROUND_TAG_LABEL, ELEMENT_LABELS, GROUND_TAG_LABELS, LOCATION_DETAILS,
     MAPPED_KIND_NAMES, MISSION_TITLE_PLACEMENTS, PLACEMENTS, RANK_SEPARATORS,
     REMOVE_WORD_OPTIONS, ROUTE_ARROWS, SEPARATORS, SHORTEN_PHRASE_OPTIONS,
     SIZE_ABBREV_BY_WORD, STYLES_BY_KIND, TITLE_SEPARATORS, TagConfig,
@@ -1931,6 +1931,8 @@ class _TagBuilderPage(QWidget):
         tags_col.addWidget(self._mt_tags_hint)
 
         _TITLE_TAG_KEYS = [
+            ("ground",    "enhancements.mt_tag_ground_cb"),
+            ("space",     "enhancements.mt_tag_space_cb"),
             ("rep",       "enhancements.mt_tag_rep_cb"),
             ("blueprint", "enhancements.mt_tag_blueprint_cb"),
             ("ace",       "enhancements.mt_tag_ace_cb"),
@@ -1948,6 +1950,24 @@ class _TagBuilderPage(QWidget):
             cb.toggled.connect(self.config_changed.emit)
             tags_col.addWidget(cb)
             self._title_tag_checkboxes[_field] = cb
+            if _field == "ground":
+                # The FPS tag's word, right under its checkbox. Saved at once
+                # like the checkboxes; the Missions tab shows it as segments.
+                word_row = QHBoxLayout()
+                word_row.setContentsMargins(22, 0, 0, 0)
+                self._mt_ground_label_lbl = QLabel(tr("enhancements.mt_ground_label"))
+                self._mt_ground_label_lbl.setProperty("role", "secondary")
+                word_row.addWidget(self._mt_ground_label_lbl)
+                self._mt_ground_label = NoScrollComboBox()
+                for label_key, text in GROUND_TAG_LABELS:
+                    self._mt_ground_label.addItem(f"[{text}]", userData=label_key)
+                self._select_combo(self._mt_ground_label, AppSettings.get_ground_tag_label())
+                self._mt_ground_label.currentIndexChanged.connect(self._on_mt_ground_label_changed)
+                word_row.addWidget(self._mt_ground_label)
+                word_row.addStretch()
+                tags_col.addLayout(word_row)
+                cb.toggled.connect(self._mt_ground_label.setEnabled)
+                self._mt_ground_label.setEnabled(cb.isChecked())
         tags_col.addStretch()
         page.addWidget(self._mt_tags_group)
 
@@ -1980,6 +2000,11 @@ class _TagBuilderPage(QWidget):
         page.addWidget(self._mt_scanning_group)
 
         page.addStretch()
+
+    def _on_mt_ground_label_changed(self, _idx: int) -> None:
+        AppSettings.set_ground_tag_label(
+            self._mt_ground_label.currentData() or DEFAULT_GROUND_TAG_LABEL)
+        self.config_changed.emit()
 
     def _set_mt_controls_enabled(self, on: bool) -> None:
         for c in (self._mt_placement, self._mt_arrow, self._mt_sep, self._mt_detail):
@@ -2109,6 +2134,7 @@ class _TagBuilderPage(QWidget):
                 key = self._title_tag_keys.get(field)
                 if key:
                     cb.setText(tr(key))
+            self._mt_ground_label_lbl.setText(tr("enhancements.mt_ground_label"))
             self._mt_scanning_group.setTitle(tr("enhancements.mt_scanning_group"))
             self._mt_scanning_hint.setText(tr("enhancements.mt_scanning_hint"))
         else:
@@ -2191,6 +2217,12 @@ class _TagBuilderPage(QWidget):
                 box.blockSignals(False)
                 if reset_title_tags:
                     AppSettings.set_mission_title_tag(field, value)
+            if reset_title_tags:
+                AppSettings.set_ground_tag_label(DEFAULT_GROUND_TAG_LABEL)
+            self._mt_ground_label.blockSignals(True)
+            self._select_combo(self._mt_ground_label, AppSettings.get_ground_tag_label())
+            self._mt_ground_label.blockSignals(False)
+            self._mt_ground_label.setEnabled(self._title_tag_checkboxes["ground"].isChecked())
             self._set_mt_controls_enabled(self._mt_enable.isChecked())
             self._refresh_preview()
             self.config_changed.emit()

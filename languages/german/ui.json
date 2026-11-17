@@ -1643,6 +1643,18 @@
     "rs_ore_name_annotations_tooltip": {
       "ht": "",
       "at": "Hängt die Basis-Ressourcensignatur jedes abbaubaren Erzes an dessen Anzeigenamen an (z. B. „Aluminium (RS 4285)“), sodass sie überall erscheint, wo das Spiel diesen Namen anzeigt — einschließlich des Missions-Trackers. Unabhängig von den Ressourcensignaturen unter Missions-Detailfeldern. Wird beim nächsten Generieren von Verbesserungen wirksam."
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "FPS-Tag (fügt \"[FPS]\" / \"[FPS?]\" hinzu, wenn ein Auftrag FPS-Ausrüstung braucht)"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "Schiffs-Tag (fügt \"[SHIP]\" zu reinen Schiffskampf-Aufträgen hinzu)"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "Tag-Wort"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "Wähle, was Auftragstitel und -beschreibungen zeigen. Die Vorschau nutzt deine geladenen Texte."
     },
-    "source_heading": {
-      "ht": "",
-      "at": "Wer schreibt Missionstexte"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "MrKrakens Titel, Ruf- und Blaupausen-Tags"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "Tags aus deinen Spieldateien"
-    },
     "titles_heading": {
       "ht": "",
       "at": "Titel"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "StarStrings schreibt diese Titel und Details. Wähle Smart Citizen, um sie hier anzupassen."
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "Smart Citizen erstellt diese Tags aus deinen Spieldateien."
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Aus Medium Distance wird Med. usw."
+      "at": "Aus Red Level Contract: wird Red Lvl:, und Ähnliches"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "Wer Missionstexte schreibt"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "Jeder Missionstyp hat zwei Ebenen. Die vordere gewinnt, wo beide Text haben. Klicke die hintere, um sie nach vorn zu holen, oder einen Punkt, um die Ebene auszuschalten."
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "StarStrings verwenden"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "VORDERE EBENE GEWINNT"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "Spieltext"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top} liegt vor {back}. Klicke die hintere zum Tauschen, einen Punkt zum Ausschalten."
+    },
+    "type_all": {
+      "ht": "",
+      "at": "Alle Missionstypen"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "gemischt"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "Frachttransport"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "Lieferung & Kurier"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "Söldner"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "Kopfgeldjagd"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "Ermittlung & Bergung"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "Bergung (Salvage)"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "Bergbau"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "Reparatur & Betankung"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "Sammeln & Versorgung"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "Andere Aufträge"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "Gegenstandsnamen"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "Meine Titeleinstellungen auf StarStrings-Titeln"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "Kürzere Titel, Route und FPS-Tag gelten, wo StarStrings vorn liegt"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "Aus. Schalte es ein, um es pro Missionstyp zu wählen."
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "Nur Englisch. Deine Sprache behält ihre eigenen Texte."
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "Noch nicht heruntergeladen. Das Banner oben bietet es an."
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "Build {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "FPS-Tag"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "Fügt [FPS] hinzu, wenn ein Auftrag FPS-Ausrüstung braucht, [FPS?] wenn nur manche"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "Tag-Wort"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "Schiffskampf-Tag"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "Fügt [SHIP] zu Aufträgen hinzu, die nur Schiffskampf sind"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "TEXT VON"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "Kategorienamen"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "Benenne die Kategorien und Reiter des Auftragsmanagers um. Lass ein Feld leer, um den Namen des Spiels zu behalten."
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "Umbenennen"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "{count} umbenannt"
     }
   }
 }

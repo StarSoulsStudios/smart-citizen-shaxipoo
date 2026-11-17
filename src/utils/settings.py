@@ -497,7 +497,7 @@ class AppSettings:
     # ace title tag and the rep/xp title tag were both unconditionally shown
     # before this split). migrate_title_tag_settings() carries a user's prior
     # blueprint_tag / ace choice forward once.
-    MISSION_TITLE_TAG_KEYS = ("rep", "blueprint", "ace", "rs", "rep_track")
+    MISSION_TITLE_TAG_KEYS = ("rep", "blueprint", "ace", "rs", "rep_track", "ground", "space")
     _MISSION_TITLE_TAG_SETTING = {
         "rep":       "mission_title_tag/rep",
         "blueprint": "mission_title_tag/blueprint",
@@ -513,11 +513,19 @@ class AppSettings:
         # suffix (MISSION DETAILS' Reputation field) is unconditional and
         # always on, independent of this toggle.
         "rep_track": "mission_title_tag/rep_track",
+        # [FPS] / [FPS?] on contracts that need FPS gear (hostile NPCs on
+        # foot, or CIG's own FPS/UGF/OnFoot key naming), and [SHIP] on
+        # ship-combat-only ones. The tag word is MISSION_GROUND_TAG_LABEL.
+        "ground":    "mission_title_tag/ground",
+        "space":     "mission_title_tag/space",
     }
     # Per-field default for get_mission_title_tags() — every title tag
     # defaults on except where overridden here.
     _MISSION_TITLE_TAG_DEFAULTS = {
         "rep_track": False,
+        # Space is the common case, so labelling it is opt-in; the FPS tag is
+        # what tells two kinds of contract apart, so it is on.
+        "space": False,
     }
     MISSION_HEADER_DEFAULTS = {
         "details": "MISSION DETAILS",
@@ -568,6 +576,18 @@ class AppSettings:
     TUTORIAL_COMPLETED_VERSION = "tutorial_completed_version"
     TUTORIAL_DISABLED = "tutorial_disabled"
     STARSTRINGS_ENABLED = "starstrings_enabled"
+    # The Missions tab's layer orderer: per mission type, which of StarStrings
+    # and Smart Citizen is on top and whether each is used (JSON, see
+    # src/utils/mission_layers.py). Empty means the defaults.
+    MISSION_LAYERS = "missions/layers"
+    # Lay Smart Citizen's title extras (Shorter titles, route, FPS tag) over a
+    # StarStrings title that wins its type. On by default.
+    STARSTRINGS_TITLE_EXTRAS = "missions/starstrings_title_extras"
+    # The player's names for the Contracts Manager categories (JSON,
+    # {loc key: name}, see src/utils/mission_categories.py).
+    MISSION_CATEGORY_NAMES = "missions/category_names"
+    # The word in the FPS title tag: a key of tag_builder.GROUND_TAG_LABELS.
+    MISSION_GROUND_TAG_LABEL = "mission_title_tag/ground_label"
 
     # Settings keys - App self-update check
     # Settings keys - Star Citizen channel selection
@@ -898,6 +918,10 @@ class AppSettings:
     # (src/utils/ship_names.py), injected just below "user". Not a registry
     # entry either.
     SOURCE_SHIP_NAMES = "ship_names"
+    # Synthetic, runtime-only source for the Missions tab's renamed Contracts
+    # Manager categories (src/utils/mission_categories.py), injected just
+    # below "user". Not a registry entry.
+    SOURCE_CATEGORY_NAMES = "category_names"
     # Synthetic, runtime-only source: MrKraken's StarStrings, filtered to
     # mission text and item names (src/utils/starstrings.py). Sits above
     # "enhancements". Not a registry entry.
@@ -1875,6 +1899,58 @@ class AppSettings:
     def set_starstrings_enabled(enabled: bool) -> None:
         AppSettings.settings().setValue(AppSettings.STARSTRINGS_ENABLED, bool(enabled))
         AppSettings.settings().sync()
+
+    @staticmethod
+    def get_mission_layer_choices() -> dict:
+        """{group: LayerChoice} for every orderer row (mission_layers)."""
+        from src.utils.mission_layers import choices_from_json
+        return choices_from_json(
+            AppSettings.settings().value(AppSettings.MISSION_LAYERS, "", type=str))
+
+    @staticmethod
+    def set_mission_layer_choices(choices: dict) -> None:
+        from src.utils.mission_layers import choices_to_json
+        AppSettings.settings().setValue(AppSettings.MISSION_LAYERS, choices_to_json(choices))
+        AppSettings.settings().sync()
+
+    @staticmethod
+    def get_mission_category_names() -> dict:
+        """{loc key: name} for the renamed Contracts Manager categories."""
+        from src.utils.mission_categories import names_from_json
+        return names_from_json(
+            AppSettings.settings().value(AppSettings.MISSION_CATEGORY_NAMES, "", type=str))
+
+    @staticmethod
+    def set_mission_category_names(names: dict) -> None:
+        from src.utils.mission_categories import names_to_json
+        AppSettings.settings().setValue(AppSettings.MISSION_CATEGORY_NAMES, names_to_json(names))
+        AppSettings.settings().sync()
+
+    @staticmethod
+    def get_starstrings_title_extras() -> bool:
+        """Lay Smart Citizen's title extras over StarStrings titles (default on)."""
+        return AppSettings.settings().value(
+            AppSettings.STARSTRINGS_TITLE_EXTRAS, True, type=bool)
+
+    @staticmethod
+    def set_starstrings_title_extras(enabled: bool) -> None:
+        AppSettings.settings().setValue(AppSettings.STARSTRINGS_TITLE_EXTRAS, bool(enabled))
+        AppSettings.settings().sync()
+
+    @staticmethod
+    def get_ground_tag_label() -> str:
+        """The FPS tag's word, a key of tag_builder.GROUND_TAG_LABELS."""
+        from src.utils.tag_builder import DEFAULT_GROUND_TAG_LABEL, GROUND_TAG_LABELS
+        value = AppSettings.settings().value(
+            AppSettings.MISSION_GROUND_TAG_LABEL, DEFAULT_GROUND_TAG_LABEL, type=str)
+        return value if value in dict(GROUND_TAG_LABELS) else DEFAULT_GROUND_TAG_LABEL
+
+    @staticmethod
+    def set_ground_tag_label(label_key: str) -> None:
+        from src.utils.tag_builder import GROUND_TAG_LABELS
+        if label_key in dict(GROUND_TAG_LABELS):
+            AppSettings.settings().setValue(AppSettings.MISSION_GROUND_TAG_LABEL, label_key)
+            AppSettings.settings().sync()
 
     @staticmethod
     def get_starstrings_dir() -> Path:
@@ -3906,6 +3982,10 @@ class AppSettings:
             AppSettings.ONEDRIVE_WARNING_DISMISSED: False,
             AppSettings.TUTORIAL_DISABLED: False,
             AppSettings.STARSTRINGS_ENABLED: True,
+            AppSettings.MISSION_LAYERS: "",
+            AppSettings.MISSION_CATEGORY_NAMES: "",
+            AppSettings.STARSTRINGS_TITLE_EXTRAS: True,
+            AppSettings.MISSION_GROUND_TAG_LABEL: "fps",
             AppSettings.BLUEPRINT_SHOW_TAGS: False,
             AppSettings.BLUEPRINT_AUTO_SCAN_ON_STARTUP: False,
             AppSettings.BLUEPRINT_AUTO_SCAN_SHOW_POPUP: False,

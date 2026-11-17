@@ -1057,6 +1057,11 @@ class MainWindow(QMainWindow):
         # a Contracts Manager preview. Enhancements itself moves to settings.
         self.missions_tab = MissionsTab(self.enhancements_tab)
         self.missions_tab.set_source(AppSettings.get_starstrings_enabled())
+        self._refresh_missions_starstrings_status()
+        # A layer click shows in the preview at once; the reload that puts it
+        # in the table (and so in what Apply writes) follows once the clicks
+        # settle (MissionsTab debounces).
+        self.missions_tab.layers_changed.connect(self.perform_merge_and_reload)
         self._missions_tab_index = self.tabs.addTab(self.missions_tab, tr("tabs.missions"))
         # Overlay tab (3.0.0): start/stop and options for the Smart Citizen
         # Overlay. Its start button drives the toolbar's Overlay button, so
@@ -1193,11 +1198,37 @@ class MainWindow(QMainWindow):
         """Feed the Missions preview the strings as they will be applied."""
         if not hasattr(self, "missions_tab"):
             return
+        from src.parser.ini_parser import last_starstrings_overlay
+        from src.utils import mission_types
         wanted = self.missions_tab.preview_keys()
         values = {e.key: (e.custom_value or e.original_value)
                   for e in self.entries if e.key in wanted}
         stock = self.default_values or {}
-        self.missions_tab.set_strings(values.get, stock.get)
+        # Title counts per mission type, for the layer orderer's rows.
+        counts: dict = {}
+        for key in stock:
+            if mission_types.is_title_key(key):
+                group = mission_types.layer_group(key)
+                if group is not None:
+                    counts[group] = counts.get(group, 0) + 1
+        self.missions_tab.set_type_counts(counts)
+        self._refresh_missions_starstrings_status()
+        self.missions_tab.set_strings(values.get, stock.get, last_starstrings_overlay())
+
+    def _refresh_missions_starstrings_status(self) -> None:
+        """Tell the Missions tab whether StarStrings can be used, and its build."""
+        from src.utils import starstrings
+        if not hasattr(self, "missions_tab"):
+            return
+        if AppSettings.get_selected_language() != starstrings.SUPPORTED_LANGUAGE:
+            self.missions_tab.set_starstrings_status(tr("missions.ss_status_language"), "")
+            return
+        installed = starstrings.read_installed(AppSettings.get_starstrings_dir())
+        if installed is None:
+            self.missions_tab.set_starstrings_status(tr("missions.ss_status_missing"), "")
+            return
+        self.missions_tab.set_starstrings_status(
+            "", tr("missions.ss_status_build", build=installed.build_label()))
 
     def _host_item_tag_builders(self) -> None:
         """Move the component and armor tag builders into Items' sub-tabs.
@@ -5633,6 +5664,7 @@ class MainWindow(QMainWindow):
         self.blueprint_tracker_tab.retranslate_ui()
         self.ship_names_tab.retranslate_ui()
         self.items_tab.retranslate_ui()
+        self._refresh_missions_starstrings_status()
         self.missions_tab.retranslate_ui()
         self.app_header.retranslate_ui()
         self.shell_nav.retranslate_ui()
@@ -6733,7 +6765,9 @@ class MainWindow(QMainWindow):
             mission_headers=AppSettings.get_mission_headers(),
             mission_header_em_tag=AppSettings.get_mission_header_em_tag(),
             mission_detail_fields=AppSettings.get_mission_detail_fields(),
-            mission_title_tags=AppSettings.get_mission_title_tags(),
+            # The FPS tag's word rides with the title-tag switches.
+            mission_title_tags={**AppSettings.get_mission_title_tags(),
+                                "ground_label": AppSettings.get_ground_tag_label()},
             stats_prepend=AppSettings.get_stats_prepend(),
             standardize_earnable_ship_names=AppSettings.get_standardize_earnable_ship_names(),
             rs_ore_name_annotations=AppSettings.get_rs_ore_name_annotations(),

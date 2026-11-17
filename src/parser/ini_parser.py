@@ -444,6 +444,8 @@ def load_sources_from_settings() -> tuple[Dict[str, Dict[str, str]], List[str], 
                 hierarchy = hierarchy + [AppSettings.SOURCE_ENHANCEMENTS]
 
     hierarchy = _inject_starstrings(sources_dict, hierarchy)
+    hierarchy = _apply_mission_layers(sources_dict, hierarchy, selected_language)
+    hierarchy = _inject_category_names(sources_dict, hierarchy)
     hierarchy = _inject_ship_names(sources_dict, hierarchy)
 
     logger.info(f"load_sources_from_settings complete. Loaded sources: {list(sources_dict.keys())}")
@@ -465,6 +467,7 @@ def _inject_starstrings(sources_dict: Dict[str, Dict[str, str]], hierarchy: List
     from src.utils.settings import AppSettings
     from src.utils import starstrings
 
+    _starstrings_cache["overlay"] = {}
     if not AppSettings.get_starstrings_enabled():
         return hierarchy
     if AppSettings.get_selected_language() != starstrings.SUPPORTED_LANGUAGE:
@@ -482,7 +485,10 @@ def _inject_starstrings(sources_dict: Dict[str, Dict[str, str]], hierarchy: List
     )
     if not overrides:
         return hierarchy
-    sources_dict[AppSettings.SOURCE_STARSTRINGS] = overrides
+    # Kept whole for the Missions tab preview, which works out every layer
+    # choice live from it (the merge below gets the filtered copy).
+    _starstrings_cache["overlay"] = overrides
+    sources_dict[AppSettings.SOURCE_STARSTRINGS] = dict(overrides)
     logger.info(f"StarStrings: {len(overrides)} mission and item strings loaded")
     anchor = (AppSettings.SOURCE_ENHANCEMENTS if AppSettings.SOURCE_ENHANCEMENTS in hierarchy
               else AppSettings.SOURCE_GLOBAL)
@@ -490,6 +496,111 @@ def _inject_starstrings(sources_dict: Dict[str, Dict[str, str]], hierarchy: List
         idx = hierarchy.index(anchor) + 1
         return hierarchy[:idx] + [AppSettings.SOURCE_STARSTRINGS] + hierarchy[idx:]
     return [AppSettings.SOURCE_STARSTRINGS] + hierarchy
+
+
+def last_starstrings_overlay() -> Dict[str, str]:
+    """StarStrings' strings as the last load read them, before the layer choices.
+
+    Empty when StarStrings is off, not downloaded or another language is
+    selected. The Missions tab preview reads it so a layer choice shows at
+    once, before the reload that puts it in the table.
+    """
+    return dict(_starstrings_cache.get("overlay") or {})
+
+
+def _apply_mission_layers(sources_dict: Dict[str, Dict[str, str]], hierarchy: List[str],
+                          language: str) -> List[str]:
+    """Apply the Missions tab's layer orderer to the two mission text sources.
+
+    Per mission type (and for item names): drop Smart Citizen's strings where
+    it is switched off, drop StarStrings' where it is off or Smart Citizen is
+    on top, and lay Smart Citizen's title extras over the StarStrings titles
+    that still win (see src/utils/mission_layers.py). A source left empty is
+    taken out of the hierarchy. Returns the hierarchy.
+    """
+    from src.utils.settings import AppSettings
+    from src.utils import mission_layers
+
+    enh_name, ss_name = AppSettings.SOURCE_ENHANCEMENTS, AppSettings.SOURCE_STARSTRINGS
+    enhancements = sources_dict.get(enh_name) or {}
+    starstrings_values = sources_dict.get(ss_name) or {}
+    if not enhancements and not starstrings_values:
+        return hierarchy
+    choices = AppSettings.get_mission_layer_choices()
+
+    transform = None
+    if starstrings_values and AppSettings.get_starstrings_title_extras():
+        transform = _starstrings_title_transform(language)
+
+    new_enh, new_ss = mission_layers.apply_layers(
+        enhancements, starstrings_values, choices, title_transform=transform)
+    dropped_enh = len(enhancements) - len(new_enh)
+    dropped_ss = len(starstrings_values) - len(new_ss)
+    if dropped_enh or dropped_ss:
+        logger.info(f"Mission layers: {dropped_enh} Smart Citizen and {dropped_ss} "
+                    f"StarStrings strings left out by the Missions tab's layer choices")
+    for name, values in ((enh_name, new_enh), (ss_name, new_ss)):
+        if name not in sources_dict:
+            continue
+        if values:
+            sources_dict[name] = values
+        else:
+            del sources_dict[name]
+            hierarchy = [h for h in hierarchy if h != name]
+    return hierarchy
+
+
+def _starstrings_title_transform(language: str):
+    """The title extras the settings lay over a winning StarStrings title."""
+    from src.utils.settings import AppSettings
+    from src.utils import mission_layers
+    from src.utils.tag_builder import route_enabled
+
+    cfg = AppSettings.get_tag_config("mission_titles")
+    tags = AppSettings.get_mission_title_tags()
+    phrases = frozenset(getattr(cfg, "abbreviated_phrases", frozenset()))
+    standardize = bool(getattr(cfg, "standardize_hauling_names", False))
+    extras = mission_layers.TitleExtras(
+        phrases=phrases,
+        rank_separator=getattr(cfg, "rank_separator", "dash"),
+        standardize_hauling=standardize,
+        # StarStrings' wording stays as MrKraken wrote it until the player
+        # turns a shortening on (Smart Citizen's own titles always get the
+        # Rank separator; StarStrings' are not ours to restyle unasked).
+        shorten=bool(phrases) or standardize,
+        route=route_enabled(cfg),
+        route_config=cfg,
+        show_ground=bool(tags.get("ground", True)),
+        show_space=bool(tags.get("space", False)),
+        ground_label=AppSettings.get_ground_tag_label(),
+    )
+    index = mission_layers.load_mission_index(
+        AppSettings.get_enhancements_dir(language) / mission_layers.MISSION_INDEX_FILE)
+
+    def transform(key: str, value: str) -> str:
+        return mission_layers.starstrings_title(value, extras, index.get(key))
+    return transform
+
+
+def _inject_category_names(sources_dict: Dict[str, Dict[str, str]], hierarchy: List[str]) -> List[str]:
+    """Add the Missions tab's Contracts Manager category names, just below ``user``.
+
+    Checked against the stock ``global`` source each load, so a key the game
+    dropped is never added. Returns the hierarchy.
+    """
+    from src.utils.settings import AppSettings
+    from src.utils import mission_categories
+
+    overrides = mission_categories.render_overrides(
+        AppSettings.get_mission_category_names(), sources_dict.get(AppSettings.SOURCE_GLOBAL, {}))
+    if not overrides:
+        return hierarchy
+    sources_dict[AppSettings.SOURCE_CATEGORY_NAMES] = overrides
+    logger.info(f"Contracts Manager categories: {len(overrides)} renamed")
+    if AppSettings.SOURCE_USER in hierarchy:
+        idx = hierarchy.index(AppSettings.SOURCE_USER)
+        return hierarchy[:idx] + [AppSettings.SOURCE_CATEGORY_NAMES] + hierarchy[idx:]
+    return hierarchy + [AppSettings.SOURCE_CATEGORY_NAMES]
 
 
 def _inject_ship_names(sources_dict: Dict[str, Dict[str, str]], hierarchy: List[str]) -> List[str]:

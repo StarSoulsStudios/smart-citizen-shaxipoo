@@ -240,6 +240,36 @@ SHORTEN_PHRASE_OPTIONS: tuple[tuple[str, str, str, str], ...] = (
      "~mission(ReputationRank) Cargo", "~mission(ReputationRank) Rank Cargo"),
     ("ling_family_prefix", 'Shorten "Ling Family" by removing it',
      "Ling Family ", ""),
+    # Every mission type, not just hauling: the Contracts Manager cuts long
+    # titles off whatever the contract. Each phrase is one CIG uses verbatim
+    # in many titles, and each replacement is a short form CIG itself uses
+    # elsewhere ("Lvl.", "Med.", "Lrg.") or the faction's own initials.
+    ("level_contract", 'Shorten "Red Level Contract:" to "Red Lvl:"',
+     " Level Contract:", " Lvl:"),
+    ("lvl_contract", 'Shorten "Red Lvl. Contract:" to "Red Lvl:"',
+     " Lvl. Contract:", " Lvl:"),
+    ("alliance_aid", 'Shorten "Alliance Aid:" to "Aid:"',
+     "Alliance Aid:", "Aid:"),
+    ("citizens_for_prosperity", 'Shorten "Citizens for Prosperity" to "CFP"',
+     "Citizens for Prosperity", "CFP"),
+    ("purchase_order", 'Shorten "Purchase Order" to "PO"',
+     "Purchase Order", "PO"),
+    ("salvager_needed", 'Shorten "Salvager Needed" to "Salvage"',
+     "Salvager Needed", "Salvage"),
+    ("special_order_of", 'Shorten "Special Order of" to "Order:"',
+     "Special Order of", "Order:"),
+    ("supply_of", 'Shorten "Supply of" to "Supply:"',
+     "Supply of", "Supply:"),
+    ("medium_distance", 'Shorten "Medium Distance" to "Med. Distance"',
+     "Medium Distance", "Med. Distance"),
+    ("interstellar_medium", 'Shorten "Interstellar Medium" to "Interstellar Med."',
+     "Interstellar Medium", "Interstellar Med."),
+    ("interstellar_large", 'Shorten "Interstellar Large" to "Interstellar Lrg."',
+     "Interstellar Large", "Interstellar Lrg."),
+    ("resource_drive", 'Shorten "RESOURCE DRIVE:" to "RES. DRIVE:"',
+     "RESOURCE DRIVE:", "RES. DRIVE:"),
+    ("courier_needed_for", 'Shorten "COURIER NEEDED FOR" to "COURIER:"',
+     "COURIER NEEDED FOR", "COURIER:"),
 )
 
 # Curated word toggles that REMOVE a word outright rather than shortening a
@@ -330,6 +360,10 @@ _LEGACY_MIGRATION_KEYS: frozenset[str] = (
     | frozenset(k for k, *_ in REMOVE_WORD_OPTIONS)
 )
 
+# The phrase shortenings, which the "Shorter titles" switch turns on and off
+# as one group.
+_SHORTEN_PHRASE_KEYS: frozenset[str] = frozenset(k for k, *_ in SHORTEN_PHRASE_OPTIONS)
+
 # All valid keys for TagConfig.abbreviated_phrases — used to filter stale
 # entries out of persisted config.
 _ABBREVIATION_OPTION_KEYS: frozenset[str] = (
@@ -352,6 +386,51 @@ SIZE_ABBREVIATIONS: tuple[tuple[str, str], ...] = (
 )
 SIZE_ABBREV_BY_WORD: dict[str, str] = dict(SIZE_ABBREVIATIONS)
 _SIZE_WORDS: frozenset[str] = frozenset(SIZE_ABBREV_BY_WORD)
+
+
+# ── Engagement tags: missions that need FPS gear, and ship-combat ones ───────
+
+# What the title tag says for a contract that needs FPS gear (#ground). The
+# player picks the word; [FPS] is the default because it is the term the
+# community uses. (key, tag text). Game text, so not translated, like [BP].
+GROUND_TAG_LABELS: tuple[tuple[str, str], ...] = (
+    ("fps",    "FPS"),
+    ("ground", "GROUND"),
+    ("onfoot", "ON FOOT"),
+)
+DEFAULT_GROUND_TAG_LABEL = "fps"
+_GROUND_TAG_BY_KEY = dict(GROUND_TAG_LABELS)
+# Ship-combat contracts, for a player who wants space work labelled too.
+SPACE_TAG_TEXT = "SHIP"
+
+# How many of a title's variants need FPS gear: every one, some, or none.
+# Mirrors [BP] / [BP?]: a title CIG reuses for an on-foot and a ship-only
+# variant gets the honest "?".
+GROUND_ALL = "all"
+GROUND_SOME = "some"
+
+
+def ground_tag_text(label_key: str) -> str:
+    """The word in the ground tag for *label_key* (FPS when unknown)."""
+    return _GROUND_TAG_BY_KEY.get(label_key, _GROUND_TAG_BY_KEY[DEFAULT_GROUND_TAG_LABEL])
+
+
+def engagement_tag(ground: str, space: bool, *, show_ground: bool = True,
+                   show_space: bool = False,
+                   label_key: str = DEFAULT_GROUND_TAG_LABEL) -> str:
+    """The bracketed engagement tag for a title, or "" for none.
+
+    *ground* is GROUND_ALL, GROUND_SOME or "" (none). *space* is True when
+    every variant fights in ships only. Single source for the generator and
+    the StarStrings title extras, so the two never disagree.
+    """
+    if show_ground and ground == GROUND_ALL:
+        return f"[{ground_tag_text(label_key)}]"
+    if show_ground and ground == GROUND_SOME:
+        return f"[{ground_tag_text(label_key)}?]"
+    if show_space and space and not ground:
+        return f"[{SPACE_TAG_TEXT}]"
+    return ""
 
 
 def _replace_word(text: str, word: str, replacement: str) -> str:
@@ -674,6 +753,12 @@ class TagConfig:
             abbreviated_phrases = frozenset(
                 k for k in raw_phrases if k in _ABBREVIATION_OPTION_KEYS
             )
+            # The phrase shortenings are one switch ("Shorter titles"), so a
+            # saved set holds all of them or none. One saved before a release
+            # added phrases holds only the old ones: it means "on", so it gets
+            # the new ones too rather than reading as off.
+            if abbreviated_phrases & _SHORTEN_PHRASE_KEYS:
+                abbreviated_phrases |= _SHORTEN_PHRASE_KEYS
         rank_separator = data.get("rank_separator", "dash") or "dash"
         if rank_separator not in _RANK_SEP_BY_KEY:
             rank_separator = "dash"

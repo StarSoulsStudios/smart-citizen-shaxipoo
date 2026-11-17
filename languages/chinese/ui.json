@@ -1643,6 +1643,18 @@
     "rs_ore_name_annotations_tooltip": {
       "ht": "",
       "at": "将每种可开采矿石的基础资源信号附加到其显示名称后（例如“Aluminium (RS 4285)”），使其在游戏渲染该名称的所有位置都会显示——包括任务追踪器。与“任务详情字段”下的“资源信号”相互独立。将在下次生成增强内容时生效。"
+    },
+    "mt_tag_ground_cb": {
+      "ht": "",
+      "at": "FPS 标签（合同需要 FPS 装备时添加 \"[FPS]\" / \"[FPS?]\"）"
+    },
+    "mt_tag_space_cb": {
+      "ht": "",
+      "at": "舰船标签（为纯舰船战斗的合同添加 \"[SHIP]\"）"
+    },
+    "mt_ground_label": {
+      "ht": "",
+      "at": "标签文字"
     }
   },
   "blueprint_tracker": {
@@ -4182,37 +4194,9 @@
       "ht": "",
       "at": "选择合同标题和描述显示的内容。预览基于你已加载的字符串。"
     },
-    "source_heading": {
-      "ht": "",
-      "at": "由谁编写任务文本"
-    },
-    "source_starstrings": {
-      "ht": "",
-      "at": "StarStrings"
-    },
-    "source_starstrings_desc": {
-      "ht": "",
-      "at": "MrKraken 的标题、声望和蓝图标签"
-    },
-    "source_smart": {
-      "ht": "",
-      "at": "Smart Citizen"
-    },
-    "source_smart_desc": {
-      "ht": "",
-      "at": "根据你的游戏文件生成的标签"
-    },
     "titles_heading": {
       "ht": "",
       "at": "标题"
-    },
-    "titles_note_starstrings": {
-      "ht": "",
-      "at": "这些标题和详情由 StarStrings 编写。选择 Smart Citizen 即可在此自定义。"
-    },
-    "titles_note_smart": {
-      "ht": "",
-      "at": "Smart Citizen 根据你的游戏文件生成这些标签。"
     },
     "route": {
       "ht": "",
@@ -4324,7 +4308,159 @@
     },
     "shorten_hint": {
       "ht": "",
-      "at": "Medium Distance 变为 Med. 等"
+      "at": "Red Level Contract: 变为 Red Lvl: 等"
+    },
+    "layers_heading": {
+      "ht": "",
+      "at": "由谁编写任务文本"
+    },
+    "layers_lede": {
+      "ht": "",
+      "at": "每种任务类型有两层。两层都有文本时，前面的一层生效。点击后面的一层把它移到前面，或点击圆点关闭该层。"
+    },
+    "use_starstrings": {
+      "ht": "",
+      "at": "使用 StarStrings"
+    },
+    "layers_legend": {
+      "ht": "",
+      "at": "前层优先"
+    },
+    "layer_starstrings": {
+      "ht": "",
+      "at": "StarStrings"
+    },
+    "layer_smart": {
+      "ht": "",
+      "at": "Smart Citizen"
+    },
+    "layer_stock": {
+      "ht": "",
+      "at": "游戏原文"
+    },
+    "stack_tip": {
+      "ht": "",
+      "at": "{top} 在 {back} 前面。点击后面的一层以交换，点击圆点以关闭。"
+    },
+    "type_all": {
+      "ht": "",
+      "at": "所有任务类型"
+    },
+    "type_mixed": {
+      "ht": "",
+      "at": "混合"
+    },
+    "type_hauling": {
+      "ht": "",
+      "at": "货运"
+    },
+    "type_delivery": {
+      "ht": "",
+      "at": "递送与快递"
+    },
+    "type_mercenary": {
+      "ht": "",
+      "at": "雇佣兵"
+    },
+    "type_bounty": {
+      "ht": "",
+      "at": "赏金狩猎"
+    },
+    "type_investigation": {
+      "ht": "",
+      "at": "调查与回收"
+    },
+    "type_salvage": {
+      "ht": "",
+      "at": "打捞"
+    },
+    "type_mining": {
+      "ht": "",
+      "at": "采矿"
+    },
+    "type_repair": {
+      "ht": "",
+      "at": "维修与加油"
+    },
+    "type_collection": {
+      "ht": "",
+      "at": "收集与补给"
+    },
+    "type_wikelo": {
+      "ht": "",
+      "at": "Wikelo"
+    },
+    "type_other": {
+      "ht": "",
+      "at": "其他合同"
+    },
+    "type_items": {
+      "ht": "",
+      "at": "物品名称"
+    },
+    "ss_extras": {
+      "ht": "",
+      "at": "在 StarStrings 标题上使用我的标题设置"
+    },
+    "ss_extras_hint": {
+      "ht": "",
+      "at": "StarStrings 在前时，缩短标题、路线和 FPS 标签仍然生效"
+    },
+    "ss_status_off": {
+      "ht": "",
+      "at": "已关闭。开启后可按任务类型选择。"
+    },
+    "ss_status_language": {
+      "ht": "",
+      "at": "仅限英文。你的语言保留自己的文本。"
+    },
+    "ss_status_missing": {
+      "ht": "",
+      "at": "尚未下载。顶部横幅提供下载。"
+    },
+    "ss_status_build": {
+      "ht": "",
+      "at": "版本 {build}"
+    },
+    "ground_tag": {
+      "ht": "",
+      "at": "FPS 标签"
+    },
+    "ground_hint": {
+      "ht": "",
+      "at": "合同需要 FPS 装备时添加 [FPS]，只有部分需要时添加 [FPS?]"
+    },
+    "ground_word": {
+      "ht": "",
+      "at": "标签文字"
+    },
+    "space_tag": {
+      "ht": "",
+      "at": "舰船战斗标签"
+    },
+    "space_hint": {
+      "ht": "",
+      "at": "为纯舰船战斗的合同添加 [SHIP]"
+    },
+    "card_source": {
+      "ht": "",
+      "at": "文本来源"
+    },
+    "cat_heading": {
+      "ht": "",
+      "at": "类别名称"
+    },
+    "cat_hint": {
+      "ht": "",
+      "at": "重命名合同管理器的类别和标签页。留空则保留游戏原名。"
+    },
+    "cat_show": {
+      "ht": "",
+      "at": "重命名"
+    },
+    "cat_renamed": {
+      "ht": "",
+      "at": "已重命名 {count} 个"
     }
   }
 }
