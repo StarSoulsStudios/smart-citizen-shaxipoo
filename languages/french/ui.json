@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "CONTRATS"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "OFFRES"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "ACCEPTÉS"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "HISTORIQUE"
-    },
     "card_contractor": {
       "ht": "",
       "at": "COMMANDITAIRE"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "Position"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "Ajoute la réputation, comme [150 Rep]"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "Ajoute [BP] quand un contrat peut donner un plan"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: devient Red Lvl:, etc."
-    },
     "layers_heading": {
       "ht": "",
       "at": "Qui écrit le texte des missions"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "Utiliser StarStrings"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "LE CALQUE DE DEVANT L'EMPORTE"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "Tag combat spatial"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "Ajoute [SHIP] aux contrats uniquement en combat spatial"
-    },
     "card_source": {
       "ht": "",
       "at": "TEXTE DE"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count} renommé(s)"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "Pas encore de contrat d'exemple de ce type. Cliquez à nouveau sur la ligne pour tout voir."
     }
   }
 }

@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "SÖZLEŞMELER"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "TEKLİFLER"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "KABUL EDİLEN"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "GEÇMİŞ"
-    },
     "card_contractor": {
       "ht": "",
       "at": "İŞVEREN"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "Konum"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "İtibar ödülünü ekler, örn. [150 Rep]"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "Sözleşme plan verebiliyorsa [BP] ekler"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: ifadesi Red Lvl: olur, benzerleri de"
-    },
     "layers_heading": {
       "ht": "",
       "at": "Görev metnini kim yazar"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "StarStrings kullan"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "ÖNDEKİ KATMAN KAZANIR"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "Gemi savaşı etiketi"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "Yalnızca gemi savaşı olan sözleşmelere [SHIP] ekler"
-    },
     "card_source": {
       "ht": "",
       "at": "METİN KAYNAĞI"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count} yeniden adlandırıldı"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "Bu türde örnek sözleşme yok. Hepsini görmek için satıra yeniden tıkla."
     }
   }
 }

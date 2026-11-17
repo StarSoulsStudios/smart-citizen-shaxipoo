@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "AUFTRÄGE"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "ANGEBOTE"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "ANGENOMMEN"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "VERLAUF"
-    },
     "card_contractor": {
       "ht": "",
       "at": "AUFTRAGGEBER"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "Position"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "Fügt den Ruf hinzu, z. B. [150 Rep]"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "Fügt [BP] hinzu, wenn ein Auftrag eine Blaupause geben kann"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Aus Red Level Contract: wird Red Lvl:, und Ähnliches"
-    },
     "layers_heading": {
       "ht": "",
       "at": "Wer Missionstexte schreibt"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "StarStrings verwenden"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "VORDERE EBENE GEWINNT"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "Schiffskampf-Tag"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "Fügt [SHIP] zu Aufträgen hinzu, die nur Schiffskampf sind"
-    },
     "card_source": {
       "ht": "",
       "at": "TEXT VON"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count} umbenannt"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "Noch kein Beispielauftrag dieses Typs. Klicke die Zeile erneut, um alle zu sehen."
     }
   }
 }

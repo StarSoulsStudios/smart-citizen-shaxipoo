@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "契約"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "オファー"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "受諾済み"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "履歴"
-    },
     "card_contractor": {
       "ht": "",
       "at": "依頼主"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "位置"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "評判報酬を追加（例：[150 Rep]）"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "ブループリントが出る契約に [BP] を追加"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: が Red Lvl: になるなど"
-    },
     "layers_heading": {
       "ht": "",
       "at": "ミッション文を書くのは誰か"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "StarStrings を使う"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "前のレイヤーが優先"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "艦船戦闘タグ"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "艦船戦闘のみの契約に [SHIP] を追加"
-    },
     "card_source": {
       "ht": "",
       "at": "文の出所"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count} 件変更済み"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "このタイプのサンプル契約はまだありません。もう一度行をクリックするとすべて表示されます。"
     }
   }
 }

@@ -4064,18 +4064,6 @@
       "ht": "CONTRACTS",
       "at": ""
     },
-    "app_offers": {
-      "ht": "OFFERS",
-      "at": ""
-    },
-    "app_accepted": {
-      "ht": "ACCEPTED",
-      "at": ""
-    },
-    "app_history": {
-      "ht": "HISTORY",
-      "at": ""
-    },
     "card_contractor": {
       "ht": "CONTRACTOR",
       "at": ""
@@ -4096,18 +4084,6 @@
       "ht": "Position",
       "at": ""
     },
-    "rep_hint": {
-      "ht": "Adds the rep reward, like [150 Rep]",
-      "at": ""
-    },
-    "bp_hint": {
-      "ht": "Adds [BP] when a contract can award a blueprint",
-      "at": ""
-    },
-    "shorten_hint": {
-      "ht": "Red Level Contract: becomes Red Lvl:, and similar",
-      "at": ""
-    },
     "layers_heading": {
       "ht": "Who writes mission text",
       "at": ""
@@ -4118,10 +4094,6 @@
     },
     "use_starstrings": {
       "ht": "Use StarStrings",
-      "at": ""
-    },
-    "layers_legend": {
-      "ht": "FRONT LAYER WINS",
       "at": ""
     },
     "layer_starstrings": {
@@ -4236,10 +4208,6 @@
       "ht": "Ship combat tag",
       "at": ""
     },
-    "space_hint": {
-      "ht": "Adds [SHIP] to contracts that are ship combat only",
-      "at": ""
-    },
     "card_source": {
       "ht": "TEXT FROM",
       "at": ""
@@ -4258,6 +4226,10 @@
     },
     "cat_renamed": {
       "ht": "{count} renamed",
+      "at": ""
+    },
+    "preview_none_of_type": {
+      "ht": "No sample contract of this type yet. Click the row again to see them all.",
       "at": ""
     }
   }

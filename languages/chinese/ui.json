@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "合同"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "邀约"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "已接受"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "历史"
-    },
     "card_contractor": {
       "ht": "",
       "at": "委托方"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "位置"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "添加声望奖励，例如 [150 Rep]"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "合同可能奖励蓝图时添加 [BP]"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: 变为 Red Lvl: 等"
-    },
     "layers_heading": {
       "ht": "",
       "at": "由谁编写任务文本"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "使用 StarStrings"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "前层优先"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "舰船战斗标签"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "为纯舰船战斗的合同添加 [SHIP]"
-    },
     "card_source": {
       "ht": "",
       "at": "文本来源"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "已重命名 {count} 个"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "暂无此类型的示例合同。再次点击该行可查看全部。"
     }
   }
 }

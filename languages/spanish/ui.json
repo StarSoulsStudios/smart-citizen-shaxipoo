@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "CONTRATOS"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "OFERTAS"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "ACEPTADOS"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "HISTORIAL"
-    },
     "card_contractor": {
       "ht": "",
       "at": "CONTRATISTA"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "Posición"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "Añade la reputación, como [150 Rep]"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "Añade [BP] cuando un contrato puede dar un plano"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: pasa a Red Lvl:, y similares"
-    },
     "layers_heading": {
       "ht": "",
       "at": "Quién escribe el texto de las misiones"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "Usar StarStrings"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "GANA LA CAPA DE DELANTE"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "Etiqueta de combate naval"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "Añade [SHIP] a los contratos que son solo combate con naves"
-    },
     "card_source": {
       "ht": "",
       "at": "TEXTO DE"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count} renombradas"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "Aún no hay un contrato de ejemplo de este tipo. Haz clic de nuevo en la fila para verlos todos."
     }
   }
 }

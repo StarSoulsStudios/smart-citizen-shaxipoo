@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "CONTRATOS"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "OFERTAS"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "ACEITOS"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "HISTÓRICO"
-    },
     "card_contractor": {
       "ht": "",
       "at": "CONTRATANTE"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "Posição"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "Adiciona a reputação, como [150 Rep]"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "Adiciona [BP] quando um contrato pode dar um projeto"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: vira Red Lvl:, e similares"
-    },
     "layers_heading": {
       "ht": "",
       "at": "Quem escreve o texto das missões"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "Usar StarStrings"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "A CAMADA DA FRENTE VENCE"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "Tag de combate de naves"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "Adiciona [SHIP] a contratos só de combate de naves"
-    },
     "card_source": {
       "ht": "",
       "at": "TEXTO DE"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count} renomeadas"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "Ainda não há contrato de exemplo deste tipo. Clique de novo na linha para ver todos."
     }
   }
 }

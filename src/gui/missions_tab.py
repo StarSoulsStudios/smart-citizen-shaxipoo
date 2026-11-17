@@ -58,6 +58,7 @@ MARK_SECONDS = 2.5
 KEY_ROLE = Qt.ItemDataRole.UserRole
 HTML_ROLE = Qt.ItemDataRole.UserRole + 1
 CHANGED_ROLE = Qt.ItemDataRole.UserRole + 2
+SOURCE_ROLE = Qt.ItemDataRole.UserRole + 3
 CONTROLS_WIDTH = 450
 # A layer change reaches the table (and so Apply) with a reload, once the
 # player stops clicking; the preview shows it at once.
@@ -306,6 +307,28 @@ class _PlacementConfig:
     title_separator: str
 
 
+# The Contracts Manager category each mission type sits under, so the preview
+# can show the game's (or the player's renamed) category name.
+TYPE_CATEGORY_KEYS: Dict[str, str] = {
+    mission_types.MERCENARY: "mobiglas_ui_Mercenary",
+    mission_types.BOUNTY: "mobiglas_ui_BountyHunter",
+    mission_types.HAULING: "mobiGlas_ui_MissionType_Hauling",
+    mission_types.DELIVERY: "mobiGlas_ui_MissionType_Delivery",
+    mission_types.INVESTIGATION: "mobiglas_ui_Investigation",
+    mission_types.SALVAGE: "mobiglas_ui_Salvage",
+    mission_types.MINING: "mobiglas_ui_Mining",
+    mission_types.REPAIR: "mobiglas_ui_Maintenance",
+    mission_types.COLLECTION: "mobiGlas_ui_MissionType_Collection",
+    mission_types.WIKELO: "ContractManager_TempTab_Vehicles",
+}
+# The categories the mock's top bar shows, in the Contracts Manager's order.
+STRIP_TYPES: Tuple[str, ...] = (
+    mission_types.MERCENARY, mission_types.BOUNTY, mission_types.HAULING,
+    mission_types.DELIVERY, mission_types.INVESTIGATION, mission_types.SALVAGE,
+    mission_types.MINING,
+)
+
+
 # ── The layer orderer ───────────────────────────────────────────────────────
 
 class LayerStack(QWidget):
@@ -318,7 +341,7 @@ class LayerStack(QWidget):
 
     changed = pyqtSignal(object)
 
-    CHIP_W, CHIP_H, OVERLAP, DOT_R = 112, 24, 16, 4.5
+    CHIP_W, CHIP_H, OVERLAP, DOT_R = 120, 24, 16, 4.5
     DOT_ZONE = 17
 
     def __init__(self, choice: LayerChoice = DEFAULT_CHOICE, parent: Optional[QWidget] = None):
@@ -426,45 +449,76 @@ class LayerStack(QWidget):
         p.end()
 
     def _paint_chip(self, p: QPainter, layer: str, front: bool) -> None:
+        """StarStrings is holo glass, Smart Citizen a hull plate with a red edge.
+
+        The front chip throws a shadow over the one behind; a layer switched
+        off (or unavailable) is only its dashed outline, struck through.
+        """
+        from PyQt6.QtGui import QLinearGradient
         r = self._chip_rect(layer)
         on = self._choice.uses(layer)
-        unavailable = bool(self._unavailable.get(layer))
-        live = on and not unavailable
+        live = on and not self._unavailable.get(layer)
         accent = QColor(LAYER_COLORS[layer])
-        dim = 0.55 if self._mixed else 1.0
+        fade = 0.55 if self._mixed else 1.0
+        radius = 3.0
+
         if front and live:
-            shadow = QColor(0, 0, 0, 110)
-            p.setPen(Qt.PenStyle.NoPen)
-            p.setBrush(shadow)
-            p.drawRoundedRect(r.translated(2, 2), 4, 4)
-        fill = QColor(HANGAR_PLATE if front else HANGAR_HULL)
-        if live:
-            tint = QColor(accent)
-            tint.setAlphaF((0.26 if front else 0.10) * dim)
-            p.setPen(Qt.PenStyle.NoPen)
-            p.setBrush(fill)
-            p.drawRoundedRect(r, 4, 4)
-            p.setBrush(tint)
-            p.drawRoundedRect(r, 4, 4)
-        else:
+            for dx, alpha in ((4, 40), (2, 90)):
+                p.setPen(Qt.PenStyle.NoPen)
+                p.setBrush(QColor(0, 0, 0, alpha))
+                p.drawRoundedRect(r.translated(dx, dx), radius, radius)
+
+        if not live:
             p.setPen(Qt.PenStyle.NoPen)
             p.setBrush(QColor(HANGAR_HULL))
-            p.drawRoundedRect(r, 4, 4)
+            p.drawRoundedRect(r, radius, radius)
+        elif layer == STARSTRINGS:
+            # Glass: a cool vertical wash, brighter at the top edge.
+            glass = QLinearGradient(r.topLeft(), r.bottomLeft())
+            top, bottom = QColor(accent), QColor(GLASS)
+            top.setAlphaF((0.42 if front else 0.18) * fade)
+            bottom.setAlphaF(0.92)
+            glass.setColorAt(0.0, top)
+            glass.setColorAt(1.0, bottom)
+            p.setPen(Qt.PenStyle.NoPen)
+            p.setBrush(QColor(GLASS))
+            p.drawRoundedRect(r, radius, radius)
+            p.setBrush(glass)
+            p.drawRoundedRect(r, radius, radius)
+            sheen = QColor(HOLO_BRIGHT)
+            sheen.setAlphaF((0.55 if front else 0.2) * fade)
+            p.setPen(QPen(sheen, 1.0))
+            p.drawLine(QPointF(r.left() + radius, r.top() + 1.5), QPointF(r.right() - radius, r.top() + 1.5))
+        else:
+            # Plate: solid hull with a lighter bevel and a signal-red edge.
+            p.setPen(Qt.PenStyle.NoPen)
+            p.setBrush(QColor(HANGAR_PLATE_HI if front else HANGAR_PLATE))
+            p.drawRoundedRect(r, radius, radius)
+            bevel = QColor("#FFFFFF")
+            bevel.setAlphaF(0.08 * fade)
+            p.setPen(QPen(bevel, 1.0))
+            p.drawLine(QPointF(r.left() + radius, r.top() + 1.5), QPointF(r.right() - radius, r.top() + 1.5))
+            edge = QColor(accent)
+            edge.setAlphaF((1.0 if front else 0.6) * fade)
+            p.setPen(Qt.PenStyle.NoPen)
+            p.setBrush(edge)
+            edge_x = r.left() if front else r.left() + self.OVERLAP
+            p.drawRect(QRectF(edge_x, r.top() + 3, 2.5, r.height() - 6))
+
         border = QColor(accent if live else HANGAR_FAINT)
-        if not front and live:
-            border.setAlphaF(0.55)
+        border.setAlphaF((0.9 if front else 0.45) * fade if live else 1.0)
         if self._hover == layer and live:
-            border = border.lighter(130)
+            border = border.lighter(135)
         pen = QPen(border)
-        pen.setWidthF(1.6 if front and live else 1.0)
+        pen.setWidthF(1.2 if front and live else 1.0)
         if not live:
             pen.setStyle(Qt.PenStyle.DashLine)
         p.setPen(pen)
         p.setBrush(Qt.BrushStyle.NoBrush)
-        p.drawRoundedRect(r.adjusted(0.5, 0.5, -0.5, -0.5), 4, 4)
+        p.drawRoundedRect(r.adjusted(0.5, 0.5, -0.5, -0.5), radius, radius)
 
         # Label: the back chip's left edge is under the front one.
-        left_pad = 8 if front else self.OVERLAP + 6
+        left_pad = 9 if front else self.OVERLAP + 7
         text_rect = QRectF(r.left() + left_pad, r.top(), r.width() - left_pad - self.DOT_ZONE,
                            r.height())
         font = QFont(self.font())
@@ -472,7 +526,8 @@ class LayerStack(QWidget):
         font.setWeight(QFont.Weight.DemiBold if front else QFont.Weight.Normal)
         font.setStrikeOut(not live)
         p.setFont(font)
-        color = QColor(HANGAR_TEXT if (front and live) else HANGAR_MUTED if live else HANGAR_FAINT)
+        color = QColor((HOLO_BRIGHT if layer == STARSTRINGS else HANGAR_TEXT) if (front and live)
+                       else HANGAR_MUTED if live else HANGAR_FAINT)
         if self._mixed:
             color.setAlphaF(0.7)
         p.setPen(color)
@@ -567,8 +622,9 @@ class _LayerRow(QWidget):
     def __init__(self, group: str, parent: Optional[QWidget] = None):
         super().__init__(parent)
         self.group = group
+        self._selected = False
         row = QHBoxLayout(self)
-        row.setContentsMargins(0, 1, 0, 1)
+        row.setContentsMargins(9, 1, 0, 1)
         row.setSpacing(6)
         self.name = QLabel()
         self.name.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -580,6 +636,19 @@ class _LayerRow(QWidget):
         self.stack = LayerStack()
         row.addWidget(self.stack)
 
+    def set_selected(self, selected: bool) -> None:
+        """The row the preview is filtered to gets a signal-red edge."""
+        if self._selected != selected:
+            self._selected = selected
+            self.update()
+
+    def paintEvent(self, event) -> None:  # noqa: N802 (Qt name)
+        super().paintEvent(event)
+        if self._selected:
+            p = QPainter(self)
+            p.fillRect(QRect(0, 4, 2, self.height() - 8), QColor(HANGAR_SIGNAL))
+            p.end()
+
     def mousePressEvent(self, event) -> None:  # noqa: N802 (Qt name)
         if event.button() == Qt.MouseButton.LeftButton:
             self.picked.emit(self.group)
@@ -587,7 +656,12 @@ class _LayerRow(QWidget):
 
 
 class _ContractDelegate(QStyledItemDelegate):
-    """A contract row: rich-text title, contractor under it, change marker."""
+    """A contract row: rich-text title, contractor under it, change marker.
+
+    The left edge is the colour of the layer the title came from (holo cyan
+    StarStrings, signal red Smart Citizen, faint for the game's own text), so
+    the list reads as the orderer's result without a word of labelling.
+    """
 
     PAD = 14
 
@@ -607,8 +681,11 @@ class _ContractDelegate(QStyledItemDelegate):
         painter.save()
         rect = option.rect
         if option.state & QStyle.StateFlag.State_Selected:
-            painter.fillRect(rect, QColor(127, 216, 230, 26))
-            painter.fillRect(QRect(rect.left(), rect.top(), 3, rect.height()), QColor(HOLO))
+            painter.fillRect(rect, QColor(127, 216, 230, 30))
+        edge = QColor(LAYER_COLORS.get(index.data(SOURCE_ROLE), HOLO_LINE))
+        if not option.state & QStyle.StateFlag.State_Selected:
+            edge.setAlphaF(0.7)
+        painter.fillRect(QRect(rect.left(), rect.top() + 6, 2, rect.height() - 12), edge)
         painter.setPen(QColor(HOLO_LINE))
         painter.drawLine(rect.bottomLeft(), rect.bottomRight())
         doc = self._doc(index, rect.width())
@@ -693,8 +770,6 @@ class _Switch(QCheckBox):
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
         r = self.rect()
         on, enabled = self.isChecked(), self.isEnabled()
-        p.setPen(QColor(HANGAR_LINE))
-        p.drawLine(r.left(), r.bottom(), r.right(), r.bottom())
         text_w = self._text_width(r.width())
         label_font = QFont(self.font())
         label_font.setWeight(QFont.Weight.Normal)
@@ -787,6 +862,8 @@ class MissionsTab(QWidget):
         self._starstrings_reason = ""        # why StarStrings cannot be used, "" if it can
         self._starstrings_values: Dict[str, str] = {}
         self._type_counts: Dict[str, int] = {}
+        self._type_filter: Optional[str] = None   # the orderer row the preview shows
+        self._shown: List[SampleContract] = []
         from src.utils.settings import AppSettings
         self._choices: Dict[str, LayerChoice] = AppSettings.get_mission_layer_choices()
         self._clear_marks = QTimer(self)
@@ -832,8 +909,12 @@ class MissionsTab(QWidget):
         label.setWordWrap(True)
         return label
 
-    def _section(self, col: QVBoxLayout) -> QLabel:
-        col.addSpacing(8)
+    def _section(self, col: QVBoxLayout, first: bool = False) -> QLabel:
+        """A zone heading; every zone after the first opens with one rule."""
+        if not first:
+            col.addSpacing(10)
+            self._rule(col)
+        col.addSpacing(4)
         heading = self._heading(11.5)
         col.addWidget(heading)
         return heading
@@ -864,7 +945,7 @@ class MissionsTab(QWidget):
         self._lede.hide()
 
         # ── Who writes mission text: the layer orderer ──
-        self._layers_heading = self._section(col)
+        self._layers_heading = self._section(col, first=True)
         self._layers_lede = self._secondary()
         col.addWidget(self._layers_lede)
         self._use_starstrings = _Switch()
@@ -872,13 +953,7 @@ class MissionsTab(QWidget):
         self._use_starstrings.toggled.connect(self._on_use_starstrings)
         col.addWidget(self._use_starstrings)
 
-        legend = QHBoxLayout()
-        legend.setContentsMargins(0, 6, 0, 2)
-        self._legend_front = QLabel()
-        self._legend_front.setStyleSheet(f"color: {HANGAR_FAINT}; font-size: 10px;")
-        legend.addWidget(self._legend_front)
-        legend.addStretch(1)
-        col.addLayout(legend)
+        col.addSpacing(6)
 
         self._rows: Dict[str, _LayerRow] = {}
         self._all_row = _LayerRow("all")
@@ -886,6 +961,7 @@ class MissionsTab(QWidget):
         bold.setWeight(QFont.Weight.DemiBold)
         self._all_row.name.setFont(bold)
         self._all_row.stack.changed.connect(self._on_all_changed)
+        self._all_row.picked.connect(self._focus_type)
         col.addWidget(self._all_row)
         self._rule(col)
         for group in mission_types.MISSION_TYPES:
@@ -966,7 +1042,9 @@ class MissionsTab(QWidget):
         """
         from src.utils.settings import AppSettings
         self._category_names: Dict[str, str] = AppSettings.get_mission_category_names()
-        col.addSpacing(8)
+        col.addSpacing(10)
+        self._rule(col)
+        col.addSpacing(4)
         head = QHBoxLayout()
         self._cat_heading = self._heading(11.5)
         head.addWidget(self._cat_heading)
@@ -1037,6 +1115,7 @@ class MissionsTab(QWidget):
         from src.utils.settings import AppSettings
         AppSettings.set_mission_category_names(self._category_names)
         self._refresh_category_header()
+        self._render_detail()
         self._layer_timer.start()
 
     def _refresh_category_rows(self) -> None:
@@ -1181,7 +1260,6 @@ class MissionsTab(QWidget):
         self._layers_heading.setText(tr("missions.layers_heading"))
         self._layers_lede.setText(tr("missions.layers_lede"))
         self._use_starstrings.setText(tr("missions.use_starstrings"))
-        self._legend_front.setText(tr("missions.layers_legend"))
         self._all_row.name.setText(tr("missions.type_all"))
         for group, row in self._rows.items():
             row.name.setText(tr(f"missions.type_{group}"))
@@ -1197,10 +1275,6 @@ class MissionsTab(QWidget):
         self._ground.setHint(tr("missions.ground_hint"))
         self._ground_word_label.setText(tr("missions.ground_word"))
         self._space.setText(tr("missions.space_tag"))
-        self._space.setHint(tr("missions.space_hint"))
-        self._rep.setHint(tr("missions.rep_hint"))
-        self._bp.setHint(tr("missions.bp_hint"))
-        self._shorten.setHint(tr("missions.shorten_hint"))
         self._rep.setText(tr("missions.rep_tag"))
         self._bp.setText(tr("missions.bp_tag"))
         self._shorten.setText(tr("missions.shorten"))
@@ -1216,13 +1290,7 @@ class MissionsTab(QWidget):
         self._preview_title.setText(tr("missions.preview_title"))
         self._preview_where.setText(tr("missions.preview_where"))
         self._caption.setText(tr("missions.caption"))
-        self._app_bar.setText(
-            f"<b style='color:{HOLO};letter-spacing:3px'>{html.escape(tr('missions.app_contracts'))}"
-            f"</b>&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:{HOLO}'>"
-            f"{html.escape(tr('missions.app_offers'))}</span>&nbsp;&nbsp;&nbsp;"
-            f"{html.escape(tr('missions.app_accepted'))}&nbsp;&nbsp;&nbsp;"
-            f"{html.escape(tr('missions.app_history'))}"
-        )
+        self._render_strip(self._shown[0].mission_type if self._shown else None)
         self._refresh_counts()
         self._refresh_source_state()
         self._sync_layer_rows()
@@ -1336,11 +1404,18 @@ class MissionsTab(QWidget):
             row.count.setText(f"{n:,}" if n else "")
 
     def _focus_type(self, group: str) -> None:
-        """A row's name was clicked: show that type's first sample contract."""
-        for i, c in enumerate(self._contracts):
-            if c.mission_type == group:
-                self._list.setCurrentRow(i)
-                return
+        """A row was clicked: show only that type's contracts (again: show all).
+
+        The "All mission types" row always clears the filter.
+        """
+        if group == "all" or group == self._type_filter:
+            self._type_filter = None
+        else:
+            self._type_filter = group
+        for g, row in self._rows.items():
+            row.set_selected(g == self._type_filter)
+        self._fill_list()
+        self._render_detail()
 
     def _mark_rebuild(self, *_args) -> None:
         self._rebuild_pending = True
@@ -1443,6 +1518,31 @@ class MissionsTab(QWidget):
         if self._changed and self._changed != previous:
             self._clear_marks.start()
 
+    def _category_name(self, group: str) -> str:
+        """The Contracts Manager's name for *group*: renamed, else the game's."""
+        key = TYPE_CATEGORY_KEYS.get(group)
+        if key:
+            renamed = getattr(self, "_category_names", {}).get(key)
+            if renamed:
+                return renamed
+            stock = self._stock(key) if hasattr(self, "_stock") else None
+            if stock:
+                return stock
+        return tr(f"missions.type_{group}")
+
+    def _render_strip(self, current: Optional[str]) -> None:
+        """The mock's top bar: the category tabs, the current contract's lit."""
+        tabs = []
+        for group in STRIP_TYPES:
+            name = html.escape(self._category_name(group).upper())
+            if group == current:
+                tabs.append(f"<span style='color:{HOLO_BRIGHT};text-decoration:underline'>{name}</span>")
+            else:
+                tabs.append(f"<span style='color:{HOLO_DIM}'>{name}</span>")
+        self._app_bar.setText(
+            f"<b style='color:{HOLO};letter-spacing:3px'>{html.escape(tr('missions.app_contracts'))}"
+            f"</b>&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;".join(tabs))
+
     def _source_badge(self, source: str) -> str:
         color = LAYER_COLORS.get(source, HOLO_DIM)
         label = tr(f"missions.layer_{source}") if source in LAYER_COLORS else tr("missions.layer_stock")
@@ -1450,24 +1550,26 @@ class MissionsTab(QWidget):
 
     def _fill_list(self) -> None:
         current = self._list.currentRow()
+        self._shown = [c for c in self._contracts
+                       if self._type_filter is None or c.mission_type == self._type_filter]
         self._list.blockSignals(True)
         self._list.clear()
-        for c in self._contracts:
+        for c in self._shown:
             title, _blocks, source = self._rendered[c.title_key]
             item = QListWidgetItem()
             item.setData(KEY_ROLE, c.title_key)
+            item.setData(SOURCE_ROLE, source)
             item.setData(HTML_ROLE, to_html(title) +
                          f"<br><span style='color:{HOLO_DIM};font-size:9pt'>"
-                         f"{html.escape(c.contractor)} &middot; "
-                         f"{html.escape(tr(f'missions.type_{c.mission_type}'))} &middot; "
-                         f"{self._source_badge(source)}</span>")
+                         f"{html.escape(c.contractor)}</span>")
             item.setData(CHANGED_ROLE, "title" in self._changed.get(c.title_key, ()))
             self._list.addItem(item)
         self._list.setCurrentRow(current if 0 <= current < self._list.count() else 0)
         self._list.blockSignals(False)
-        if not self._contracts:
-            self._detail.setHtml(
-                f"<p style='color:{HOLO_DIM}'>{html.escape(tr('missions.preview_empty'))}</p>")
+        if not self._shown:
+            key = "missions.preview_empty" if not self._contracts else "missions.preview_none_of_type"
+            self._detail.setHtml(f"<p style='color:{HOLO_DIM}'>{html.escape(tr(key))}</p>")
+            self._render_strip(self._type_filter)
 
     def _unmark(self) -> None:
         self._changed = {}
@@ -1478,9 +1580,10 @@ class MissionsTab(QWidget):
 
     def _render_detail(self) -> None:
         row = self._list.currentRow()
-        if not (0 <= row < len(self._contracts)):
+        if not (0 <= row < len(self._shown)):
             return
-        c = self._contracts[row]
+        c = self._shown[row]
+        self._render_strip(c.mission_type)
         title, blocks, source = self._rendered[c.title_key]
         lit = self._changed.get(c.title_key, set())
 
@@ -1491,7 +1594,7 @@ class MissionsTab(QWidget):
 
         cells = [(tr("missions.card_contractor"), html.escape(c.contractor)),
                  (tr("missions.card_reward"), html.escape(c.reward)),
-                 (tr("missions.card_type"), html.escape(c.kind)),
+                 (tr("missions.card_type"), html.escape(self._category_name(c.mission_type))),
                  (tr("missions.card_source"), self._source_badge(source))]
         meta = "".join(
             f"<td style='padding-right:26px'><span style='color:{HOLO_DIM};font-size:8pt;"

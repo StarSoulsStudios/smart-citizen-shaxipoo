@@ -4266,18 +4266,6 @@
       "ht": "",
       "at": "계약"
     },
-    "app_offers": {
-      "ht": "",
-      "at": "제안"
-    },
-    "app_accepted": {
-      "ht": "",
-      "at": "수락됨"
-    },
-    "app_history": {
-      "ht": "",
-      "at": "기록"
-    },
     "card_contractor": {
       "ht": "",
       "at": "의뢰인"
@@ -4298,18 +4286,6 @@
       "ht": "",
       "at": "위치"
     },
-    "rep_hint": {
-      "ht": "",
-      "at": "평판 보상 추가 (예: [150 Rep])"
-    },
-    "bp_hint": {
-      "ht": "",
-      "at": "청사진을 줄 수 있는 계약에 [BP] 추가"
-    },
-    "shorten_hint": {
-      "ht": "",
-      "at": "Red Level Contract: 가 Red Lvl: 가 되는 식"
-    },
     "layers_heading": {
       "ht": "",
       "at": "임무 텍스트를 누가 쓰는가"
@@ -4321,10 +4297,6 @@
     "use_starstrings": {
       "ht": "",
       "at": "StarStrings 사용"
-    },
-    "layers_legend": {
-      "ht": "",
-      "at": "앞쪽 레이어 우선"
     },
     "layer_starstrings": {
       "ht": "",
@@ -4438,10 +4410,6 @@
       "ht": "",
       "at": "함선 전투 태그"
     },
-    "space_hint": {
-      "ht": "",
-      "at": "함선 전투만 있는 계약에 [SHIP]을 추가"
-    },
     "card_source": {
       "ht": "",
       "at": "텍스트 출처"
@@ -4461,6 +4429,10 @@
     "cat_renamed": {
       "ht": "",
       "at": "{count}개 변경됨"
+    },
+    "preview_none_of_type": {
+      "ht": "",
+      "at": "이 유형의 예시 계약이 아직 없습니다. 행을 다시 클릭하면 모두 보입니다."
     }
   }
 }
