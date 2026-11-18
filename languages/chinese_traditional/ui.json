@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "依 ASOP 的排序方式，從 A 到 Z 顯示每艘艦船的名稱。白色的是你的。"
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "匯入 HangarLink CSV..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "從 HangarLink Hangar Export 瀏覽器擴充功能載入 hangarexport.csv，把你擁有的艦船加入此清單。"
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "從 HangarLink 匯入艦船"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{total} 艘艦船中有 {matched} 艘符合遊戲中的艦船。檢查比對結果，取消勾選不需要的，然後新增。"
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "使用我在 RSI 網站上為艦船取的名字"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "新增"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "機庫中"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "遊戲艦船"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "名稱"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "（無符合 - 請選擇）"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "加入清單"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "取代清單"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "取消"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "CSV 檔案 (*.csv);;所有檔案 (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "匯入失敗"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "無法讀取 {path}：\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "{path} 中沒有找到艦船。請使用 HangarLink Hangar Export 擴充功能儲存的 hangarexport.csv。"
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "遊戲字串尚未載入，無法比對艦船。請先載入，再匯入。"
     }
   },
   "shell": {

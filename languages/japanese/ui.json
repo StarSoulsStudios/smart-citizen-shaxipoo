@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "すべての艦船名を ASOP と同じ A〜Z 順に表示します。白いものがあなたの艦船です。"
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "HangarLink CSV をインポート..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "HangarLink Hangar Export ブラウザ拡張機能の hangarexport.csv を読み込み、所有艦船をこのリストに追加します。"
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "HangarLink から艦船をインポート"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{total} 隻中 {matched} 隻がゲーム内の艦船と一致しました。一致を確認し、不要なもののチェックを外してから追加してください。"
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "RSI サイトで艦船に付けた名前を使う"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "追加"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "格納庫内"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "ゲーム艦船"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "名前"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "（一致なし - 選択してください）"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "リストに追加"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "リストを置き換え"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "キャンセル"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "CSV ファイル (*.csv);;すべてのファイル (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "インポート失敗"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "{path} を読み込めませんでした:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "{path} に艦船が見つかりません。HangarLink Hangar Export 拡張機能が保存した hangarexport.csv を使ってください。"
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "ゲーム文字列がまだ読み込まれていないため、艦船を照合できません。先に読み込んでからインポートしてください。"
     }
   },
   "shell": {

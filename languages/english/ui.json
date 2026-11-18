@@ -3797,6 +3797,78 @@
     "preview_desc": {
       "ht": "Every ship's name, A to Z, the way the ASOP sorts them. White ones are yours.",
       "at": ""
+    },
+    "import_btn": {
+      "ht": "Import HangarLink CSV...",
+      "at": ""
+    },
+    "import_tooltip": {
+      "ht": "Load hangarexport.csv from the HangarLink Hangar Export browser extension and add the ships you own to this list.",
+      "at": ""
+    },
+    "import_dialog_title": {
+      "ht": "Import ships from HangarLink",
+      "at": ""
+    },
+    "import_summary": {
+      "ht": "{matched} of {total} ships matched a ship in the game. Check the matches, untick any you don't want, then add them.",
+      "at": ""
+    },
+    "import_use_custom": {
+      "ht": "Use the names I gave my ships on the RSI site",
+      "at": ""
+    },
+    "import_col_use": {
+      "ht": "Add",
+      "at": ""
+    },
+    "import_col_hangar": {
+      "ht": "In your hangar",
+      "at": ""
+    },
+    "import_col_match": {
+      "ht": "Game ship",
+      "at": ""
+    },
+    "import_col_name": {
+      "ht": "Name",
+      "at": ""
+    },
+    "import_no_match": {
+      "ht": "(no match - pick one)",
+      "at": ""
+    },
+    "import_append": {
+      "ht": "Add to List",
+      "at": ""
+    },
+    "import_replace": {
+      "ht": "Replace List",
+      "at": ""
+    },
+    "import_cancel": {
+      "ht": "Cancel",
+      "at": ""
+    },
+    "import_file_filter": {
+      "ht": "CSV files (*.csv);;All files (*)",
+      "at": ""
+    },
+    "import_error_title": {
+      "ht": "Import failed",
+      "at": ""
+    },
+    "import_error_body": {
+      "ht": "Could not read {path}:\n{error}",
+      "at": ""
+    },
+    "import_empty_body": {
+      "ht": "No ships were found in {path}. Use the hangarexport.csv saved by the HangarLink Hangar Export extension.",
+      "at": ""
+    },
+    "import_no_strings": {
+      "ht": "The game strings are not loaded yet, so ships can't be matched. Load them first, then import.",
+      "at": ""
     }
   },
   "shell": {

@@ -10,24 +10,27 @@ the names up through the synthetic ``ship_names`` source.
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 from typing import Dict, List, Optional
 
 from PyQt6.QtCore import QRect, QSize, Qt, pyqtSignal
 from PyQt6.QtGui import QColor, QFont, QKeySequence, QPainter, QShortcut
 from PyQt6.QtWidgets import (
-    QAbstractItemView, QCheckBox, QCompleter, QFrame, QGroupBox, QHBoxLayout, QLabel,
+    QAbstractItemView, QCheckBox, QCompleter, QDialog, QFileDialog, QFrame, QGroupBox,
+    QHBoxLayout, QLabel,
     QStyle, QStyledItemDelegate, QStyleOptionViewItem,
     QLineEdit, QListWidget, QListWidgetItem, QMessageBox, QPushButton, QVBoxLayout,
     QWidget,
 )
 
 from src.gui.combo_box import NoScrollComboBox
+from src.gui.hangar_import_dialog import HangarImportDialog
 from src.gui.theme import (
     BODY_FONT_FAMILY, DISPLAY_FONT_FAMILY, GAME_TEXT_FONT_FAMILY, HANGAR_FAINT, HANGAR_LINE,
     HANGAR_MUTED, HANGAR_PLATE, HANGAR_PLATE_HI, HANGAR_SIGNAL, HANGAR_TERMINAL, HANGAR_TEXT,
     host_in_scroll_area,
 )
-from src.utils import ship_names
+from src.utils import hangar_import, ship_names
 from src.utils.i18n import tr
 from src.utils.ship_names import ShipNamesConfig, ShipOption
 
@@ -190,10 +193,15 @@ class ShipNamesTab(QWidget):
         self._add_btn.clicked.connect(self._on_add)
         row.addWidget(self._add_btn)
         add_layout.addLayout(row)
+        hint_row = QHBoxLayout()
         self._add_hint = QLabel()
         self._add_hint.setProperty("role", "secondary")
         self._add_hint.setWordWrap(True)
-        add_layout.addWidget(self._add_hint)
+        hint_row.addWidget(self._add_hint, 1)
+        self._import_btn = QPushButton()
+        self._import_btn.clicked.connect(self._on_import)
+        hint_row.addWidget(self._import_btn, 0, Qt.AlignmentFlag.AlignTop)
+        add_layout.addLayout(hint_row)
         layout.addWidget(self._add_group)
 
         # The list
@@ -304,6 +312,8 @@ class ShipNamesTab(QWidget):
         self._name_label.setText(tr("ship_names.name_label"))
         self._name_edit.setPlaceholderText(tr("ship_names.name_placeholder"))
         self._add_hint.setText(tr("ship_names.add_hint"))
+        self._import_btn.setText(tr("ship_names.import_btn"))
+        self._import_btn.setToolTip(tr("ship_names.import_tooltip"))
         self._list_group.setTitle(tr("ship_names.list_group"))
         self._numbering_check.setText(tr("ship_names.numbering"))
         self._manufacturer_check.setText(tr("ship_names.manufacturer"))
@@ -502,6 +512,39 @@ class ShipNamesTab(QWidget):
         if answer != buttons.Yes:
             return
         self._config.entries = []
+        self._render_list()
+        self._save()
+
+    def _on_import(self) -> None:
+        """Add owned ships from a HangarLink Hangar Export CSV."""
+        if not self._options:
+            QMessageBox.information(self, tr("ship_names.import_dialog_title"),
+                                    tr("ship_names.import_no_strings"))
+            return
+        start = Path.home() / "Downloads"
+        path, _ = QFileDialog.getOpenFileName(
+            self, tr("ship_names.import_dialog_title"),
+            str(start if start.is_dir() else Path.home()), tr("ship_names.import_file_filter"),
+        )
+        if not path:
+            return
+        try:
+            ships = hangar_import.parse_hangar_csv(Path(path))
+        except OSError as exc:
+            QMessageBox.warning(self, tr("ship_names.import_error_title"),
+                                tr("ship_names.import_error_body", path=path, error=exc))
+            return
+        if not ships:
+            QMessageBox.warning(self, tr("ship_names.import_error_title"),
+                                tr("ship_names.import_empty_body", path=path))
+            return
+        rows = hangar_import.match_ships(ships, self._options)
+        dialog = HangarImportDialog(rows, self._options, self)
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return
+        if not dialog.picks and not dialog.replace_list:
+            return
+        hangar_import.apply_import(self._config, dialog.picks, replace=dialog.replace_list)
         self._render_list()
         self._save()
 

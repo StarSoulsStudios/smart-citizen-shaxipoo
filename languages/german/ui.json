@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "Der Name jedes Schiffs, von A bis Z, so wie das ASOP sie sortiert. Weiße sind deine."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "HangarLink-CSV importieren..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "Lädt hangarexport.csv aus der Browser-Erweiterung HangarLink Hangar Export und fügt deine Schiffe dieser Liste hinzu."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "Schiffe aus HangarLink importieren"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{matched} von {total} Schiffen passen zu einem Schiff im Spiel. Prüfe die Zuordnungen, entferne den Haken bei unerwünschten und füge sie dann hinzu."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "Die Namen verwenden, die ich meinen Schiffen auf der RSI-Seite gegeben habe"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Hinzufügen"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "In deinem Hangar"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Spielschiff"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Name"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(keine Zuordnung - auswählen)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Zur Liste hinzufügen"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Liste ersetzen"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "Abbrechen"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "CSV-Dateien (*.csv);;Alle Dateien (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "Import fehlgeschlagen"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "{path} konnte nicht gelesen werden:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "In {path} wurden keine Schiffe gefunden. Verwende die hangarexport.csv der Erweiterung HangarLink Hangar Export."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "Die Spieltexte sind noch nicht geladen, daher können keine Schiffe zugeordnet werden. Lade sie zuerst und importiere dann."
     }
   },
   "shell": {

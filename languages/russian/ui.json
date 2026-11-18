@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "Названия всех кораблей от A до Z, как их сортирует ASOP. Белые — ваши."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "Импорт CSV из HangarLink..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "Загружает hangarexport.csv из расширения HangarLink Hangar Export и добавляет ваши корабли в этот список."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "Импорт кораблей из HangarLink"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "Совпало с кораблями игры: {matched} из {total}. Проверьте совпадения, снимите отметки с ненужных и добавьте их."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "Использовать имена, которые я дал кораблям на сайте RSI"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Добавить"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "В ангаре"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Корабль в игре"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Имя"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(нет совпадения - выберите)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Добавить в список"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Заменить список"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "Отмена"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "Файлы CSV (*.csv);;Все файлы (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "Ошибка импорта"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "Не удалось прочитать {path}:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "В {path} не найдено кораблей. Используйте hangarexport.csv, сохранённый расширением HangarLink Hangar Export."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "Строки игры ещё не загружены, поэтому корабли нельзя сопоставить. Сначала загрузите их, затем импортируйте."
     }
   },
   "shell": {

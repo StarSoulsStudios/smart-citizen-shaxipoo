@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "Her geminin adı, A'dan Z'ye, ASOP'un sıraladığı gibi. Beyaz olanlar senin."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "HangarLink CSV içe aktar..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "HangarLink Hangar Export tarayıcı eklentisinin hangarexport.csv dosyasını yükler ve sahip olduğun gemileri bu listeye ekler."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "HangarLink'ten gemi içe aktar"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{total} gemiden {matched} tanesi oyundaki bir gemiyle eşleşti. Eşleşmeleri kontrol et, istemediklerinin işaretini kaldır ve ekle."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "RSI sitesinde gemilerime verdiğim adları kullan"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Ekle"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "Hangarında"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Oyun gemisi"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Ad"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(eşleşme yok - seç)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Listeye ekle"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Listeyi değiştir"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "İptal"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "CSV dosyaları (*.csv);;Tüm dosyalar (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "İçe aktarma başarısız"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "{path} okunamadı:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "{path} içinde gemi bulunamadı. HangarLink Hangar Export eklentisinin kaydettiği hangarexport.csv dosyasını kullan."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "Oyun metinleri henüz yüklenmedi, bu yüzden gemiler eşleştirilemiyor. Önce yükle, sonra içe aktar."
     }
   },
   "shell": {

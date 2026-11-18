@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "Le nom de chaque vaisseau, de A à Z, comme l'ASOP les trie. Les blancs sont les vôtres."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "Importer un CSV HangarLink..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "Charge hangarexport.csv depuis l'extension HangarLink Hangar Export et ajoute vos vaisseaux à cette liste."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "Importer des vaisseaux depuis HangarLink"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{matched} vaisseaux sur {total} correspondent à un vaisseau du jeu. Vérifiez les correspondances, décochez ceux que vous ne voulez pas, puis ajoutez-les."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "Utiliser les noms donnés à mes vaisseaux sur le site RSI"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Ajouter"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "Dans votre hangar"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Vaisseau du jeu"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Nom"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(aucune correspondance - choisissez)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Ajouter à la liste"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Remplacer la liste"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "Annuler"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "Fichiers CSV (*.csv);;Tous les fichiers (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "Échec de l'import"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "Impossible de lire {path} :\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "Aucun vaisseau trouvé dans {path}. Utilisez le hangarexport.csv enregistré par l'extension HangarLink Hangar Export."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "Les textes du jeu ne sont pas encore chargés, les vaisseaux ne peuvent pas être associés. Chargez-les d'abord, puis importez."
     }
   },
   "shell": {

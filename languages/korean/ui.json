@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "ASOP가 정렬하는 방식대로 모든 함선 이름을 A부터 Z까지 표시합니다. 흰색이 내 함선입니다."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "HangarLink CSV 가져오기..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "HangarLink Hangar Export 브라우저 확장 프로그램의 hangarexport.csv를 불러와 보유 함선을 이 목록에 추가합니다."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "HangarLink에서 함선 가져오기"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{total}척 중 {matched}척이 게임 내 함선과 일치합니다. 일치 결과를 확인하고 원하지 않는 항목의 체크를 해제한 뒤 추가하세요."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "RSI 사이트에서 함선에 붙인 이름 사용"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "추가"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "보유 격납고"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "게임 함선"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "이름"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(일치 없음 - 선택하세요)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "목록에 추가"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "목록 교체"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "취소"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "CSV 파일 (*.csv);;모든 파일 (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "가져오기 실패"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "{path}을(를) 읽을 수 없습니다:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "{path}에서 함선을 찾지 못했습니다. HangarLink Hangar Export 확장 프로그램이 저장한 hangarexport.csv를 사용하세요."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "게임 문자열이 아직 로드되지 않아 함선을 매칭할 수 없습니다. 먼저 로드한 뒤 가져오세요."
     }
   },
   "shell": {

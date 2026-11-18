@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "Il nome di ogni nave, dalla A alla Z, come le ordina l'ASOP. Quelle bianche sono tue."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "Importa CSV HangarLink..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "Carica hangarexport.csv dall'estensione HangarLink Hangar Export e aggiunge le tue navi a questa lista."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "Importa navi da HangarLink"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{matched} navi su {total} corrispondono a una nave del gioco. Controlla le corrispondenze, deseleziona quelle che non vuoi e poi aggiungile."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "Usa i nomi che ho dato alle mie navi sul sito RSI"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Aggiungi"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "Nel tuo hangar"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Nave del gioco"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Nome"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(nessuna corrispondenza - scegline una)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Aggiungi alla lista"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Sostituisci lista"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "Annulla"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "File CSV (*.csv);;Tutti i file (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "Importazione non riuscita"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "Impossibile leggere {path}:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "Nessuna nave trovata in {path}. Usa il file hangarexport.csv salvato dall'estensione HangarLink Hangar Export."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "I testi del gioco non sono ancora caricati, quindi le navi non possono essere abbinate. Caricali prima, poi importa."
     }
   },
   "shell": {

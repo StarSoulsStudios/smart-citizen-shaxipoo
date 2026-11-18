@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "O nome de cada nave, de A a Z, como o ASOP ordena. As brancas são suas."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "Importar CSV do HangarLink..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "Carrega o hangarexport.csv da extensão HangarLink Hangar Export e adiciona suas naves a esta lista."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "Importar naves do HangarLink"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{matched} de {total} naves correspondem a uma nave do jogo. Confira as correspondências, desmarque as que não quer e adicione."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "Usar os nomes que dei às minhas naves no site da RSI"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Adicionar"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "No seu hangar"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Nave do jogo"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Nome"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(sem correspondência - escolha uma)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Adicionar à lista"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Substituir lista"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "Cancelar"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "Arquivos CSV (*.csv);;Todos os arquivos (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "Falha na importação"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "Não foi possível ler {path}:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "Nenhuma nave encontrada em {path}. Use o hangarexport.csv salvo pela extensão HangarLink Hangar Export."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "Os textos do jogo ainda não foram carregados, então as naves não podem ser associadas. Carregue-os primeiro e depois importe."
     }
   },
   "shell": {

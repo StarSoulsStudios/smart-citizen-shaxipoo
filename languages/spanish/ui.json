@@ -3999,6 +3999,78 @@
     "preview_desc": {
       "ht": "",
       "at": "El nombre de cada nave, de la A a la Z, como las ordena el ASOP. Las blancas son tuyas."
+    },
+    "import_btn": {
+      "ht": "",
+      "at": "Importar CSV de HangarLink..."
+    },
+    "import_tooltip": {
+      "ht": "",
+      "at": "Carga hangarexport.csv desde la extensión HangarLink Hangar Export y añade tus naves a esta lista."
+    },
+    "import_dialog_title": {
+      "ht": "",
+      "at": "Importar naves desde HangarLink"
+    },
+    "import_summary": {
+      "ht": "",
+      "at": "{matched} de {total} naves coinciden con una nave del juego. Revisa las coincidencias, desmarca las que no quieras y añádelas."
+    },
+    "import_use_custom": {
+      "ht": "",
+      "at": "Usar los nombres que di a mis naves en la web de RSI"
+    },
+    "import_col_use": {
+      "ht": "",
+      "at": "Añadir"
+    },
+    "import_col_hangar": {
+      "ht": "",
+      "at": "En tu hangar"
+    },
+    "import_col_match": {
+      "ht": "",
+      "at": "Nave del juego"
+    },
+    "import_col_name": {
+      "ht": "",
+      "at": "Nombre"
+    },
+    "import_no_match": {
+      "ht": "",
+      "at": "(sin coincidencia - elige una)"
+    },
+    "import_append": {
+      "ht": "",
+      "at": "Añadir a la lista"
+    },
+    "import_replace": {
+      "ht": "",
+      "at": "Reemplazar lista"
+    },
+    "import_cancel": {
+      "ht": "",
+      "at": "Cancelar"
+    },
+    "import_file_filter": {
+      "ht": "",
+      "at": "Archivos CSV (*.csv);;Todos los archivos (*)"
+    },
+    "import_error_title": {
+      "ht": "",
+      "at": "Error al importar"
+    },
+    "import_error_body": {
+      "ht": "",
+      "at": "No se pudo leer {path}:\n{error}"
+    },
+    "import_empty_body": {
+      "ht": "",
+      "at": "No se encontraron naves en {path}. Usa el hangarexport.csv guardado por la extensión HangarLink Hangar Export."
+    },
+    "import_no_strings": {
+      "ht": "",
+      "at": "Los textos del juego aún no están cargados, así que no se pueden emparejar las naves. Cárgalos primero y luego importa."
     }
   },
   "shell": {
